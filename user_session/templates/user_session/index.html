@@ -1,0 +1,6 @@
+checking if you are autherized!<br>
+{% if user.is_authenticated %}
+	{{ user.username }}
+{% else %}
+	<p> Guess not </p>
+{% endif %}
