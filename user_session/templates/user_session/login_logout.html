@@ -1,0 +1,23 @@
+{% if form.errors %}
+    <p>Sorry, that's not a valid username or password</p>
+{% endif %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<form style="display:inline;" action="{% url 'user_session:login' %}" method="post">
+{% csrf_token %}
+    <label for="username">User name:</label>
+    <input type="text" name="username" value="" id="username">
+    <label for="password">Password:</label>
+    <input type="password" name="password" value="" id="password">
+    <input type="submit" name="login" value="Login"/>
+    <input type="hidden" name="next" value="{{ next|escape }}" />
+</form>
+
+<form style="display:inline;" action="{% url 'user_session:register' %}">
+	<input type="submit"  value="Register"/>
+</form>
