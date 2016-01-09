@@ -12,11 +12,18 @@ if inidividual user logges in, should we
 [ ] : validate Team name, anwesha ID
 [X] : Registraion 
 [X] : Questiong Loading
-[ ] : Point System
-[ ] : Leader Board
+[X] : Point System
+[X] : Leader Board
 [ ] : How to user scripts and fixtures
 [ ] : Add Favicon
 [ ] : Deploying static files https://docs.djangoproject.com/en/1.9/howto/static-files/
+[ ] : Answering
+[ ] : Has Context
+[ ] : Add rules page
+[X] : CSS Question Heighlight
+[ ] : If answered, change color at home
+[ ] : CSS on messages
+
 
 ## TODO For Registraioint form
 [X] : TeamMembers -> TeamDetails
