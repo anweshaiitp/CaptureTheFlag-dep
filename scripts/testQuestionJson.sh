@@ -30,7 +30,7 @@ echo "
 		\"pk\": $val, 
 		\"fields\": {
 			\"valid\": true, 
-			\"source_file\": \question$val.html\", 
+			\"source_file\": \"question$val.html\", 
 			\"points\": 0, 
 			\"has_context\": false
 			}
