@@ -14,6 +14,17 @@ class Question(models.Model):
 	source_file = models.FilePathField(path=BASE_DIR+"/Questions/")
 	points = models.IntegerField()
 
+class Team(models.Model):
+	# TODO : enforce validators
+	team_name = models.OneToOneField(User,on_delete = models.CASCADE)
+	valid = models.BooleanField(default = True)
+	user1 = models.CharField(max_length = 30)
+	user2 = models.CharField(max_length = 30)
+	user3 = models.CharField(max_length = 30)
+	#college_name = models.EmailField()
+	#phone_number = models.PhoneNumber()
+	points = models.IntegerField(default = 0)
+
 '''
 @metastableB : We are not using a leaderboard specific data structure for this app
 	Our assumption is that the number of users will always remain under, say 1000.
@@ -24,7 +35,3 @@ class Question(models.Model):
 	have to resort to a better LeaderBoard ranking system and scheme, like the ones
 	followed by steam/counter_strike/SO etc
 '''
-class PointsPerUser(models.Model):
-	user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-	points = models.IntegerField(default = 0)
-
