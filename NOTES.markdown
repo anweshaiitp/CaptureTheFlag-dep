@@ -23,6 +23,7 @@ if inidividual user logges in, should we
 [X] : CSS Question Heighlight
 [ ] : If answered, change color at home
 [ ] : CSS on messages
+[ ] : Add link to team at footes
 
 
 ## TODO For Registraioint form

@@ -26,12 +26,12 @@
     <![endif]-->
   </head>
 
-  <body>
-    <div class="container">
+  <body class="login-body">
+    <div class="container login-container-bg">
       <form class="form-signin" action="{% url 'user_session:login' %}" method="post">
       {% csrf_token %}
         <h2 class="form-signin-heading text-center">Login</h2>
-        <div class="info_message text-center">
+        <div class="info_message text-center hideMe">
             {% if form.errors %}
                 <p>Sorry, that's not a valid username or password</p>
             {% endif %}
@@ -42,7 +42,7 @@
             {% endif %}
         </div>
         <label for="username" class="sr-only">Team Name</label>
-        <input type="text" name="username" value="" id="username" class="form-control" placeholder="TeamAwesome"autofocus>
+        <input type="text" name="username" value="" id="username" class="form-control" placeholder="Team Name"autofocus>
 
         <label for="password" class="sr-only">Password</label>
         <input type="password" name="password" value="" id="password" class="form-control" placeholder="Password">
