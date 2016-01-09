@@ -12,7 +12,8 @@ from django.core.urlresolvers import resolve, Resolver404, is_valid_path
 from django.contrib.auth.decorators import login_required
 
 from .forms import UserRegistrationForm
-from settings import template_path, info_messages
+from .settings import template_path, info_messages
+from game_ctf.models import TeamMembers
 
 from django.contrib.auth.models import User
 import settings 
@@ -61,20 +62,29 @@ def logout(request):
 				info_messages['logged out'][0],info_messages['logged out'][1])
 	return auth_logout(request,next_page=reverse('user_session:login'))
 
-def create_user_from_form(registration_form):
+def save_team(registration_form):
 	'''
-	* first_name
-	* last_name
-	* username 
+	* user1
+	* user2
+	* user3
+	* username (TeamName)
 	* password1
 	* email 
+	* college_name
+	* phone_number
 	'''
 	u = User.objects.create_user(registration_form.cleaned_data['username'],
 		password = registration_form.cleaned_data['password1'])
-	u.email = registration_form.cleaned_data['email']
-	u.first_name = registration_form.cleaned_data['first_name']
-	u.last_name = registration_form.cleaned_data['last_name']
-	return u
+	u.save()
+	team = TeamMembers(team = u,
+		email = registration_form.cleaned_data['email'],
+		user1 = registration_form.cleaned_data['user1'],
+		user2 = registration_form.cleaned_data['user2'],
+		user3 = registration_form.cleaned_data['user3'],
+		college_name = registration_form.cleaned_data['college_name'],
+		phone_number = registration_form.cleaned_data['phone_number'])
+	team.save()
+	
 
 def user_registration(request):
 	user = request.user
@@ -89,8 +99,7 @@ def user_registration(request):
 			print registration_form.cleaned_data
 			messages.add_message(request,
 			info_messages['registration successful'][0],info_messages['registration successful'][1])
-			u = create_user_from_form(registration_form)
-			u.save()
+			save_team(registration_form)
 			return HttpResponseRedirect(reverse('user_session:login'))
 	else:
 			registration_form = UserRegistrationForm()
