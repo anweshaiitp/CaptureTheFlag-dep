@@ -14,8 +14,6 @@ urlpatterns = [
 	url(r'^logout/$',views.logout, name='logout'),
 	url(r'^register/$',views.user_registration,name='register'),
 	# Placeholders
-	url(r'^home/$',views.home, name='home'),
-	url(r'^$',views.home,name='index'),
 ]
 
 

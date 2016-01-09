@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'game_ctf',
     'user_session',
     'django.contrib.admin',
     'django.contrib.auth',
