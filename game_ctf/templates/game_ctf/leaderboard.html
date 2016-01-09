@@ -1,0 +1,7 @@
+{% if ranklist %}
+<ul>
+    {% for row in ranklist %}
+    <li> {{ row.0 }} : <b>{{row.1}}</b> <i>{{row.2}}</i></li>
+    {% endfor %}
+</ul>
+{% endif %}

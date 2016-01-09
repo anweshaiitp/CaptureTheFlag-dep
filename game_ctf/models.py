@@ -10,6 +10,7 @@ from CaptureTheFlag.settings import BASE_DIR
 class Question(models.Model):
 	valid = models.BooleanField(default = True)
 	source_file = models.CharField(max_length=50)
+	answer = models.CharField(max_length=50)
 	points = models.IntegerField(default = 0)
 	# Some questions will require additional context information
 	# such as specific rendering of modification requests, if this is

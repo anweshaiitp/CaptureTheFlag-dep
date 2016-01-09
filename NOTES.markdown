@@ -16,6 +16,7 @@ if inidividual user logges in, should we
 [ ] : Leader Board
 [ ] : How to user scripts and fixtures
 [ ] : Add Favicon
+[ ] : Validate Answers
 
 ## TODO For Registraioint form
 [ ] : TeamMembers -> TeamDetails
