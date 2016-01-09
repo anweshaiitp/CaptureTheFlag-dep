@@ -14,7 +14,7 @@ do
 		\"pk\": $i, 
 		\"fields\": {
 			\"valid\": true, 
-			\"source_file\": \"lola\", 
+			\"source_file\": \"question$i.html\", 
 			\"points\": 0, 
 			\"has_context\": false
 			}
@@ -30,7 +30,7 @@ echo "
 		\"pk\": $val, 
 		\"fields\": {
 			\"valid\": true, 
-			\"source_file\": \"lola\", 
+			\"source_file\": \question$val.html\", 
 			\"points\": 0, 
 			\"has_context\": false
 			}
