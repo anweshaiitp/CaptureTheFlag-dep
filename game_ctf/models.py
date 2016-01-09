@@ -43,18 +43,6 @@ class TeamMembers(models.Model):
 	have to resort to a better LeaderBoard ranking system and scheme, like the ones
 	followed by steam/counter_strike/SO etc
 '''
-
-class Team(models.Model):
-	# TODO : enforce validators
-	team_id = models.OneToOneField(User,on_delete = models.CASCADE)
-	valid = models.BooleanField(default = True)
-	user1 = models.CharField(max_length = 30)
-	user2 = models.CharField(max_length = 30)
-	user3 = models.CharField(max_length = 30)
-	#college_name = models.EmailField()
-	#phone_number = models.PhoneNumber()
-	points = models.IntegerField(default = 0)
-
 class QuestionStatus(models.Model):
 	team_id = models.ForeignKey(User,on_delete = models.CASCADE)
 	question_id = models.ForeignKey(Question,on_delete = models.PROTECT)

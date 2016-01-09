@@ -18,15 +18,8 @@ if inidividual user logges in, should we
 [ ] : Add Favicon
 
 ## TODO For Registraioint form
-
-User_name -> team name
-user1 : answesha ID
-user2 
-user3 
-College Name
-Phone Number
-Email Id
-
-(Models: Team)
-(Forms: Registration)
-(views: user_rgistration)
+[ ] : TeamMembers -> TeamDetails
+[ ] : Validate COllege_name., Phone_number
+[ ] : Add Team Name in place of user name in registration form
+[ ] : Validate usernames
+[ ] : Change error messages 

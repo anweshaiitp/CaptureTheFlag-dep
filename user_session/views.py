@@ -75,7 +75,6 @@ def save_team(registration_form):
 	'''
 	u = User.objects.create_user(registration_form.cleaned_data['username'],
 		password = registration_form.cleaned_data['password1'])
-	u.save()
 	team = TeamMembers(team = u,
 		email = registration_form.cleaned_data['email'],
 		user1 = registration_form.cleaned_data['user1'],
@@ -96,7 +95,7 @@ def user_registration(request):
 	if request.method == 'POST':
 		registration_form = UserRegistrationForm(request.POST)
 		if registration_form.is_valid():
-			print registration_form.cleaned_data
+			#print registration_form.cleaned_data
 			messages.add_message(request,
 			info_messages['registration successful'][0],info_messages['registration successful'][1])
 			save_team(registration_form)
