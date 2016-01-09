@@ -14,13 +14,15 @@ from django.contrib import messages
 
 from django.template import loader
 
-from models import Question, QuestionStatus, TeamDetails
+from models import Question, QuestionStatus, TeamDetail
 from .settings import QUESTIONS_DIR, info_messages, template_path
 
 @login_required 
 def home(request):
 	questions = Question.objects.all().filter(valid=True)
-	return render(request, 'game_ctf/home.html',{'questions':questions})
+	score = TeamDetail.objects.get(team = request.user).points
+	team_name = request.user.username
+	return render(request, template_path['home'],{'questions':questions, 'score':score, 'team_name' :team_name})
 
 
 @login_required
@@ -62,7 +64,7 @@ def question_page(request,question_id):
 @login_required 
 def leaderboard(request):
 	template = loader.get_template('game_ctf/leaderboard.html')
-	rlist_ = TeamDetails.objects.all().order_by('-points')[:20];
+	rlist_ = TeamDetail.objects.all().order_by('-points')[:20];
 	rlist = []
 	rank = 1
 	for row in rlist_:
@@ -73,4 +75,7 @@ def leaderboard(request):
 	}
 	
 
-	return HttpResponse(template.render(content,request))
+	return render(request, template_path['leaderboard'],content)
+
+def rules(request):
+	return render(request, template_path['rules'])

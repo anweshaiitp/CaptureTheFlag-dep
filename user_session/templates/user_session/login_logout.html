@@ -10,14 +10,14 @@
     
     {% load staticfiles %}
     <!-- TODO : load favivo -->
-    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'bootstrap-3.3.6-dist/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
     <title>Login</title>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="{% static 'css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'css/signin.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -28,40 +28,36 @@
 
   <body>
     <div class="container">
-    {% if form.errors %}
-        <p>Sorry, that's not a valid username or password</p>
-    {% endif %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
       <form class="form-signin" action="{% url 'user_session:login' %}" method="post">
       {% csrf_token %}
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading text-center">Login</h2>
+        <div class="info_message text-center">
+            {% if form.errors %}
+                <p>Sorry, that's not a valid username or password</p>
+            {% endif %}
+            {% if messages %}
+                {% for message in messages %}
+                    <span {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}<br></span>
+                {% endfor %}
+            {% endif %}
+        </div>
         <label for="username" class="sr-only">Team Name</label>
         <input type="text" name="username" value="" id="username" class="form-control" placeholder="TeamAwesome"autofocus>
 
         <label for="password" class="sr-only">Password</label>
         <input type="password" name="password" value="" id="password" class="form-control" placeholder="Password">
-        <input type="submit" name="login" value="Login"/>
+        <button class="btn btn-lg btn-primary btn-block" name="login" type="submit">Sign in</button>
         <input type="hidden" name="next" value="{{ next|escape }}" />
 <!--        <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>-->
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <div class="a-register  text-center">
+            <a href="{% url 'user_session:register' %}">Register</a>
+        </div>
       </form>
-    <form style="display:inline;" action="{% url 'user_session:register' %}">
-        <input type="submit"  value="Register"/>
-    </form>
-    </div> <!-- /container -->
-
-
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
   </body>
 </html>

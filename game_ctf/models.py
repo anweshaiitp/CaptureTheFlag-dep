@@ -19,7 +19,7 @@ class Question(models.Model):
 	def __str__(self):
 		return str(self.pk) + " " + self.source_file
 
-class TeamDetails(models.Model):
+class TeamDetail(models.Model):
 	# TODO : enforce validators
 	team = models.ForeignKey(User,on_delete = models.CASCADE)
 	valid = models.BooleanField(default = True)

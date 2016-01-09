@@ -12,6 +12,7 @@ urlpatterns = [
 	url(r'^question/(?P<question_id>[0-9]+)/$',views.question_page, name='question_page'),
 	url(r'^submit/(?P<question_id>[0-9]+)/$',views.submit_answer, name='submit_answer'),
 	url(r'^leaderboard/$',views.leaderboard,name='leaderboard'),
+	url(r'^rules/$',views.rules,name='rules'),
 	# Placeholders
 ]
 
