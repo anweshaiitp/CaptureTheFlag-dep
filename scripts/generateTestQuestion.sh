@@ -5,8 +5,8 @@
 # 
 # Script generates random test question files in the testQuestion directory
 
-#mkdir ../testQuestions
+mkdir -p ../game_ctf/templates/testQuestions
 for i in {1..10}
 do 
-	echo "Question number $i" > ../testQuestions/question$i.html
+	echo "Question number $i" > ../game_ctf/templates/testQuestions/question$i.html
 done
