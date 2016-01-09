@@ -7,12 +7,14 @@ if inidividual user logges in, should we
 ## TODO :
 [ ] : Modify `user_registration` to incorporate team registration
 [ ] :   Change field names, and error messages
+[ ] : Change UserTable names throughout to Team
 [ ] : Figure our models structure for team play and points allocation
 [ ] : validate Team name, anwesha ID
 [ ] : Registraion 
 [ ] : Questiong Loading
 [ ] : Point System
 [ ] : Leader Board
+[ ] : How to user scripts and fixtures
 
 ## TODO For Registraioint form
 

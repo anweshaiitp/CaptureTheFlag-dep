@@ -1,0 +1,85 @@
+[
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 1, 
+		"fields": {
+			"valid": true, 
+			"source_file": "lola", 
+			"points": 0, 
+			"has_context": false
+			}
+		}, 	
+
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 2, 
+		"fields": {
+			"valid": true, 
+			"source_file": "lola", 
+			"points": 0, 
+			"has_context": false
+			}
+		}, 	
+
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 3, 
+		"fields": {
+			"valid": true, 
+			"source_file": "lola", 
+			"points": 0, 
+			"has_context": false
+			}
+		}, 	
+
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 4, 
+		"fields": {
+			"valid": true, 
+			"source_file": "lola", 
+			"points": 0, 
+			"has_context": false
+			}
+		}, 	
+
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 5, 
+		"fields": {
+			"valid": true, 
+			"source_file": "lola", 
+			"points": 0, 
+			"has_context": false
+			}
+		}, 	
+
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 6, 
+		"fields": {
+			"valid": true, 
+			"source_file": "lola", 
+			"points": 0, 
+			"has_context": false
+			}
+		}, 	
+
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 7, 
+		"fields": {
+			"valid": true, 
+			"source_file": "lola", 
+			"points": 0, 
+			"has_context": false
+			}
+		} 	
+]
