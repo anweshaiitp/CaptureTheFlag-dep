@@ -13,14 +13,13 @@ from django.contrib.auth.models import User
 from models import Question
 @login_required 
 def home(request):
-	# Get all valid questionns,
-	# create links accordingly
 	questions = Question.objects.all().filter(valid=True)
 	return render(request, 'game_ctf/home.html',{'questions':questions})
 
 
 @login_required
 def question_page(request):
+	# if has context deal with it
 	return HttpResponse("question page")
 
 @login_required 

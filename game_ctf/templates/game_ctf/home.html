@@ -1,7 +1,7 @@
 {% if questions %}
 <ul>
     {% for question in questions %}
-    <a href="{{ question.source_link }}">Question id {{ question.pk }}</a>
+    <a href="/question/{{ question.pk }}">Question id {{ question.pk }}</a>
     {% endfor %}
 </ul>
 {% else %}
