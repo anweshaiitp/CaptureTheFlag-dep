@@ -9,7 +9,7 @@ These are settings for the django.contrib.auth module.
 We have overridden them with our specifics.
 Refer the documentation for more details.
 """
-LOGIN_REDIRECT_URL = 'user_session:home'
+LOGIN_REDIRECT_URL = 'game_ctf:home'
 LOGIN_URL = 'user_session:login'
 LOGOUT_URL = 'user_session:error_404'
 

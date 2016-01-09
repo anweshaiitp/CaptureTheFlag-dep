@@ -15,6 +15,7 @@ if inidividual user logges in, should we
 [ ] : Point System
 [ ] : Leader Board
 [ ] : How to user scripts and fixtures
+[ ] : Add Favicon
 
 ## TODO For Registraioint form
 
