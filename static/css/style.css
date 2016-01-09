@@ -115,3 +115,8 @@ body {
 .lb-header{
   color: #f92672;
 }
+
+.terminal {
+  height: 300px;
+  margin-top: 20px
+}
