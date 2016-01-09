@@ -9,10 +9,14 @@ from CaptureTheFlag.settings import BASE_DIR
 
 class Question(models.Model):
 	valid = models.BooleanField(default = True)
-	# @metastableB : useage of FilePathField might not be as straight forward
-	# refer to the documentation
-	source_file = models.FilePathField(path=BASE_DIR+"/Questions/")
-	points = models.IntegerField()
+	source_file = models.CharField(max_length=50)
+	points = models.IntegerField(default = 0)
+	# Some questions will require additional context information
+	# such as specific rendering of modification requests, if this is
+	# the case we will have to handle such questions separately 
+	has_context = models.BooleanField(default = False)
+	def __str__(self):
+		return str(self.pk) + " " + self.source_file
 
 '''
 @metastableB : We are not using a leaderboard specific data structure for this app
@@ -24,7 +28,25 @@ class Question(models.Model):
 	have to resort to a better LeaderBoard ranking system and scheme, like the ones
 	followed by steam/counter_strike/SO etc
 '''
-class PointsPerUser(models.Model):
-	user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Team(models.Model):
+	# TODO : enforce validators
+	team_id = models.OneToOneField(User,on_delete = models.CASCADE)
+	valid = models.BooleanField(default = True)
+	user1 = models.CharField(max_length = 30)
+	user2 = models.CharField(max_length = 30)
+	user3 = models.CharField(max_length = 30)
+	#college_name = models.EmailField()
+	#phone_number = models.PhoneNumber()
 	points = models.IntegerField(default = 0)
 
+class QuestionStatus(models.Model):
+	team_id = models.ForeignKey(User,on_delete = models.CASCADE)
+	question_id = models.ForeignKey(Question,on_delete = models.PROTECT)
+	OPPEN = 'OP'
+	CLOSED = 'CL'
+	ANSWERED = 'AW'
+	QUESTION_STATUS_CHOICES = ((OPPEN,"Open"),
+		(CLOSED,"Closed"),
+		(ANSWERED,"Answered"))
+	question_status = models.CharField(max_length = 2, choices = QUESTION_STATUS_CHOICES, default = CLOSED)
