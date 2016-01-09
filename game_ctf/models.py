@@ -4,7 +4,7 @@
 # 
 from __future__ import unicode_literals
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User 
 from CaptureTheFlag.settings import BASE_DIR
 
 class Question(models.Model):
@@ -17,6 +17,21 @@ class Question(models.Model):
 	has_context = models.BooleanField(default = False)
 	def __str__(self):
 		return str(self.pk) + " " + self.source_file
+
+	# TeamDetails
+class TeamMembers(models.Model):
+	# TODO : enforce validators
+	team = models.ForeignKey(User,on_delete = models.CASCADE)
+	valid = models.BooleanField(default = True)
+	user1 = models.CharField(max_length = 30)
+	user2 = models.CharField(max_length = 30)
+	user3 = models.CharField(max_length = 30)
+	email = models.EmailField()
+	college_name = models.CharField(max_length = 30)
+	phone_number = models.CharField(max_length = 15)
+	points = models.IntegerField(default = 0)
+	def __str__(self):
+		return str(self.team.pk) + " : " + self.team.username 
 
 '''
 @metastableB : We are not using a leaderboard specific data structure for this app

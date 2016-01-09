@@ -9,9 +9,13 @@ from django import forms
 # http://jessenoller.com/blog/2011/12/19/quick-example-of-extending-usercreationform-in-django
 
 class UserRegistrationForm(UserCreationForm):
-    first_name = forms.CharField(required = True,max_length = 30, min_length = 1, strip = True)
-    last_name = forms.CharField(required = True,max_length = 30, min_length = 1, strip = True)
+    user1 = forms.CharField(required = True,max_length = 30, min_length = 1, strip = True)
+    user2 = forms.CharField(required = True,max_length = 30, min_length = 1, strip = True)
+    user3 = forms.CharField(required = True,max_length = 30, min_length = 1, strip = True)
+    college_name = forms.CharField(required = True,max_length = 30, min_length = 1, strip = True)
+    phone_number = forms.IntegerField(required = True)
     email = forms.EmailField(required = True)
+
     class Meta:
         model = User
-        fields = ("first_name","last_name","username", "email", "password1", "password2")
+        fields = ("username","email","user1","user2","user3","password1", "password2","phone_number","college_name")
