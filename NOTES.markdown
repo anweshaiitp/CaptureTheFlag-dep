@@ -9,6 +9,10 @@ if inidividual user logges in, should we
 [ ] :   Change field names, and error messages
 [ ] : Figure our models structure for team play and points allocation
 [ ] : validate Team name, anwesha ID
+[ ] : Registraion 
+[ ] : Questiong Loading
+[ ] : Point System
+[ ] : Leader Board
 
 ## TODO For Registraioint form
 
