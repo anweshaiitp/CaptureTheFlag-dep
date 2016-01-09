@@ -11,6 +11,7 @@ urlpatterns = [
 	url(r'^home/$',views.home, name='home'),
 	url(r'^question/(?P<question_id>[0-9]+)/$',views.question_page, name='question_page'),
 	url(r'^leaderboard/$',views.leaderboard,name='leaderboard'),
+	url(r'^rules/$',views.rules,name='rules'),
 	# Placeholders
 ]
 

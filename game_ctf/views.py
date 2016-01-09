@@ -38,3 +38,6 @@ def question_page(request,question_id):
 @login_required 
 def leaderboard(request):
 	return render(request, template_path['leaderboard'])
+
+def rules(request):
+	return render(request, template_path['rules'])
