@@ -10,9 +10,13 @@ from django.core.urlresolvers import resolve, Resolver404, is_valid_path
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+from models import Question
 @login_required 
 def home(request):
-	return HttpResponse("Hello Home")
+	# Get all valid questionns,
+	# create links accordingly
+	questions = Question.objects.all().filter(valid=True)
+	return render(request, 'game_ctf/home.html',{'questions':questions})
 
 
 @login_required
