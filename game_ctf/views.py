@@ -20,7 +20,7 @@ def home(request):
 	questions = Question.objects.all().filter(valid=True)
 	score = TeamMember.objects.get(team = request.user).points
 	team_name = request.user.username
-	return render(request, 'game_ctf/home.html',{'questions':questions, 'score':score, 'team_name' :team_name})
+	return render(request, template_path['home'],{'questions':questions, 'score':score, 'team_name' :team_name})
 
 
 @login_required
@@ -37,4 +37,4 @@ def question_page(request,question_id):
 
 @login_required 
 def leaderboard(request):
-	return HttpResponse("Apparently you are winning")
+	return render(request, template_path['leaderboard'])

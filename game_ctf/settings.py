@@ -19,4 +19,5 @@ info_messages = {
 
 template_path = {
 	'home':'game_ctf/home.html',
+	'leaderboard':'game_ctf/leaderboard.html'
 }	
