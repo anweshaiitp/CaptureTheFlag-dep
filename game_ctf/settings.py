@@ -14,6 +14,7 @@ QUESTIONS_DIR='testQuestions/'
 
 info_messages = {
 	'question does not exist' :(messages.ERROR,'Does Not Exist: Seriously dude ?'),
+	'question already solved' :(messages.INFO,'Already Soved : Why Solve Again??'),
 	'login required':(messages.INFO,'You must login first'),
 }
 

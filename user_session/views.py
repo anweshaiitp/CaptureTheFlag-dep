@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import UserRegistrationForm
 from .settings import template_path, info_messages
-from game_ctf.models import TeamMember
+from game_ctf.models import TeamDetail
 
 from django.contrib.auth.models import User
 import settings 
@@ -75,7 +75,7 @@ def save_team(registration_form):
 	'''
 	u = User.objects.create_user(registration_form.cleaned_data['username'],
 		password = registration_form.cleaned_data['password1'])
-	team = TeamMember(team = u,
+	team = TeamDetail(team = u,
 		email = registration_form.cleaned_data['email'],
 		user1 = registration_form.cleaned_data['user1'],
 		user2 = registration_form.cleaned_data['user2'],

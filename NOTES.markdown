@@ -16,6 +16,7 @@ if inidividual user logges in, should we
 [X] : Leader Board
 [ ] : How to user scripts and fixtures
 [ ] : Add Favicon
+[ ] : Validate Answers
 [ ] : Deploying static files https://docs.djangoproject.com/en/1.9/howto/static-files/
 [ ] : Answering
 [ ] : Has Context

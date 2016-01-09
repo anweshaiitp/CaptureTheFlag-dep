@@ -10,6 +10,7 @@ from CaptureTheFlag.settings import BASE_DIR
 class Question(models.Model):
 	valid = models.BooleanField(default = True)
 	source_file = models.CharField(max_length=50)
+	answer = models.CharField(max_length=50)
 	points = models.IntegerField(default = 0)
 	# Some questions will require additional context information
 	# such as specific rendering of modification requests, if this is
@@ -18,8 +19,7 @@ class Question(models.Model):
 	def __str__(self):
 		return str(self.pk) + " " + self.source_file
 
-	# TeamDetails
-class TeamMember(models.Model):
+class TeamDetail(models.Model):
 	# TODO : enforce validators
 	team = models.ForeignKey(User,on_delete = models.CASCADE)
 	valid = models.BooleanField(default = True)
