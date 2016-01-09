@@ -49,52 +49,24 @@
 		</div>
 	</div>
 </nav>
-<!-- The question answer portion -->
 
-<div class="container" style="padding-top:60px;">
-	
-	<div class="row">
-		<div class="col-md-12 text-right team-info">
-				<span class="team-name">{{ team_name }}</span><br>
-				<span class="score"> {{ score }}</span>
-		</div>
+<div class="container">
+	<div class="row text-center lb-header">
+		<h2> Rules  <h2>
 	</div>
-	<div class="row info_message text-center">
-		<div class="col-md-12">
-			{% if messages %}
-			    {% for message in messages %}
-			    <span {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
-			    {% endfor %}
-			{% endif %}
+	<div class="row text-centered">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			Lorem ipsum Culpa voluptate ut in minim aute aliqua in non do veniam veniam qui fugiat reprehenderit dolor nostrud fugiat sunt anim dolore non Duis ut dolore Ut in nulla nostrud voluptate ut velit deserunt exercitation nulla do elit exercitation nisi deserunt.
+			ut in minim aute aliqua in non do veniam veniam qui fugiat reprehenderit dolor nostrud fugiat sunt anim dolore non Duis ut dolore Ut in nulla nostrud voluptate ut velit deserunt exercitation nulla do elit exercitation nisi deserunt.
+			<br>
+			<br>
+			Lorem ipsum Culpa voluptate ut in minim aute aliqua in non do veniam veniam qui fugiat reprehenderit dolor nostrud fugiat sunt anim dolore non Duis ut dolore Ut in nulla nostrud voluptate ut velit deserunt exercitation nulla do elit exercitation nisi deserunt.
+			ut in minim aute aliqua in non do veniam veniam qui fugiat reprehenderit dolor nostrud fugiat sunt anim dolore non Duis ut dolore Ut in nulla nostrud voluptate ut velit deserunt exercitation nulla do elit exercitation nisi deserunt.
 		</div>
-	</div>
-	<div class="row ">
-			{% if questions %}
-	    		{% for question in questions %}
-	    			{% if forloop.counter0|divisibleby:"2" %}
-						<div class="row text-center">
-	    					<div class="col-md-6 text-center">
-	    						<div class="question-box">
-	    							<a class="flo-green glow"href="/question/{{ question.pk }}">Question {{ question.pk }}</a>
-	    						</div>
-	    					</div>
-	    				{% if forloop.last %}
-						</div>
-						{% endif %}
-					{% else %}
-							<div class="col-md-6 text-center">
-								<div class="question-box">
-	    							<a class="flo-green glow"href="/question/{{ question.pk }}">Question {{ question.pk }}</a>
-	    						</div>
-	    					</div>
-	    				</div>
-	    			{% endif %}
-	    		{% endfor %}
-			{% endif %}
+		<div class="col-md-2"></div>
 	</div>
 </div>
-
-<!-- footer -->
 <div class="footer text-center">
 	      Anwesha, IIT Patna
 </div>
@@ -116,4 +88,3 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>
 </body>
-

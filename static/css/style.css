@@ -1,0 +1,117 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+  border-style: solid;
+  border-radius: 3px;
+  background-color:rgba(24, 162, 129, 0.61);
+  border-color:rgba(24, 162, 129, 0.49);
+  max-height:50%;
+  margin-top:10%;
+  box-shadow: 2px 5px 5px rgba(136, 136, 136, 0.61);
+  border-radius: 7px;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin-heading{
+
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.a-register{
+  padding:3px;
+}
+
+.info_message {
+  color:#002275;
+  padding:2px;
+}
+
+/* monokai */
+body {
+  background: #272822;
+  color: #f8f8f2;
+  font-family: "Lucida Console", Monaco, monospace;
+}
+.team-info {
+  padding-bottom:5px;
+}
+
+.team-name{
+  color:#FF0000;
+}
+.score{
+  color:#0000FF;
+}
+.flo-green {
+  color: #967efb;
+}
+.question-box{
+  font-size:1.7em;
+  background-color:#75715e;
+  padding-top:7px;
+  padding-bottom:7px;
+  margin-bottom:5px;
+  border-radius:4px;
+}
+
+.glow{
+  transition: all 0.3s ease-in;
+  text-decoration:none;
+}
+
+.glow:hover{
+  -webkit-stroke-width: 5.3px;
+  -webkit-stroke-color: #FFFFFF;
+  -webkit-fill-color: #FFFFFF;
+  text-shadow: 1px 0px 20px green;
+  text-decoration:none;
+  color:orange;
+}
+
+.footer{
+  padding:10px;
+  position:absolute;
+  bottom:0px;
+  background-color:#222;
+  border-style: solid;
+  border-width:1px 0 0 0;
+  border-color: #080808;
+  width:100%;
+  color:#9d9d9d;
+}
+
+.lb-header{
+  color: #f92672;
+}

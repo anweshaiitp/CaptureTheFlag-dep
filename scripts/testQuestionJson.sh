@@ -6,7 +6,7 @@
 # Generate a dummy question json file 
 
 echo "["
-for i in {1..6}
+for i in {1..7}
 do
 	echo "
 	{
