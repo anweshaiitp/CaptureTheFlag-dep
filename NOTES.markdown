@@ -13,7 +13,6 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
 - [X] Question Loading
 - [X] Point System
 - [X] Leader Board
-- [ ] How to : user scripts and fixtures
 - [X] Add Favicon
 - [ ] Validate Answers
 - [X] Deploying static files https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -41,16 +40,23 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
 - [ ] Run deployment as daemon
 - [ ] Use nigix to serve static
 - [X] Do not allow multiple sessions par user.
-- [X] MIT License for `django-preventconcurrentlogins`
-- [ ] License
+- [X] MIT License for `django-preventconcurrentlogins
 - [X] Fix login page CSS
 - [ ] Fix terminal CSS
 - [ ] Document on how to allow concurrent logins
 - [ ] concurrent login while javascript
+- [ ] Color Change Answered questions and do not let it to be opened
+- [ ] License
+- [ ] Change password form
+- [ ] Return button on terminal because mobile forms dont have return key
+
+### For future release
 - [ ] create a separate branch which allows
         - Users register separately and agree on a team
         - All members of team can login on different machines
-- [ ] Color Change Answered questions and do not let it to be opened
+- [ ] How to : user scripts and fixtures
+- [ ] Finishing time - opening time
+
 
 ## Deployement
 
