@@ -7,10 +7,10 @@ if inidividual user logges in, should we
 ## TODO :
 
 - [X] Modify `user_registration` to incorporate team registration
-- [ ]   Change field names, and error messages
+- [X]   Change field names, and error messages
 - [X] Change UserTable names throughout to Team
 - [X] Figure our models structure for team play and points allocation
-- [ ] validate Team name, anwesha ID
+- [X] validate Team name, anwesha ID
 - [X] Registraion 
 - [X] Questiong Loading
 - [X] Point System
@@ -18,28 +18,28 @@ if inidividual user logges in, should we
 - [ ] How to : user scripts and fixtures
 - [X] Add Favicon
 - [ ] Validate Answers
-- [ ] Deploying static files https://docs.djangoproject.com/en/1.9/howto/static-files/
+- [X] Deploying static files https://docs.djangoproject.com/en/1.9/howto/static-files/
 - [ ] Answering
 - [ ] Has Context
 - [X] Add rules page
-- [ ] : Update Rules page Content
+- [ ] Update Rules page Content
 - [X] CSS Question Heighlight
-- [ ] If answered, change color at home
-- [ ] CSS on messages
+- [X] If answered, change color at home
+- [X] CSS on messages
 - [ ] Add link to team at footes
 - [ ] User part of multiple teams
 - [X] Make sure anwesha IDs are different
 - [X] Test duplicate teamname(Already Username)
 - [ ] Test duplicate teamname
-- [ ] Add footer to registation form
+- [X] Add footer to registation form
 - [ ] Adding timestamp to question answering time
 - [ ] Convert all anwesha id to small case before saving in database
 - [ ] Anwesha ID -> Team Name (After SMPT, Plug and Play)
 - [X] TeamMembers -> TeamDetails
-- [ ] Validate COllege_name., Phone_number
-- [ ] Add Team Name in place of user name in registration form
-- [ ] Validate usernames
-- [ ] Change error messages 
+- [X] Validate COllege_name., Phone_number
+- [X] Add Team Name in place of user name in registration form
+- [X] Validate usernames
+- [X] Change error messages 
 - [ ] Run deployment as daemon
 - [ ] Use nigix to serve staticop
 
