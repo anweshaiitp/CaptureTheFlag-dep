@@ -7,6 +7,9 @@
 		        <span class="icon-bar"></span>		        
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
+		  		{% if not user.is_authenticated %}
+		  		<span class="icon-bar"></span>
+		  		{% endif %}
 			    </button>
 	        <a class="navbar-brand" href="{% url 'game_ctf:home' %}">Anwesha '16 <span style="font-weight:bolder;">|</span> CTF </a>
 		</div>
@@ -18,6 +21,7 @@
 				<li><a class="active" href="{% url 'game_ctf:home' %}">Home</a></li>
 				{% else %}
 				<li><a class="active" href="{% url 'user_session:login' %}">Login</a></li>
+				<li><a class="active" href="{% url 'user_session:register' %}">Register</a></li>
 				{% endif %}
 				<li><a href="{% url 'game_ctf:leaderboard' %}">Leaderboard</a></li>
 				<li><a href="{% url 'game_ctf:rules' %}">Rules</a></li>
