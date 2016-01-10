@@ -2,8 +2,6 @@
 
 This repository holds the capture the flag framework used by NJACK, IIT Patna.
 
-Should we allow each individual user to login or should we stick to one team per session login ?
-if inidividual user logges in, should we
 ## TODO :
 
 - [X] Modify `user_registration` to incorporate team registration
@@ -11,8 +9,8 @@ if inidividual user logges in, should we
 - [X] Change UserTable names throughout to Team
 - [X] Figure our models structure for team play and points allocation
 - [X] validate Team name, anwesha ID
-- [X] Registraion 
-- [X] Questiong Loading
+- [X] Registration 
+- [X] Question Loading
 - [X] Point System
 - [X] Leader Board
 - [ ] How to : user scripts and fixtures
@@ -23,16 +21,16 @@ if inidividual user logges in, should we
 - [ ] Has Context
 - [X] Add rules page
 - [ ] Update Rules page Content
-- [X] CSS Question Heighlight
+- [X] CSS Question Highlight
 - [X] If answered, change color at home
 - [X] CSS on messages
-- [ ] Add link to team at footes
+- [ ] Add link to team at footer
 - [ ] User part of multiple teams
 - [X] Make sure anwesha IDs are different
 - [X] Test duplicate teamname(Already Username)
 - [ ] Test duplicate teamname
-- [X] Add footer to registation form
-- [ ] Adding timestamp to question answering time
+- [X] Add footer to registration form
+- [ ] Adding timestamps to question answering time
 - [ ] Convert all anwesha id to small case before saving in database
 - [ ] Anwesha ID -> Team Name (After SMPT, Plug and Play)
 - [X] TeamMembers -> TeamDetails
@@ -41,7 +39,13 @@ if inidividual user logges in, should we
 - [X] Validate usernames
 - [X] Change error messages 
 - [ ] Run deployment as daemon
-- [ ] Use nigix to serve staticop
+- [ ] Use nigix to serve static
+- [X] Do not allow multiple sessions par user.
+- [X] MIT License for `django-preventconcurrentlogins`
+- [ ] License
+- [ ] Fix login page CSS
+- [ ] Fix terminal CSS
+- [ ] Document on how to allow concurrent logins
 
 ## Deployement
 
@@ -55,17 +59,17 @@ STEP 1 : Build and install mod_wsgi from source
 **python 2.7**
 **apache 2.4.12**
 **mod_wsgi 4.4.21**
-You can view if your apache2 is threaded by runnin `apache2ctl -V`.
+You can view if your apache2 is threaded by running `apache2ctl -V`.
 
-Instalation instructions can be found [here](2). The following are the steps we followed. **This is only for reference**
+Installation instructions can be found [here](2). The following are the steps we followed. **This is only for reference**
 - [Download source code](1)
 - Extract 
-- Configure : If you face ` apxs: command not found`, download the apache dev package as discribed in the instructions.
+- Configure : If you face ` apxs: command not found`, download the apache dev package as described in the instructions.
 - Install `apache2-dev`
 - Build the package using `make`
 - Install apache module `sudo make install`
 - Find the `httpd.conf` file. This is actually your `apache2.conf` file. You can find this by running `apache2ctl -V` and looking at `HTTPD_ROOT` and `SERVER_CONFIG_FILE`
-`sudo make install` will output where it installed the libraries. You will need this as a parameter for loadking.
+`sudo make install` will output where it installed the libraries. You will need this as a parameter for loading.
 - Restart `apache2ctl`
 If configured correctly, this will be reflected in the apache error logs as
 `mod_wsgi/4.4.21 Python/2.7.6 configured `
@@ -78,7 +82,7 @@ Find and edit the following lines:
     export APACHE_RUN_USER=<username>
     export APACHE_RUN_GROUP=<username>
 
-Temporarly you can set the username as your own.
+Temporary you can set the username as your own.
 The in the `/etc/apache2/apache.conf` add the following lines making the necessary edits.
 
     WSGIScriptAlias /CFG /path/to/CaptureTheFlag/CaptureTheFlag/wsgi.py WSGIPythonPath /path/to/CaptureTheFlag:/path/to/virtualenc/lib/site-packages
