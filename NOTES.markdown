@@ -14,7 +14,7 @@ if inidividual user logges in, should we
 [X] : Questiong Loading
 [X] : Point System
 [X] : Leader Board
-[ ] : How to user scripts and fixtures
+[ ] : How to : user scripts and fixtures
 [ ] : Add Favicon
 [ ] : Validate Answers
 [ ] : Deploying static files https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -25,7 +25,10 @@ if inidividual user logges in, should we
 [ ] : If answered, change color at home
 [ ] : CSS on messages
 [ ] : Add link to team at footes
-
+[ ] : User part of multiple teams
+[ ] : Make sure anwesha IDs are different
+[ ] : Test duplicate teamname
+[ ] : Add footer to registation form
 
 ## TODO For Registraioint form
 [X] : TeamMembers -> TeamDetails
