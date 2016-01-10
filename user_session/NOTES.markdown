@@ -22,6 +22,7 @@ across insecure connection.
 - [ ] : Describe how the plug play is going to work. Document the changes required
 - [ ] : Write test cases for modal fields. (SQL injection and similar exploits)
 - [ ] : Modify the user_session login page to show a disabled account error when trying to login using a disabled account.
+- [ ] : Handel CSS for Long Message in LoginPage
 - [ ] : Donot forget to add settings.* and the related docs.
 - [ ] : Rewrite test cases
 

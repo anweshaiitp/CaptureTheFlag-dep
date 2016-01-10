@@ -1,0 +1,34 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-items" aria-expanded="false">
+	    <!-- sr-only : screen reader only -->
+		        <span class="sr-only">Toggle navigation</span>		       
+		        <span class="icon-bar"></span>		        
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		  		{% if not user.is_authenticated %}
+		  		<span class="icon-bar"></span>
+		  		{% endif %}
+			    </button>
+	        <a class="navbar-brand" href="{% url 'game_ctf:home' %}">Anwesha '16 <span style="font-weight:bolder;">|</span> CTF </a>
+		</div>
+		<div id="navbar-items" class="navbar-collapse collapse">
+
+			<ul class="nav navbar-nav navbar-right">
+			<!-- something like the default active element-->
+				{% if user.is_authenticated %}
+				<li><a class="active" href="{% url 'game_ctf:home' %}">Home</a></li>
+				{% else %}
+				<li><a class="active" href="{% url 'user_session:login' %}">Login</a></li>
+				<li><a class="active" href="{% url 'user_session:register' %}">Register</a></li>
+				{% endif %}
+				<li><a href="{% url 'game_ctf:leaderboard' %}">Leaderboard</a></li>
+				<li><a href="{% url 'game_ctf:rules' %}">Rules</a></li>
+				{% if user.is_authenticated %}
+				<li><a href="{% url 'user_session:logout' %}">Logout</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</nav>
