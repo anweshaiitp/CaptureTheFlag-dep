@@ -13,6 +13,7 @@ from django.contrib import messages
 QUESTIONS_DIR='testQuestions/'
 
 info_messages = {
+	'normal user page':(messages.INFO,'Logged Out: Game Not For Admin'),
 	'question does not exist' :(messages.ERROR,'Does Not Exist: Seriously dude ?'),
 	'question already solved' :(messages.INFO,'Already Soved : Why Solve Again??'),
 	'login required':(messages.INFO,'You must login first'),

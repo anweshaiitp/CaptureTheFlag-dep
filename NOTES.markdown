@@ -32,6 +32,7 @@ if inidividual user logges in, should we
 [ ] : Adding timestamp to question answering time
 [ ] : Convert all anwesha id to small case before saving in database
 [ ] : Anwesha ID -> Team Name (After SMPT, Plug and Play)
+[ ] : CSS fix for Cursor in Terminal
 
 ## TODO For Registraioint form
 [X] : TeamMembers -> TeamDetails

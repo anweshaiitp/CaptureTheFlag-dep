@@ -94,10 +94,17 @@
 			{% endif %}
 	</div>
 </div>
-<div class="terminal">
-
+<div>
+	<div class="terminal"> 
+	<div class="terminalhistory" id="terminalhistory" style="position:absolute;bottom:32px;margin-top:32px">
+	</div>
+	<div class="bottom" style="position:absolute;bottom:0px;">
+		<div class="label">></div>
+		<div id="input"></div>
+	</div>
+	
+	</div>
 </div>
-
 <!-- footer -->
 <div class="footer text-center">
 	      Anwesha, IIT Patna
@@ -121,22 +128,138 @@
 <script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'cssConsole/cssConsole.min.js' %}"></script>
 <script type="text/javascript">
+//For CSRF
+
+// using jQuery
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+</script>
+<style type="text/css">
+.terminal{
+width: 100%
+position:absolute;
+bottom:32px;
+overflow:hidden;
+}
+
+.cssConsoleDisplay {
+position:absolute;
+bottom:0px;
+padding-left: 10px;
+}
+</style>
+<script type="text/javascript">
+addTerminalHistory("Welcome To CTF!!!");
+var lineLimit = 28;
+function addTerminalHistory(input, style, color) {
+		if($('.terminalhistory div').length==lineLimit) {
+			$('.terminalhistory div').eq(0).remove();
+		}
+		style = typeof style !== 'undefined' ? style : 'line';
+		color = typeof color !== 'undefined' ? color : 'white';
+		$('.terminalhistory').append('<div class="'+style+' '+color+'">'+input+'</div>');
+}
+function afterCommandEntered()
+{
+	$('.terminal').cssConsole('reset');	
+}
 $(document).ready(function(){
-	var post_url = "some_shit";
+	var post_url = "../submit/";
 	$('.terminal').cssConsole({
+	
+	
 		onEnter: function(){
-			$.post( post_url, function( data ) {
-				onAnswerQuestion( data.id, data.status );
-				//$( ".result" ).html( data );
-			});
+			var spans = $(".cssConsoleDisplay");
+			var output = "";
+			var usage = "Usage : ans -q &lt;QuestionNo&gt; -f &lt;Flag&gt;<br> Example : ans -q 1 -f got_my_flag";
+			var commands = spans[0].innerHTML.replace(new RegExp("<([^>]+)>","gm"),"").replace(/<\/span>/g,"");
+			var cmds = commands.split(" ");
+			if(cmds.length == 0 || cmds[0]=="")
+				output = "No Commands Entered!\nEnter `help` for manual";
+			else if(cmds[0] == "help")
+				output = "CTF terminal v1\nShell Commands List - <br> help    - To Show Shell Manual<br> ans     - To submit Flag<br> clear    - To Clear Screen";
+			else if(cmds[0] == "clear")
+			{
+				$('.terminalhistory div').empty();
+				output = "clear";
+			}
+			else if(cmds[0] != "ans")
+				output = "`"+cmds[0]+"` Not Found!<br>Enter `help` for manual";
+			else if(cmds.length == 1)
+				output = usage;
+			else if(cmds[1] == "--help")
+				output = usage;
+			else if(cmds.length !=5 )
+				output = "Invalid Syntax, For Usage `ans --help`";
+			else if(cmds[1] != "-q" || cmds[3] != "-f")
+				output = "Invalid Syntax, For Usage `ans --help`";
+			else {
+				try
+				{
+					question = parseInt(cmds[2]);
+					if( question<1 || question>6)
+						output = "Error : Question Number, Allowed Range [1-6]"
+					else
+					{
+						flag = cmds[4];
+						$.post( post_url+question+"/", {answer : flag}).done(function( data ) {
+							onAnswerQuestion( data );
+							//$( ".result" ).html( data );
+						});
+					}
+				}catch(err)
+				{
+					output = "Error : Invalid Question Number";
+				}
+				
+
+
+			}
+			if(output!="")
+				addTerminalHistory(output);
+			else if(output!="clear") addTerminalHistory("Processing!");
+			afterCommandEntered();
 		}
 	});
-	function onAnswerQuestion( id, status ) {
-		if ( status === true ) {
-			$( '#'+id ).css( 'border-color', 'green' );
-		}
+	function onAnswerQuestion( data ) {
+		if ( data === "wow" ) {
+				addTerminalHistory("Response : You Cracked it!");
+		} else if ( data === "as" ) {
+				addTerminalHistory("Response : This Problem is Already Submitted");
+		} else if ( data === "tryagain" ) {
+				addTerminalHistory("Response : Invalid Flag!");
+		} else if ( data === "error" ) {
+				addTerminalHistory("Response : Some Error!");
+		} 
 	}
 });
+
+
 </script>
 </body>
 

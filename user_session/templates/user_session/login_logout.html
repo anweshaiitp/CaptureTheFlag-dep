@@ -53,7 +53,8 @@
           </label>
         </div>-->
         <div class="a-register  text-center">
-            <a href="{% url 'user_session:register' %}">Register</a>
+          <button class="btn btn-lg btn-primary btn-block" type="button"
+          onclick='window.location.assign("{% url 'user_session:register' %}")'>Register</button>
         </div>
       </form>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
