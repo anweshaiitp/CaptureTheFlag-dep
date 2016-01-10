@@ -5,7 +5,7 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
 ## TODO :
 
 - [X] Modify `user_registration` to incorporate team registration
-- [X]   Change field names, and error messages
+- [X] Change field names, and error messages
 - [X] Change UserTable names throughout to Team
 - [X] Figure our models structure for team play and points allocation
 - [X] validate Team name, anwesha ID
@@ -24,13 +24,12 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
 - [X] If answered, change color at home
 - [X] CSS on messages
 - [ ] Add link to team at footer
-- [ ] User part of multiple teams
+- [X] User part of multiple teams
 - [X] Make sure anwesha IDs are different
 - [X] Test duplicate teamname(Already Username)
-- [ ] Test duplicate teamname
 - [X] Add footer to registration form
-- [ ] Adding timestamps to question answering time
-- [ ] Convert all anwesha id to small case before saving in database
+- [X] Adding timestamps to question answering time
+- [X] Convert all anwesha id to upper case before saving in database
 - [ ] Anwesha ID -> Team Name (After SMPT, Plug and Play)
 - [X] TeamMembers -> TeamDetails
 - [X] Validate COllege_name., Phone_number
@@ -44,7 +43,7 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
 - [X] Fix login page CSS
 - [ ] Fix terminal CSS
 - [ ] Document on how to allow concurrent logins
-- [ ] concurrent login while javascript
+- [X] concurrent login while javascript
 - [ ] Color Change Answered questions and do not let it to be opened
         - opened /closed and color change
         - JS color change on question answering
@@ -53,6 +52,7 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
 - [X] [Ignored] Return button on terminal because mobile forms dont have return key
 - [ ] To change or reset password, contact us
 - [ ] Define has context view
+
 ### For future release
 - [ ] create a separate branch which allows
         - Users register separately and agree on a team
