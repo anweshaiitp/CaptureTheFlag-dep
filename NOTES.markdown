@@ -50,8 +50,8 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
         - JS color change on question answering
         - Submitted questions not to be opened again
 - [ ] License
-- [ ] Change password form
 - [ ] Return button on terminal because mobile forms dont have return key
+- [ ] To change or reset password, contact us
 
 ### For future release
 - [ ] create a separate branch which allows
@@ -60,6 +60,8 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
 - [ ] How to : user scripts and fixtures
 - [ ] Finishing time - opening time
 - [ ] Cheatsheet
+- [ ] Change title of pages
+- [ ] Change password form
 
 ## Deployement
 
