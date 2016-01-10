@@ -29,6 +29,9 @@ if inidividual user logges in, should we
 [ ] : Make sure anwesha IDs are different
 [ ] : Test duplicate teamname
 [ ] : Add footer to registation form
+[ ] : Adding timestamp to question answering time
+[ ] : Convert all anwesha id to small case before saving in database
+[ ] : Anwesha ID -> Team Name (After SMPT, Plug and Play)
 
 ## TODO For Registraioint form
 [X] : TeamMembers -> TeamDetails

@@ -30,13 +30,13 @@ class UserRegistrationForm(forms.ModelForm):
         'password_mismatch': _("The two password fields didn't match."),
     }
     
-    teamname = forms.RegexField(label=_("teamname"), max_length=30,
+    teamname = forms.RegexField(
+    	required=True,
+    	label=_("teamname"), 
+    	max_length=30,
         regex=r'^[\w.@+-]+$',
-        help_text=_("Required. 30 characters or fewer. Letters, digits and "
-                    "@/./+/-/_ only."),
-        error_messages={
-            'invalid': _("This value may contain only letters, numbers and "
-                         "@/./+/-/_ characters.")},
+        help_text=_("Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."),
+        error_messages={'invalid': _("This value may contain only letters, numbers and @/./+/-/_ characters.")},
         widget = forms.TextInput(attrs={'class':'form-control form-control-reg', 'placeholder':'Team Name'}))
 
     password1 = forms.CharField(
@@ -48,29 +48,31 @@ class UserRegistrationForm(forms.ModelForm):
         help_text=_("Enter the same password as above, for verification."),
         widget = forms.PasswordInput(attrs={'class':'form-control form-control-reg', 'placeholder':'Re-enter Password'}))
     
-    user1 = forms.CharField(
+    user1 = forms.RegexField(
     	required = True,
-    	max_length = 30, 
     	min_length = 1, 
-    	strip = True,
     	label='user1: AnweshaID',
+    	max_length=10,
+        regex=r'^[Aa][Nn][Ww]\d{4}$',
+        error_messages={'invalid': _("Enter a valid anweshaID")},
     	widget=forms.TextInput(attrs={ 'class':'form-control form-control-reg', 'placeholder':'User1: AnweshaID'}))
     
-    user2 = forms.CharField(
+    user2 = forms.RegexField(
     	required = True,
-    	max_length = 30, 
     	min_length = 1, 
-    	strip = True,
     	label='user2: AnweshaID',
+    	max_length=10,
+        regex=r'^[Aa][Nn][Ww]\d{4}$',
+        error_messages={'invalid': _("Enter a valid anweshaID")},
     	widget=forms.TextInput(attrs={ 'class':'form-control form-control-reg', 'placeholder':'User2: AnweshaID'}))
-
     
-    user3 = forms.CharField(
+    user3 = forms.RegexField(
     	required = True,
-    	max_length = 30, 
     	min_length = 1, 
-    	strip = True,
     	label='user3: AnweshaID',
+    	max_length=10,
+        regex=r'^[Aa][Nn][Ww]\d{4}$',
+        error_messages={'invalid': _("Enter a valid anweshaID")},
     	widget=forms.TextInput(attrs={ 'class':'form-control form-control-reg', 'placeholder':'User3: AnweshaID'}))
 
     email = forms.EmailField(
@@ -80,7 +82,7 @@ class UserRegistrationForm(forms.ModelForm):
     college_name = forms.CharField(
     	required = True,
     	max_length = 50, 
-    	min_length = 1, 
+    	min_length = 1, 	
     	strip = True,
     	widget= forms.TextInput(attrs={'class':'form-control form-control-reg', 'placeholder':'College Name'}))
 
