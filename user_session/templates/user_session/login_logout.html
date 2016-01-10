@@ -25,8 +25,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-
   <body class="login-body">
+  {% include 'includes/navbar_top.html' %}
     <div class="container login-container-bg">
       <form class="form-signin" action="{% url 'user_session:login' %}" method="post">
       {% csrf_token %}
@@ -47,16 +47,17 @@
         <input type="password" name="password" value="" id="password" class="form-control" placeholder="Password">
         <button class="btn btn-lg btn-primary btn-block" name="login" type="submit">Sign in</button>
         <input type="hidden" name="next" value="{{ next|escape }}" />
+  
 <!--        <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>-->
-        <div class="a-register  text-center">
-            <a href="{% url 'user_session:register' %}">Register</a>
-        </div>
       </form>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+    {% include 'includes/footer.html' %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>
   </body>
 </html>

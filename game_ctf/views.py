@@ -20,7 +20,13 @@ from .settings import QUESTIONS_DIR, info_messages, template_path
 @login_required 
 def home(request):
 	questions = Question.objects.all().filter(valid=True)
-	score = TeamDetail.objects.get(team = request.user).points
+	try:
+		score = TeamDetail.objects.get(team = request.user).points
+	except ObjectDoesNotExist:
+		messages.add_message(request,
+		info_messages['normal user page'][0],info_messages['normal user page'][1])
+		return HttpResponseRedirect(reverse('user_session:logout'))
+
 	team_name = request.user.username
 	return render(request, template_path['home'],{'questions':questions, 'score':score, 'team_name' :team_name})
 
@@ -46,6 +52,7 @@ def submit_answer(request,question_id):
 		pass
 	return HttpResponse("error")
 
+
 @login_required
 def question_page(request,question_id):
 	try:
@@ -61,7 +68,7 @@ def question_page(request,question_id):
 
 	return render(request, QUESTIONS_DIR + question.source_file)
 
-@login_required 
+
 def leaderboard(request):
 	template = loader.get_template('game_ctf/leaderboard.html')
 	rlist_ = TeamDetail.objects.all().order_by('-points')[:20];
@@ -73,8 +80,6 @@ def leaderboard(request):
 	content = { 
 		'ranklist' : rlist	
 	}
-	
-
 	return render(request, template_path['leaderboard'],content)
 
 def rules(request):

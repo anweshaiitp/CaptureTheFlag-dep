@@ -7,10 +7,11 @@
     <!-- @metastableB : The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="Home for NJACK Capture the Flag">
     <meta name="author" content="metastableB">
-    
+
     {% load staticfiles %}
     <!-- TODO : load favivo -->
     <link href="{% static 'bootstrap-3.3.6-dist/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'cssConsole/cssConsole.css' %}" type="text/css" rel="stylesheet">
     <title>Home</title>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -25,34 +26,11 @@
     <![endif]-->
   </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-		   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-items" aria-expanded="false">
-		    <!-- sr-only : screen reader only -->
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		    </button>
-		      <a class="navbar-brand" href="{% url 'game_ctf:home' %}">Anwesha '16 <span style="font-weight:bolder;">|</span> CTF</a>
-		</div>
-		<div id="navbar-items" class="navbar-collapse collapse">
-
-			<ul class="nav navbar-nav navbar-right">
-			<!-- something like the default active element-->
-				<li><a class="active" href="{% url 'game_ctf:home' %}">Home</a></li>
-				<li><a href="{% url 'game_ctf:leaderboard' %}">Leaderboard</a></li>
-				<li><a href="{% url 'game_ctf:rules' %}">Rules</a></li>
-				<li><a href="{% url 'user_session:logout' %}">Logout</a></li>
-			</ul>
-		</div>
-	</div>
-</nav>
+	{% include 'includes/navbar_top.html' %}
 <!-- The question answer portion -->
 
 <div class="container" style="padding-top:60px;">
-	
+
 	<div class="row">
 		<div class="col-md-12 text-right team-info">
 				<span class="team-name">{{ team_name }}</span><br>
@@ -74,7 +52,7 @@
 	    			{% if forloop.counter0|divisibleby:"2" %}
 						<div class="row text-center">
 	    					<div class="col-md-6 text-center">
-	    						<div class="question-box">
+	    						<div class="question-box" id="{{ question.pk }}">
 	    							<a class="flo-green glow"href="/question/{{ question.pk }}">Question {{ question.pk }}</a>
 	    						</div>
 	    					</div>
@@ -83,7 +61,7 @@
 						{% endif %}
 					{% else %}
 							<div class="col-md-6 text-center">
-								<div class="question-box">
+								<div class="question-box" id="{{ question.pk }}">
 	    							<a class="flo-green glow"href="/question/{{ question.pk }}">Question {{ question.pk }}</a>
 	    						</div>
 	    					</div>
@@ -93,13 +71,14 @@
 			{% endif %}
 	</div>
 </div>
+<div class="terminal">
 
-<!-- footer -->
-<div class="footer text-center">
-	      Anwesha, IIT Patna
 </div>
 
-	
+<!-- footer -->
+	{% include 'includes/footer.html' %}
+
+
 <!--	<div class="row">
 		<div class="console-container">
 			<div class="console">
@@ -111,9 +90,28 @@
 			</div>
 		</div>
 	</div>
---> 
+-->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'cssConsole/cssConsole.min.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var post_url = "some_shit";
+	$('.terminal').cssConsole({
+		onEnter: function(){
+			$.post( post_url, function( data ) {
+				onAnswerQuestion( data.id, data.status );
+				//$( ".result" ).html( data );
+			});
+		}
+	});
+	function onAnswerQuestion( id, status ) {
+		if ( status === true ) {
+			$( '#'+id ).css( 'border-color', 'green' );
+		}
+	}
+});
+</script>
 </body>
 
