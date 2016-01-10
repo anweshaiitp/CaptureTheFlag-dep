@@ -46,6 +46,11 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
 - [ ] Fix login page CSS
 - [ ] Fix terminal CSS
 - [ ] Document on how to allow concurrent logins
+- [ ] concurrent login while javascript
+- [ ] create a separate branch which allows
+        - Users register separately and agree on a team
+        - All members of team can login on different machines
+        
 
 ## Deployement
 
