@@ -51,7 +51,7 @@ body {
 
 .a-register{
   padding:3px;
-  color: #272822;
+  color: red;
 }
 
 .info_message {
@@ -122,8 +122,10 @@ body {
 
 .footer{
   padding:10px;
-  position:absolute;
+  position:fixed;
   bottom:0px;
+  left:0px;
+  right:0px;
   background-color:#222;
   border-style: solid;
   border-width:1px 0 0 0;
@@ -176,7 +178,8 @@ body {
   border-radius: 3px;
   background-color:#967ebf;
   max-height:55%;
-  margin-top:10%;
+  margin-top:60px;
+  margin-bottom:20px;
   box-shadow: 1px 1px 5px rgba(136, 136, 136, 0.61);
   border-radius: 7px;
   height:100%;
@@ -189,8 +192,5 @@ body {
   color : #ec3533;
   list-style-type : none;
 }
-.footer-reg{
-  position:absolute;
-  bottom:0px;
-}
+
 /*******/

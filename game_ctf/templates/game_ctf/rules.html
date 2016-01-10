@@ -25,30 +25,7 @@
     <![endif]-->
   </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-		   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-items" aria-expanded="false">
-		    <!-- sr-only : screen reader only -->
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		    </button>
-		      <a class="navbar-brand" href="{% url 'game_ctf:home' %}">Anwesha '16 <span style="font-weight:bolder;">|</span> CTF</a>
-		</div>
-		<div id="navbar-items" class="navbar-collapse collapse">
-
-			<ul class="nav navbar-nav navbar-right">
-			<!-- something like the default active element-->
-				<li><a class="active" href="{% url 'game_ctf:home' %}">Home</a></li>
-				<li><a href="{% url 'game_ctf:leaderboard' %}">Leaderboard</a></li>
-				<li><a href="{% url 'game_ctf:rules' %}">Rules</a></li>
-				<li><a href="{% url 'user_session:logout' %}">Logout</a></li>
-			</ul>
-		</div>
-	</div>
-</nav>
+	{% include 'includes/navbar_top.html' %}
 
 <div class="container">
 	<div class="row text-center lb-header">
@@ -67,24 +44,7 @@
 		<div class="col-md-2"></div>
 	</div>
 </div>
-<div class="footer text-center">
-	      Anwesha, IIT Patna
-</div>
-
-	
-<!--	<div class="row">
-		<div class="console-container">
-			<div class="console">
-				<div class="line white">Welcome to cssConsole! Type help for command list.</div>
-			</div>
-			<div class="bottom">
-				<div class="label">></div>
-				<div id="input"></div>
-			</div>
-		</div>
-	</div>
---> 
-
+	{% include 'includes/footer.html' %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>
 </body>
