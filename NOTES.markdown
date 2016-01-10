@@ -33,14 +33,13 @@ if inidividual user logges in, should we
 [ ] Adding timestamp to question answering time
 [ ] Convert all anwesha id to small case before saving in database
 [ ] Anwesha ID -> Team Name (After SMPT, Plug and Play)
-
-## TODO For Registraioint form
 [X] TeamMembers -> TeamDetails
 [ ] Validate COllege_name., Phone_number
 [ ] Add Team Name in place of user name in registration form
 [ ] Validate usernames
 [ ] Change error messages 
-
+[ ] Run deployment as daemon
+[ ] Use nigix to serve static
 
 ## Deployement
 
@@ -69,7 +68,36 @@ Instalation instructions can be found [here](2). The following are the steps we 
 If configured correctly, this will be reflected in the apache error logs as
 `mod_wsgi/4.4.21 Python/2.7.6 configured `
 
-Now you need to follow the [django documentation][3] on deployment to configure your virtual host and other files.
+Now you need to follow the [django documentation][3] on deployment to configure your virtual host and other files. This was the actually painful part.
+
+First make sure that the user and group set in apache conf has access to your project files. The user and group settings are found in `/etc/apache2/envvars`.
+Find and edit the following lines:
+    
+    export APACHE_RUN_USER=<username>
+    export APACHE_RUN_GROUP=<username>
+
+Temporarly you can set the username as your own.
+The in the `/etc/apache2/apache.conf` add the following lines making the necessary edits.
+
+    WSGIScriptAlias /CFG /path/to/CaptureTheFlag/CaptureTheFlag/wsgi.py WSGIPythonPath /path/to/CaptureTheFlag:/path/to/virtualenc/lib/site-packages
+    
+    <Directory /path/CaptureTheFlag/CaptureTheFlag>
+        <Files wsgi.py>
+                AllowOverride all
+                Allow from all
+                Require all granted
+        </Files>
+    </Directory>
+
+For serving static media, we currently use the apache server itself. For it, add the following lines to the `apache.conf` file.
+   
+     Alias /static/ /path/to/CaptureTheFlag/static/
+    <Directory /path/to/CaptureTheFlag/static>
+        Require all granted
+    </Directory>
+
+
+
 
 [1]: "http://code.google.com/p/modwsgi/downloads/list" "Source code"
 [2]: "https://code.google.com/p/modwsgi/wiki/QuickInstallationGuide" "Mod_Wsgi installation instructions"
