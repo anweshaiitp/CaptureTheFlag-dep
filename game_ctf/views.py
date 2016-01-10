@@ -37,7 +37,7 @@ def home(request):
 			_questions.append( ( ques.pk,False) )	#Unsolved
 
 		
-	return render(request, template_path['home'],{'questions':_questions, 'score':score, 'team_name' :team_name})
+	return render(request, template_path['home'],{'teamname':team_name,'questions':_questions, 'score':score, 'team_name' :team_name})
 
 
 @login_required

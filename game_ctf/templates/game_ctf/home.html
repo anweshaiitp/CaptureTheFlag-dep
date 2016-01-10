@@ -86,7 +86,7 @@
 	<div class="terminalhistory" id="terminalhistory" style="position:absolute;bottom:32px;margin-top:32px">
 	</div>
 	<div class="bottom" style="position:absolute;bottom:0px;">
-		<div class="label" class="flo-green" >test@ctf:~$ </div>
+		<div class="label" class="flo-green" >{{ teamname }}@ctf:~$ </div>
 		<div id="input"></div>
 	</div>
 
@@ -176,7 +176,7 @@ function afterCommandEntered()
 {
 	$('.terminal').cssConsole('reset');
 }
-var precmdtag = "user@ctf:~$ ";
+var precmdtag = "{{ teamname }}@ctf:~$ ";
 $('.label').innerHTML = precmdtag;
 var cmd_history = [];
 
