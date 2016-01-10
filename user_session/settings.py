@@ -26,6 +26,6 @@ info_messages = {
 	'logout first' : (messages.INFO, "Sorry, you need to logout first."),
 	'registration successful' : (messages.INFO, 'Registration successful, please login to continue.'),
 	'invalid username password':(messages.ERROR,"Sorry, that's not a valid username or password"),
-	'id_exists':(messages.ERROR,"User Already Registered : "),
+	'reg_failed':(messages.ERROR,"Registration Failed : "),
 	'redirect_to_url not set' : (messages.ERROR, "ERROR: redirect_to_url not set in user_session:views"),
 }
