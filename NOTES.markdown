@@ -46,6 +46,9 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
 - [ ] Document on how to allow concurrent logins
 - [ ] concurrent login while javascript
 - [ ] Color Change Answered questions and do not let it to be opened
+        - opened /closed and color change
+        - JS color change on question answering
+        - Submitted questions not to be opened again
 - [ ] License
 - [ ] Change password form
 - [ ] Return button on terminal because mobile forms dont have return key
@@ -56,7 +59,7 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
         - All members of team can login on different machines
 - [ ] How to : user scripts and fixtures
 - [ ] Finishing time - opening time
-
+- [ ] Cheatsheet
 
 ## Deployement
 
