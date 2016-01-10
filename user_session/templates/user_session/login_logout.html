@@ -31,16 +31,19 @@
       <form class="form-signin" action="{% url 'user_session:login' %}" method="post">
       {% csrf_token %}
         <h2 class="form-signin-heading text-center">Login</h2>
-        <div class="info_message text-center hideMe">
+        
             {% if form.errors %}
+            <div class="info_message text-center hideMe">
                 <p>Sorry, that's not a valid username or password</p>
+            </div>
             {% endif %}
             {% if messages %}
+            <div class="info_message text-center hideMe">
                 {% for message in messages %}
                     <span {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}<br></span>
                 {% endfor %}
+            </div>
             {% endif %}
-        </div>
         <label for="username" class="sr-only">Team Name</label>
         <input type="text" name="username" value="" id="username" class="form-control" placeholder="Team Name"autofocus>
         <label for="password" class="sr-only">Password</label>
