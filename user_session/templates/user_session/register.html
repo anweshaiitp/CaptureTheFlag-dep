@@ -25,6 +25,7 @@
     <![endif]-->
   </head>
 <body class="register-body">
+	{% include 'includes/navbar_top.html' %}
     <div class="container login-container-bg">
       <form class="form-register" action="{% url 'user_session:register' %}" method="post">
       {% csrf_token %}
@@ -61,12 +62,8 @@
         {{ form.mobile_number.errors}}
 
     <input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit" />
-    <div class="a-register  text-center">
-            <a href="{% url 'user_session:login' %}">Login</a>
-    </div>
 </form>
-<!-- footer -->
-
+	{% include 'includes/footer.html' %}
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
 </body>
