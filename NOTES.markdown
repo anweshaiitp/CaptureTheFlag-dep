@@ -62,6 +62,7 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
 - [ ] Cheatsheet
 - [ ] Change title of pages
 - [ ] Change password form
+- [ ] Testing and veryfying models, views and other code
 
 ## Deployement
 
@@ -120,6 +121,53 @@ For serving static media, we currently use the apache server itself. For it, add
 
 Do not forget to serve admin static files. A simple simlink to `django/contrib/admin/static/admin` will do. 
 
+## Deployment vs testing:
+I've tried my utmost to keep the deployment and testing versions separate. To that end, I've maintained the testing copy on `dev` branch and deployment versions on other branches.
+Specifically the mysql_port branch contains port to mysql.
+
+MySQL version 5.5
+
+## Connecting to mysql
+Connecting to mysql is very easy. 
+To connect to an existing database we require two things from dajngo. First we require that django creates its tables in that database and secondly we require the model classes for the tables that were previously in the database so that we can interact with them as well.
+
+#### Connecting to MySQL database
+In your global settings.py file edit the following,
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'OPTIONS': {
+                'read_default_file': '/path/to/my.cnf',
+            },
+        }
+    }
+
+You also need to create the /path/to/my.cnf file with similar settings from above
+
+    [client]
+    database = DB_NAME
+    host = localhost
+    user = DB_USER
+    password = DB_PASSWORD
+    default-character-set = utf8
+
+The order of connection resolution is
+
+1. OPTIONS.
+2. NAME, USER, PASSWORD, HOST, PORT
+3. MySQL option files.
+
+This will connect django to the MySQL database. You may have to install `mysql-python` package if you dont have it already. 
+
+If you migrate now, all your model tables will be created in the database. But don't migrate just yet.
+
+#### Obtaining model definitions for pre-existing tables
+Once connected, obtaining model definitions for preexisting tables is as simple as 
+    
+    python manage.py inspectdb
+
+After you have obtained the models, you can use them as you like. Migrate now to create the models defined my you and start your server to test.
 
 
 [1]: "http://code.google.com/p/modwsgi/downloads/list" "Source code"
