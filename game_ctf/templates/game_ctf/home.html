@@ -52,8 +52,12 @@
 	    			{% if forloop.counter0|divisibleby:"2" %}
 						<div class="row text-center">
 	    					<div class="col-md-6 text-center">
-	    						<div class="question-box" id="{{ question.pk }}">
-	    							<a class="flo-green glow"href="/question/{{ question.pk }}">Question {{ question.pk }}</a>
+	    						{% if question.1 %}
+	    						<div class="question-box answered" id="{{ question.0 }}">
+	    						{% else %}
+	    						<div class="question-box unanswered" id="{{ question.0 }}">
+	    						{% endif %}
+	    							<a class="flo-green glow"href="/question/{{ question.0 }}">Question {{ question.0 }}</a>
 	    						</div>
 	    					</div>
 	    				{% if forloop.last %}
@@ -61,8 +65,12 @@
 						{% endif %}
 					{% else %}
 							<div class="col-md-6 text-center">
-								<div class="question-box" id="{{ question.pk }}">
-	    							<a class="flo-green glow"href="/question/{{ question.pk }}">Question {{ question.pk }}</a>
+								{% if question.1 %}
+	    						<div class="question-box answered" id="{{ question.0 }}">
+	    						{% else %}
+	    						<div class="question-box unanswered" id="{{ question.0 }}">
+	    						{% endif %}
+	    							<a class="flo-green glow"href="/question/{{ question.0 }}">Question {{ question.0 }}</a>
 	    						</div>
 	    					</div>
 	    				</div>
@@ -169,6 +177,7 @@ function afterCommandEntered()
 var precmdtag = "user@ctf:~$ ";
 $('.label').innerHTML = precmdtag;
 var cmd_history = [];
+
 $(document).ready(function(){
 	var post_url = "../submit/";
 	$('.terminal').cssConsole({
@@ -216,7 +225,7 @@ $(document).ready(function(){
 				try
 				{
 					question = parseInt(cmds[2]);
-					if( question<1 || question>6)
+					if( question<1 || question>7)
 						{
 							output = "&nbsp;&nbsp;Error : Question Number, Allowed Range [1-6]";
 							color = 'red';
@@ -226,7 +235,7 @@ $(document).ready(function(){
 						flag = cmds[4];
 						$.post( post_url+question+"/", {answer : flag}).done(function( data ) {
 							//Response 302 Not Handled Directly!
-							onAnswerQuestion( data );
+							onAnswerQuestion( data ,question);
 						});
 					}
 				}catch(err)
@@ -251,9 +260,12 @@ $(document).ready(function(){
 			afterCommandEntered();
 		}
 	});
-	function onAnswerQuestion( data ) {
+	function onAnswerQuestion( data,question ) {
 		if ( data === "wow" ) {
-				addTerminalHistory("&nbsp;&nbsp;Response : You Cracked it!",'line','green');
+				{
+					addTerminalHistory("&nbsp;&nbsp;Response : You Cracked it!",'line','green');
+					document.getElementById(""+question).className = "question-box answered";
+				}
 		} else if ( data === "as" ) {
 				addTerminalHistory("&nbsp;&nbsp;Response : This Problem is Already Submitted",'line','yellow');
 		} else if ( data === "tryagain" ) {

@@ -28,7 +28,16 @@ def home(request):
 		return HttpResponseRedirect(reverse('user_session:logout'))
 
 	team_name = request.user.username
-	return render(request, template_path['home'],{'questions':questions, 'score':score, 'team_name' :team_name})
+	_questions = []
+	for ques in questions:
+		question_status_obj = QuestionStatus.objects.filter(team_id = request.user).filter(question_id = ques).filter(question_status = 'AW')	
+		if len(question_status_obj) == 1 :
+			_questions.append( ( ques.pk,True) )	#Solved
+		else:
+			_questions.append( ( ques.pk,False) )	#Unsolved
+
+		
+	return render(request, template_path['home'],{'questions':_questions, 'score':score, 'team_name' :team_name})
 
 
 @login_required
