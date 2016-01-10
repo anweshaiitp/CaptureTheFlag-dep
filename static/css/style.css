@@ -51,6 +51,7 @@ body {
 
 .a-register{
   padding:3px;
+  color: #272822;
 }
 
 .info_message {
@@ -162,3 +163,30 @@ body {
     }
 }
 /**************** ***********/
+/******* Registration CSS ******/
+.form-register {
+  max-width: 500px;
+  padding: 15px;
+  margin: 0 auto;
+  border-style: solid;
+  border-radius: 3px;
+  background-color:#967ebf;
+  max-height:55%;
+  margin-top:10%;
+  box-shadow: 1px 1px 5px rgba(136, 136, 136, 0.61);
+  border-radius: 7px;
+  height:100%;
+}
+.form-control-reg {
+  margin-top:5px;
+  margin-bottom:5px;
+}
+.errorlist{
+  color : #ec3533;
+  list-style-type : none;
+}
+.footer-reg{
+  position:absolute;
+  bottom:0px;
+}
+/*******/

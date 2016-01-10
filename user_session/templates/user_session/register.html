@@ -1,5 +1,73 @@
-<form action={% url 'user_session:register' %} method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit" />
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- @metastableB : The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="LeaderBoard for NJACK Capture the Flag">
+    <meta name="author" content="metastableB">
+    
+    {% load staticfiles %}
+    <!-- TODO : load favivo -->
+    <link href="{% static 'bootstrap-3.3.6-dist/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <title>Register</title>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="{% static 'css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+<body class="register-body">
+    <div class="container login-container-bg">
+      <form class="form-register" action="{% url 'user_session:register' %}" method="post">
+      {% csrf_token %}
+        <h2 class="form-signin-heading text-center">Register</h2>
+        <div class="info_message text-center">
+        	{{ form.non_field_errors }}
+        </div>
+        <label for="{{ form.teamname.id_for_label }}" class="sr-only">Team Name</label>
+        {{ form.teamname}}
+        {{ form.teamname.errors}}
+        <label for="{{ form.password1.id_for_label }}" class="sr-only">Password</label>
+        {{ form.password1}}
+        {{ form.password1.errors}}
+        <label for="{{ form.password2.id_for_label }}" class="sr-only">Reenter Password</label>
+        {{ form.password2}}
+        {{ form.password2.errors}}
+        <label for="{{ form.user1.id_for_label }}" class="sr-only">User1: Anwesha ID</label>
+        {{ form.user1}}
+        {{ form.user1.errors}}
+        <label for="{{ form.user2.id_for_label }}" class="sr-only">User2: Anwesha ID</label>
+        {{ form.user2}}
+        {{ form.user2.errors}}
+        <label for="{{ form.user3.id_for_label }}" class="sr-only">User3: Anwesha ID</label>
+        {{ form.user3}}
+        {{ form.user3.errors}}
+        <label for="{{ form.email.id_for_label }}" class="sr-only">Email</label>
+        {{ form.email}}
+        {{ form.email.errors}}
+        <label for="{{ form.college_name.id_for_label }}" class="sr-only">College Name</label>
+        {{ form.college_name}}
+        {{ form.college_name.errors}}
+        <label for="{{ form.mobile_number.id_for_label }}" class="sr-only">Mobile Number</label>
+        {{ form.mobile_number}}
+        {{ form.mobile_number.errors}}
+
+    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit" />
+    <div class="a-register  text-center">
+            <a href="{% url 'user_session:login' %}">Login</a>
+    </div>
 </form>
+<!-- footer -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+</body>
+    
