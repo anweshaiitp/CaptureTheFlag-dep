@@ -14,7 +14,9 @@ body {
   margin-top:10%;
   box-shadow: 1px 1px 5px rgba(136, 136, 136, 0.61);
   border-radius: 7px;
-  height:100%;
+  height:auto;
+  min-height: 250px;
+  padding-bottom:20px;
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
