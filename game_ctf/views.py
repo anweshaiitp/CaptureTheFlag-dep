@@ -51,6 +51,9 @@ def submit_answer(request,question_id):
 					question_id = question,
 					question_status = 'AW')
 				qs.save()
+				team = TeamDetail.objects.filter(team = qs.team_id)[0];
+				team.points+=qs.question_id.points;
+				team.save()
 				return HttpResponse("wow")
 			else:
 				return HttpResponse("tryagain")

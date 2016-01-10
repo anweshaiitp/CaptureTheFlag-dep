@@ -9,7 +9,7 @@
     <meta name="author" content="metastableB">
     
     {% load staticfiles %}
-    <!-- TODO : load favivo -->
+    <link rel='shortcut icon' type='image/x-icon' href="{% static 'favicon.ico' %}" />
     <link href="{% static 'bootstrap-3.3.6-dist/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
     <title>Register</title>
 
@@ -30,6 +30,14 @@
       <form class="form-register" action="{% url 'user_session:register' %}" method="post">
       {% csrf_token %}
         <h2 class="form-signin-heading text-center">Register</h2>
+        <div class="info_message text-center hideMe">
+            {% if messages %}
+                {% for message in messages %}
+                    <span {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}<br></span>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
         <div class="info_message text-center">
         	{{ form.non_field_errors }}
         </div>

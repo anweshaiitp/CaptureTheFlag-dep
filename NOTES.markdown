@@ -15,24 +15,26 @@ if inidividual user logges in, should we
 [X] : Point System
 [X] : Leader Board
 [ ] : How to : user scripts and fixtures
-[ ] : Add Favicon
+[X] : Add Favicon
 [ ] : Validate Answers
 [ ] : Deploying static files https://docs.djangoproject.com/en/1.9/howto/static-files/
 [ ] : Answering
 [ ] : Has Context
-[ ] : Add rules page
+[X] : Add rules page
+[ ] : Update Rules page Content
 [X] : CSS Question Heighlight
 [ ] : If answered, change color at home
 [ ] : CSS on messages
 [ ] : Add link to team at footes
 [ ] : User part of multiple teams
-[ ] : Make sure anwesha IDs are different
-[ ] : Test duplicate teamname
+[X] : Make sure anwesha IDs are different
+[X] : Test duplicate teamname(Already Username)
 [ ] : Add footer to registation form
-[ ] : Adding timestamp to question answering time
-[ ] : Convert all anwesha id to small case before saving in database
+[X] : Adding timestamp to question answering time
+[X] : Convert all anwesha id to small case before saving in database
 [ ] : Anwesha ID -> Team Name (After SMPT, Plug and Play)
 [ ] : CSS fix for Cursor in Terminal
+[ ] : Handle MutipleLogins
 
 ## TODO For Registraioint form
 [X] : TeamMembers -> TeamDetails

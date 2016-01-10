@@ -89,7 +89,7 @@ class UserRegistrationForm(forms.ModelForm):
     mobile_number = forms.RegexField(
     	label=_("Phone Number"), 
     	max_length=10,
-        regex=r'^\d{6}$',
+        regex=r'^\d{10}$',
         help_text=_("Required. 10 digit mobile number"),
         error_messages={'invalid': _("This value must contain a 10 digit valid mobile number.")},
         widget = forms.TextInput(attrs={'class':'form-control form-control-reg', 'placeholder':'Mobile Number'})

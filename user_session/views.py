@@ -73,17 +73,26 @@ def save_team(registration_form):
 	* college_name
 	* phone_number
 	'''
-	u = User.objects.create_user(registration_form.cleaned_data['username'],
+	u = User.objects.create_user(registration_form.cleaned_data['teamname'],
 		password = registration_form.cleaned_data['password1'])
 	team = TeamDetail(team = u,
 		email = registration_form.cleaned_data['email'],
-		user1 = registration_form.cleaned_data['user1'],
-		user2 = registration_form.cleaned_data['user2'],
-		user3 = registration_form.cleaned_data['user3'],
+		user1 = registration_form.cleaned_data['user1'].lower(),
+		user2 = registration_form.cleaned_data['user2'].lower(),
+		user3 = registration_form.cleaned_data['user3'].lower(),
 		college_name = registration_form.cleaned_data['college_name'],
-		phone_number = registration_form.cleaned_data['phone_number'])
+		phone_number = registration_form.cleaned_data['mobile_number'])
 	team.save()
 	
+def checkUserID(registration_form):
+	for i in [1,2,3]:
+		forUser1 = TeamDetail.objects.filter(user1 = registration_form.cleaned_data['user'+str(i)].lower());
+		forUser2 = TeamDetail.objects.filter(user2 = registration_form.cleaned_data['user'+str(i)].lower());
+		forUser3 = TeamDetail.objects.filter(user3 = registration_form.cleaned_data['user'+str(i)].lower());
+		if len(forUser1)+len(forUser2)+len(forUser3) != 0 :
+			#user already exists
+			return registration_form.cleaned_data['user'+str(i)].lower();
+	return None
 
 def user_registration(request):
 	user = request.user
@@ -96,6 +105,13 @@ def user_registration(request):
 		registration_form = UserRegistrationForm(request.POST)
 		if registration_form.is_valid():
 			#print registration_form.cleaned_data
+			result = checkUserID(registration_form);
+			if result is not None :
+				messages.add_message(request,
+				info_messages['id_exists'][0],info_messages['id_exists'][1]+result)
+				return HttpResponseRedirect(reverse('user_session:register'))
+
+
 			messages.add_message(request,
 			info_messages['registration successful'][0],info_messages['registration successful'][1])
 			save_team(registration_form)
