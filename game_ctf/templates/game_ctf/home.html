@@ -170,7 +170,7 @@ function addTerminalHistory(input, style, color) {
 		}
 		style = typeof style !== 'undefined' ? style : 'line';
 		color = typeof color !== 'undefined' ? color : 'white';
-		$('.terminalhistory').prepend('<div class="'+style+'" style="color:'+color+'">'+input+'</div>');
+		$('.terminalhistory').append('<div class="'+style+'" style="color:'+color+'">'+input+'</div>');
 }
 function afterCommandEntered()
 {

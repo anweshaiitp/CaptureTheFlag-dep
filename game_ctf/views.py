@@ -45,15 +45,16 @@ def submit_answer(request,question_id):
 	try:
 		question = Question.objects.get(pk = question_id)
 		if request.method == 'POST' and 'answer' in request.POST:
+			try:
+				question = Question.objects.get(pk = question_id)
+			except ObjectDoesNotExist:
+					return HttpResponse("invalid")
+			question_status_obj = QuestionStatus.objects.filter(team_id = request.user).filter(question_id = question).filter(question_status = 'AW')	
+			if len(question_status_obj) !=0 :
+				return HttpResponse("as")
+				
 			answer = request.POST['answer']
 			if question.answer == answer:
-				try:
-					question = Question.objects.get(pk = question_id)
-				except ObjectDoesNotExist:
-						return HttpResponse("invalid")
-				question_status_obj = QuestionStatus.objects.filter(team_id = request.user).filter(question_id = question).filter(question_status = 'AW')	
-				if len(question_status_obj) !=0 :
-					return HttpResponse("as")
 				
 				qs = QuestionStatus(
 					team_id = request.user,
