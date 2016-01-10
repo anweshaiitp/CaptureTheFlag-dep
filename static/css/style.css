@@ -18,6 +18,9 @@ body {
   min-height: 250px;
   padding-bottom:20px;
 }
+.form-signin-er {
+  min-height:300px;
+}
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
@@ -139,10 +142,6 @@ body {
   color: #f92672;
 }
 
-.terminal {
-  height: 300px;
-  margin-top: 20px
-}
 /*********** Hiding info messgaed ***************/
 .hideMe {
     -moz-animation: cssAnimation 0s ease-in 5s forwards;
@@ -195,3 +194,7 @@ body {
 }
 
 /*******/
+.terminal {
+  height: 300px;
+  margin-top: 20px
+}

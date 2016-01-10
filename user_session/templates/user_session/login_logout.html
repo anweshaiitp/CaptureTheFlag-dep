@@ -28,7 +28,7 @@
   <body class="login-body">
   {% include 'includes/navbar_top.html' %}
     <div class="container login-container-bg">
-      <form class="form-signin" action="{% url 'user_session:login' %}" method="post">
+      <form class="form-signin {% if form.errors or messages %} form-signin-er {% endif %}" action="{% url 'user_session:login' %}" method="post">
       {% csrf_token %}
         <h2 class="form-signin-heading text-center">Login</h2>
         
