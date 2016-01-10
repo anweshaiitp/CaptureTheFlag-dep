@@ -20,7 +20,13 @@ from .settings import QUESTIONS_DIR, info_messages, template_path
 @login_required 
 def home(request):
 	questions = Question.objects.all().filter(valid=True)
-	score = TeamDetail.objects.get(team = request.user).points
+	try:
+		score = TeamDetail.objects.get(team = request.user).points
+	except ObjectDoesNotExist:
+		messages.add_message(request,
+		info_messages['normal user page'][0],info_messages['normal user page'][1])
+		return HttpResponseRedirect(reverse('user_session:logout'))
+
 	team_name = request.user.username
 	return render(request, template_path['home'],{'questions':questions, 'score':score, 'team_name' :team_name})
 
