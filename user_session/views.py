@@ -77,9 +77,9 @@ def save_team(registration_form):
 		password = registration_form.cleaned_data['password1'])
 	team = TeamDetail(team = u,
 		email = registration_form.cleaned_data['email'],
-		user1 = registration_form.cleaned_data['user1'].lower(),
-		user2 = registration_form.cleaned_data['user2'].lower(),
-		user3 = registration_form.cleaned_data['user3'].lower(),
+		user1 = registration_form.cleaned_data['user1'].upper(),
+		user2 = registration_form.cleaned_data['user2'].upper(),
+		user3 = registration_form.cleaned_data['user3'].upper(),
 		college_name = registration_form.cleaned_data['college_name'],
 		phone_number = registration_form.cleaned_data['mobile_number'])
 	team.save()

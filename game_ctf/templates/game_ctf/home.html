@@ -76,7 +76,7 @@
 	<div class="terminalhistory" id="terminalhistory" style="position:absolute;bottom:32px;margin-top:32px">
 	</div>
 	<div class="bottom" style="position:absolute;bottom:0px;">
-		<div class="label">></div>
+		<div class="label" class="flo-green" >test@ctf:~$ </div>
 		<div id="input"></div>
 	</div>
 	
@@ -145,11 +145,14 @@ overflow:hidden;
 .cssConsoleDisplay {
 position:absolute;
 bottom:0px;
-padding-left: 10px;
+padding-left: 70px;
 }
 </style>
 <script type="text/javascript">
-addTerminalHistory("Welcome To CTF!!!");
+addTerminalHistory("Welcome To Capture The Flag",'line','green');
+addTerminalHistory("&nbsp;[ CTF terminal v1.0 ]<br>",'line','white');
+
+var currcmd = -1;
 var lineLimit = 28;
 function addTerminalHistory(input, style, color) {
 		if($('.terminalhistory div').length==lineLimit) {
@@ -157,12 +160,15 @@ function addTerminalHistory(input, style, color) {
 		}
 		style = typeof style !== 'undefined' ? style : 'line';
 		color = typeof color !== 'undefined' ? color : 'white';
-		$('.terminalhistory').append('<div class="'+style+' '+color+'">'+input+'</div>');
+		$('.terminalhistory').append('<div class="'+style+'" style="color:'+color+'">'+input+'</div>');
 }
 function afterCommandEntered()
 {
 	$('.terminal').cssConsole('reset');	
 }
+var precmdtag = "user@ctf:~$ ";
+$('.label').innerHTML = precmdtag;
+var cmd_history = [];
 $(document).ready(function(){
 	var post_url = "../submit/";
 	$('.terminal').cssConsole({
@@ -171,68 +177,120 @@ $(document).ready(function(){
 		onEnter: function(){
 			var spans = $(".cssConsoleDisplay");
 			var output = "";
-			var usage = "Usage : ans -q &lt;QuestionNo&gt; -f &lt;Flag&gt;<br> Example : ans -q 1 -f got_my_flag";
+			var color = 'white';
+			var usage = "&nbsp;&nbsp;Usage : ans -q &lt;QuestionNo&gt; -f &lt;Flag&gt;<br>&nbsp;&nbsp;&nbsp;Example : ans -q 1 -f got_my_flag";
 			var commands = spans[0].innerHTML.replace(new RegExp("<([^>]+)>","gm"),"").replace(/<\/span>/g,"");
 			var cmds = commands.split(" ");
 			if(cmds.length == 0 || cmds[0]=="")
-				output = "No Commands Entered!\nEnter `help` for manual";
+			{
+				output = "&nbsp;&nbsp;No Commands Entered!\nEnter `help` for manual";
+				color = 'yellow';
+			}
 			else if(cmds[0] == "help")
-				output = "CTF terminal v1\nShell Commands List - <br> help    - To Show Shell Manual<br> ans     - To submit Flag<br> clear    - To Clear Screen";
+				output = "&nbsp;&nbsp;[ CTF terminal v1.0 ]<br><br>&nbsp;&nbsp;&nbsp;Shell Commands List - <br>&nbsp;&nbsp;&nbsp;&nbsp;clear   - To Clear Screen<br>&nbsp;&nbsp;&nbsp;&nbsp;help    - To Show Shell Manual<br>&nbsp;&nbsp;&nbsp;&nbsp;ans     - To submit Flag<br>";
 			else if(cmds[0] == "clear")
 			{
 				$('.terminalhistory div').empty();
 				output = "clear";
 			}
 			else if(cmds[0] != "ans")
-				output = "`"+cmds[0]+"` Not Found!<br>Enter `help` for manual";
+			{
+				output = "&nbsp;&nbsp;`"+cmds[0]+"` Not Found!<br>&nbsp;&nbsp;Enter `help` for manual";
+				color = 'red';
+			}
 			else if(cmds.length == 1)
 				output = usage;
 			else if(cmds[1] == "--help")
 				output = usage;
 			else if(cmds.length !=5 )
-				output = "Invalid Syntax, For Usage `ans --help`";
+				{
+					output = "&nbsp;&nbsp;Invalid Syntax, For Usage `ans --help`";
+					color = 'red';
+				}
 			else if(cmds[1] != "-q" || cmds[3] != "-f")
-				output = "Invalid Syntax, For Usage `ans --help`";
+				{
+					output = "&nbsp;&nbsp;Invalid Syntax, For Usage `ans --help`";
+					color = 'red';
+				}
 			else {
 				try
 				{
 					question = parseInt(cmds[2]);
 					if( question<1 || question>6)
-						output = "Error : Question Number, Allowed Range [1-6]"
+						{
+							output = "&nbsp;&nbsp;Error : Question Number, Allowed Range [1-6]";
+							color = 'red';
+						}
 					else
 					{
 						flag = cmds[4];
 						$.post( post_url+question+"/", {answer : flag}).done(function( data ) {
+							//Response 302 Not Handled Directly!
 							onAnswerQuestion( data );
-							//$( ".result" ).html( data );
 						});
 					}
 				}catch(err)
 				{
-					output = "Error : Invalid Question Number";
+					output = "&nbsp;&nbsp;Error : Invalid Question Number";
 				}
 				
 
 
 			}
-			if(output!="")
-				addTerminalHistory(output);
-			else if(output!="clear") addTerminalHistory("Processing!");
+			addTerminalHistory(precmdtag+commands,'line','flo-green');
+			if(cmd_history[currcmd] != commands && commands!="")
+			{
+				cmd_history.push(commands);
+				currcmd = cmd_history.length;
+			}
+			
+			if(output=="clear"); 
+			else if(output!="")
+				addTerminalHistory(output,'line',color);
+			
 			afterCommandEntered();
 		}
 	});
 	function onAnswerQuestion( data ) {
 		if ( data === "wow" ) {
-				addTerminalHistory("Response : You Cracked it!");
+				addTerminalHistory("&nbsp;&nbsp;Response : You Cracked it!",'line','green');
 		} else if ( data === "as" ) {
-				addTerminalHistory("Response : This Problem is Already Submitted");
+				addTerminalHistory("&nbsp;&nbsp;Response : This Problem is Already Submitted",'line','yellow');
 		} else if ( data === "tryagain" ) {
-				addTerminalHistory("Response : Invalid Flag!");
+				addTerminalHistory("&nbsp;&nbsp;Response : Invalid Flag!",'line','yellow');
 		} else if ( data === "error" ) {
-				addTerminalHistory("Response : Some Error!");
-		} 
+				addTerminalHistory("&nbsp;&nbsp;Response : Some Error!",'line','error');
+
+		} else 	addTerminalHistory("&nbsp;&nbsp;Some Error Occured! Please Refresh Page",'line','red');
+							
 	}
 });
+document.onkeydown = checkKey;
+function setCommand (argument) {
+	var spans = $(".cssConsoleDisplay");
+	str = "";
+	for (var i = 0, len = argument.length; i < len; i++) 
+		str+="<span>"+argument[i]+"</span>"; 
+	spans[0].innerHTML = str;
+}
+function checkKey(e) {
+
+    e = e || window.event;
+
+    if (e.keyCode == '38') {
+        // up arrow
+        if(currcmd>0) currcmd--;
+        if(currcmd>=0) setCommand(cmd_history[currcmd]);
+    }
+    else if (e.keyCode == '40') {
+        // down arrow
+    		currcmd++;
+    	if(currcmd>=cmd_history.length-1)
+    		currcmd=cmd_history.length-1;
+    	if(currcmd>=0) setCommand(cmd_history[currcmd]);
+    }
+
+}
 
 
 </script>
