@@ -42,8 +42,13 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
 - [X] MIT License for `django-preventconcurrentlogins
 - [X] Fix login page CSS
 - [ ] Fix terminal CSS
+- [ ] Check Question Number/Score in HomePage
 - [ ] Document on how to allow concurrent logins
 - [X] concurrent login while javascript
+- [ ] Open Questions in NewTab
+- [ ] CSS .hideMe Not Working in Firefox
+- [ ] JS Terminal Ignore ExtraWhiteSpace
+- [ ] Change HTML Page Title
 - [ ] Color Change Answered questions and do not let it to be opened
         - opened /closed and color change
         - JS color change on question answering
