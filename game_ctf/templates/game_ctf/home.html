@@ -72,14 +72,16 @@
 	</div>
 </div>
 <div>
-	<div class="terminal"> 
+<div class="title-bar">Hack Here!</div>
+	<div class="terminal">
+
 	<div class="terminalhistory" id="terminalhistory" style="position:absolute;bottom:32px;margin-top:32px">
 	</div>
 	<div class="bottom" style="position:absolute;bottom:0px;">
 		<div class="label">></div>
 		<div id="input"></div>
 	</div>
-	
+
 	</div>
 </div>
 <!-- footer -->
@@ -157,17 +159,17 @@ function addTerminalHistory(input, style, color) {
 		}
 		style = typeof style !== 'undefined' ? style : 'line';
 		color = typeof color !== 'undefined' ? color : 'white';
-		$('.terminalhistory').append('<div class="'+style+' '+color+'">'+input+'</div>');
+		$('.terminalhistory').prepend('<div class="'+style+' '+color+'">'+input+'</div>');
 }
 function afterCommandEntered()
 {
-	$('.terminal').cssConsole('reset');	
+	$('.terminal').cssConsole('reset');
 }
 $(document).ready(function(){
 	var post_url = "../submit/";
 	$('.terminal').cssConsole({
-	
-	
+
+
 		onEnter: function(){
 			var spans = $(".cssConsoleDisplay");
 			var output = "";
@@ -211,7 +213,7 @@ $(document).ready(function(){
 				{
 					output = "Error : Invalid Question Number";
 				}
-				
+
 
 
 			}
@@ -230,7 +232,7 @@ $(document).ready(function(){
 				addTerminalHistory("Response : Invalid Flag!");
 		} else if ( data === "error" ) {
 				addTerminalHistory("Response : Some Error!");
-		} 
+		}
 	}
 });
 
