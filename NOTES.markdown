@@ -50,9 +50,9 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
         - JS color change on question answering
         - Submitted questions not to be opened again
 - [ ] License
-- [ ] Return button on terminal because mobile forms dont have return key
+- [X] [Ignored] Return button on terminal because mobile forms dont have return key
 - [ ] To change or reset password, contact us
-
+- [ ] Define has context view
 ### For future release
 - [ ] create a separate branch which allows
         - Users register separately and agree on a team
@@ -63,6 +63,16 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
 - [ ] Change title of pages
 - [ ] Change password form
 - [ ] Testing and veryfying models, views and other code
+
+
+## Work Flow From Now
+- Test locally and work out flaws 
+    + This will ignore validating anweshaID to DB
+    + also will ignore validating email
+- Code review
+- **QUESTIONS**
+- Deploy and connect to officialDB
+- Setup three way userlogin wit SMTP
 
 ## Deployement
 
