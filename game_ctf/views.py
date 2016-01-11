@@ -36,8 +36,9 @@ def home(request):
 		else:
 			_questions.append( ( ques.pk,False) )	#Unsolved
 
-		
-	return render(request, template_path['home'],{'teamname':team_name,'questions':_questions, 'score':score, 'team_name' :team_name})
+	if len(_questions) == 0:
+		HttpResponse("Database Error")
+	return render(request, template_path['home'],{'teamname':team_name,'questions':_questions, 'score':score,})
 
 
 @login_required

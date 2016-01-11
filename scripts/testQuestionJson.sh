@@ -16,7 +16,8 @@ do
 			\"valid\": true, 
 			\"source_file\": \"question$i.html\", 
 			\"points\": 0, 
-			\"has_context\": false
+			\"has_context\": false,
+			\"answer\" : \"ans$i\"
 			}
 		}, 	
 "
@@ -32,7 +33,8 @@ echo "
 			\"valid\": true, 
 			\"source_file\": \"question$val.html\", 
 			\"points\": 0, 
-			\"has_context\": false
+			\"has_context\": false,
+			\"answer\" : \"ans$i\"
 			}
 		} 	
 ]"
