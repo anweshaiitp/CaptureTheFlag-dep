@@ -38,7 +38,7 @@ def home(request):
 
 	if len(_questions) == 0:
 		HttpResponse("Database Error")
-	return render(request, template_path['home'],{'shortteamname':team_name[:5],'questions':_questions, 'score':score, 'team_name' :team_name, 'error_invalid_request' :info_messages['invalid_request'][1]})
+	return render(request, template_path['home'],{'shortteamname':team_name[:5],'questions':_questions, 'score':score, 'team_name' :team_name,})
 
 
 @login_required
@@ -47,10 +47,10 @@ def submit_answer(request,question_id):
 		try:
 			question = Question.objects.get(pk = question_id)
 		except ObjectDoesNotExist:
-				return HttpResponse("InvalidQuestion")
+				return HttpResponse(info_messages['invalid_question'][1])
 		question_status_obj = QuestionStatus.objects.filter(team_id = request.user).filter(question_id = question).filter(question_status = 'AW')	
 		if len(question_status_obj) !=0 :
-			return HttpResponse("AlreadySubmmited")
+			return HttpResponse(info_messages['answered'][1])
 			
 		answer = request.POST['answer']
 		if question.answer == answer:
@@ -63,9 +63,9 @@ def submit_answer(request,question_id):
 			team = TeamDetail.objects.filter(team = qs.team_id)[0];
 			team.points+=qs.question_id.points;
 			team.save()
-			return HttpResponse("CrackedIt")
+			return HttpResponse(info_messages['correct answer'][1])
 		else:
-			return HttpResponse("InvalidFlag")
+			return HttpResponse(info_messages['incorrect answer'][1])
 	return HttpResponse(info_messages['invalid_request'][1])
 
 
