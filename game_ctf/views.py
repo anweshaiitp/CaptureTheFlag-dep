@@ -32,12 +32,12 @@ def home(request):
 	for ques in questions:
 		question_status_obj = QuestionStatus.objects.filter(team_id = request.user).filter(question_id = ques).filter(question_status = 'AW')	
 		if len(question_status_obj) == 1 :
-			_questions.append( ( ques.pk,True) )	#Solved
+			_questions.append( ( ques.pk,True,ques.points) )	#Solved
 		else:
-			_questions.append( ( ques.pk,False) )	#Unsolved
+			_questions.append( ( ques.pk,False,ques.points) )	#Unsolved
 
 		
-	return render(request, template_path['home'],{'teamname':team_name,'questions':_questions, 'score':score, 'team_name' :team_name})
+	return render(request, template_path['home'],{'shortteamname':team_name[:5],'questions':_questions, 'score':score, 'team_name' :team_name})
 
 
 @login_required
