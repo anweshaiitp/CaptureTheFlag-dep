@@ -38,7 +38,7 @@
 		</div>
 	</div>
 	<div class="row info_message text-center hideMe">
-		<div class="col-md-12">
+		<div class="col-md-12" id="info_messages">
 			{% if messages %}
 			    {% for message in messages %}
 			    <span {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
@@ -57,7 +57,7 @@
 	    						{% else %}
 	    						<div class="question-box unanswered" id="{{ question.0 }}">
 	    						{% endif %}
-	    							<a class="flo-green glow"href="/question/{{ question.0 }}">Question {{ question.0 }}</a>
+	    							<a class="flo-green glow"href="/question/{{ question.0 }}" target="_blank">Question {{ question.0 }} ({{ question.2 }})</a>
 	    						</div>
 	    					</div>
 	    				{% if forloop.last %}
@@ -70,7 +70,7 @@
 	    						{% else %}
 	    						<div class="question-box unanswered" id="{{ question.0 }}">
 	    						{% endif %}
-	    							<a class="flo-green glow"href="/question/{{ question.0 }}">Question {{ question.0 }}</a>
+	    							<a class="flo-green glow"href="/question/{{ question.0 }}" target="_blank">Question {{ question.0 }} ({{ question.2 }})</a>
 	    						</div>
 	    					</div>
 	    				</div>
@@ -86,7 +86,7 @@
 	<div class="terminalhistory" id="terminalhistory" style="position:absolute;bottom:32px;margin-top:32px">
 	</div>
 	<div class="bottom" style="position:absolute;bottom:0px;">
-		<div class="label" class="flo-green" >{{ teamname }}@ctf:~$ </div>
+		<div class="label" class="flo-green" >{{ shortteamname }}@ctf:~$ </div>
 		<div id="input"></div>
 	</div>
 
@@ -157,6 +157,10 @@ position:absolute;
 bottom:0px;
 padding-left: 80px;
 }
+.answered {
+   pointer-events: none;
+   cursor: default;
+}
 </style>
 <script type="text/javascript">
 addTerminalHistory("Welcome To Capture The Flag",'line','green');
@@ -176,7 +180,7 @@ function afterCommandEntered()
 {
 	$('.terminal').cssConsole('reset');
 }
-var precmdtag = "{{ teamname }}@ctf:~$ ";
+var precmdtag = "{{ shortteamname }}@ctf:~$ ";
 $('.label').innerHTML = precmdtag;
 var cmd_history = [];
 
@@ -191,7 +195,7 @@ $(document).ready(function(){
 			var color = 'white';
 			var usage = "&nbsp;&nbsp;Usage : ans -q &lt;QuestionNo&gt; -f &lt;Flag&gt;<br>&nbsp;&nbsp;&nbsp;Example : ans -q 1 -f got_my_flag";
 			var commands = spans[0].innerHTML.replace(new RegExp("<([^>]+)>","gm"),"").replace(/<\/span>/g,"");
-			var cmds = commands.split(" ");
+			var cmds = commands.replace(/  +/g, ' ').split(" ");
 			if(cmds.length == 0 || cmds[0]=="")
 			{
 				output = "&nbsp;&nbsp;No Commands Entered!\nEnter `help` for manual";
@@ -226,23 +230,22 @@ $(document).ready(function(){
 			else {
 				try
 				{
-					question = parseInt(cmds[2]);
-					if( question<1 || question>7)
-						{
-							output = "&nbsp;&nbsp;Error : Question Number, Allowed Range [1-6]";
-							color = 'red';
-						}
-					else
-					{
+					if(cmds[2] == parseInt(cmds[2])) {
+						question = parseInt(cmds[2]);
 						flag = cmds[4];
 						$.post( post_url+question+"/", {answer : flag}).done(function( data ) {
 							//Response 302 Not Handled Directly!
 							onAnswerQuestion( data ,question);
 						});
+					} else {
+						output = "&nbsp;&nbsp;Invalid Question" ;
+						color = 'red';
 					}
+			
 				}catch(err)
 				{
 					output = "&nbsp;&nbsp;Error : Invalid Question Number";
+					color = 'red';
 				}
 
 
@@ -263,17 +266,20 @@ $(document).ready(function(){
 		}
 	});
 	function onAnswerQuestion( data,question ) {
-		if ( data === "wow" ) {
+		if ( data === "CrackedIt" ) {
 				{
 					addTerminalHistory("&nbsp;&nbsp;Response : You Cracked it!",'line','green');
 					document.getElementById(""+question).className = "question-box answered";
 				}
-		} else if ( data === "as" ) {
+		} else if ( data === "AlreadySubmmited" ) {
 				addTerminalHistory("&nbsp;&nbsp;Response : This Problem is Already Submitted",'line','yellow');
-		} else if ( data === "tryagain" ) {
+		} else if ( data === "InvalidFlag" ) {
 				addTerminalHistory("&nbsp;&nbsp;Response : Invalid Flag!",'line','yellow');
-		} else if ( data === "error" ) {
-				addTerminalHistory("&nbsp;&nbsp;Response : Some Error!",'line','error');
+		} else if ( data === "Invalid Request" ) {
+				addTerminalHistory("&nbsp;&nbsp;Response : Some Error!",'line','red');
+
+		} else if ( data === "InvalidQuestion" ) {
+				addTerminalHistory("&nbsp;&nbsp;Response : Invalid Question!",'line','red');
 
 		} else 	addTerminalHistory("&nbsp;&nbsp;Some Error Occured! Please Refresh Page",'line','red');
 	}
@@ -305,6 +311,23 @@ function checkKey(e) {
 
 }
 
+
+</script>
+<script type="text/javascript">
+setMessageHide();
+$(document).ready(function() {
+        $('.answered').click(function() {
+        	document.getElementById("info_messages").innerHTML = "<span>Already Soved : Why Solve Again??</span>";
+        	setMessageHide();
+            
+        });
+    });
+function setMessageHide(){
+	document.getElementById("info_messages").style.visibility = "visible";
+	setTimeout(function() { 
+		document.getElementById("info_messages").style.visibility = "hidden";
+	 }, 5000);
+}
 
 </script>
 </body>

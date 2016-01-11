@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django import forms
 
+from game_ctf.models import TeamDetail
+
 '''
 @metastableB : The inbuild userregistration form was too difficult to modify
 	and adapt for our particular case so I decided to user a custom implementation
@@ -28,6 +30,8 @@ class UserRegistrationForm(forms.ModelForm):
     error_messages = {
         'duplicate_teamname': _("A team with that teamname already exists."),
         'password_mismatch': _("The two password fields didn't match."),
+        'anw_same_id': _("Two Users Can't Have Same ANW ID"),
+        'anw_exists': _("User Already Registered "),
     }
     
     teamname = forms.RegexField(
@@ -122,6 +126,30 @@ class UserRegistrationForm(forms.ModelForm):
                 code='password_mismatch',
             )
         return password2
+
+    def clean_user3(self):
+        u = [self.cleaned_data['user1'].upper(),self.cleaned_data['user2'].upper(),self.cleaned_data['user3'].upper() ]
+        for i in [0,1,2]:
+            for j in [0,1,2]:
+                if i!=j:
+                    if u[i] == u[j]:
+                        raise forms.ValidationError(
+                            self.error_messages['anw_same_id'],
+                            code='anw_same_id',
+                        )
+
+        for i in [0,1,2]:
+            forUser1 = TeamDetail.objects.filter(user1 = u[i]);
+            forUser2 = TeamDetail.objects.filter(user2 = u[i]);
+            forUser3 = TeamDetail.objects.filter(user3 = u[i]);
+            if len(forUser1)+len(forUser2)+len(forUser3) != 0 :
+                #user already exists
+                raise forms.ValidationError(
+                            self.error_messages['anw_exists'] + u[i],
+                            code='anw_exists',
+                        )
+        return self.cleaned_data.get("user3")
+        
 '''
     def save(self, commit=True):
         user = super(UserRegistrationForm, self).save(commit=False)

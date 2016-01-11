@@ -13,7 +13,11 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 from user_session.settings import LOGIN_REDIRECT_URL,LOGIN_URL
 from secret_settings import SECRET_KEY 
-
+'''
+@metastableB:
+    User the following link to generate your own secret key
+http://stackoverflow.com/questions/4664724/distributing-django-projects-with-unique-secret-keys
+'''
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -79,8 +83,10 @@ WSGI_APPLICATION = 'CaptureTheFlag.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': os.path.join(BASE_DIR, "CaptureTheFlag/mysql.cnf"),
+        },
     }
 }
 
