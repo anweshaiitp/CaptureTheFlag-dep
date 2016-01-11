@@ -15,9 +15,9 @@ do
 		\"fields\": {
 			\"valid\": true, 
 			\"source_file\": \"question$i.html\", 
-			\"points\": 0, 
+			\"points\": 20, 
 			\"has_context\": false,
-			\"answer\" : \"ans$i\"
+			\"answer\": \"ans$i\"
 			}
 		}, 	
 "
