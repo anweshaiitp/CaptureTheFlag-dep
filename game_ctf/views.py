@@ -38,7 +38,7 @@ def home(request):
 
 	if len(_questions) == 0:
 		HttpResponse("Database Error")
-	return render(request, template_path['home'],{'teamname':team_name,'questions':_questions, 'score':score,})
+	return render(request, template_path['home'],{'team_name':team_name,'questions':_questions, 'score':score,})
 
 
 @login_required
@@ -80,8 +80,10 @@ def question_page(request,question_id):
 	try:
 		question = Question.objects.get(pk = question_id)
 	except ObjectDoesNotExist:
-		messages.add_message(request,
-			info_messages['question does not exist'][0],info_messages['question does not exist'][1])
+		messages.add_message(request, info_messages['question does not exist'][0],
+			info_messages['question does not exist'][1])
+		return HttpResponseRedirect(reverse('user_session:login'))
+
 	question_status_obj = QuestionStatus.objects.filter(team_id = request.user).filter(question_id = question).filter(question_status = 'AW')	
 	if len(question_status_obj) == 1 :
 		messages.add_message(request,
