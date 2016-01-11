@@ -83,23 +83,6 @@ def save_team(registration_form):
 		college_name = registration_form.cleaned_data['college_name'],
 		phone_number = registration_form.cleaned_data['mobile_number'])
 	team.save()
-	
-def checkUserID(registration_form):
-	u = [registration_form.cleaned_data['user1'].upper(),registration_form.cleaned_data['user2'].upper(),registration_form.cleaned_data['user3'].upper() ]
-	for i in [0,1,2]:
-		for j in [0,1,2]:
-			if i!=j:
-				if u[i] == u[j]:
-					return "Two Users Can't Have Same ANW ID : " +u[i]
-
-	for i in [0,1,2]:
-		forUser1 = TeamDetail.objects.filter(user1 = u[i]);
-		forUser2 = TeamDetail.objects.filter(user2 = u[i]);
-		forUser3 = TeamDetail.objects.filter(user3 = u[i]);
-		if len(forUser1)+len(forUser2)+len(forUser3) != 0 :
-			#user already exists
-			return "User Already Registered : " +u[i]
-	return None
 
 def user_registration(request):
 	user = request.user
@@ -112,13 +95,6 @@ def user_registration(request):
 		registration_form = UserRegistrationForm(request.POST)
 		if registration_form.is_valid():
 			#print registration_form.cleaned_data
-			result = checkUserID(registration_form);
-			if result is not None :
-				messages.add_message(request,
-				info_messages['reg_failed'][0],info_messages['reg_failed'][1]+result)
-				return HttpResponseRedirect(reverse('user_session:register'))
-
-
 			messages.add_message(request,
 			info_messages['registration successful'][0],info_messages['registration successful'][1])
 			save_team(registration_form)

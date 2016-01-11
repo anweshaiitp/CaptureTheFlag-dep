@@ -267,16 +267,16 @@ $(document).ready(function(){
 		}
 	});
 	function onAnswerQuestion( data,question ) {
-		if ( data === "wow" ) {
+		if ( data === "CrackedIt" ) {
 				{
 					addTerminalHistory("&nbsp;&nbsp;Response : You Cracked it!",'line','green');
 					document.getElementById(""+question).className = "question-box answered";
 				}
-		} else if ( data === "as" ) {
+		} else if ( data === "AlreadySubmmited" ) {
 				addTerminalHistory("&nbsp;&nbsp;Response : This Problem is Already Submitted",'line','yellow');
-		} else if ( data === "tryagain" ) {
+		} else if ( data === "InvalidFlag" ) {
 				addTerminalHistory("&nbsp;&nbsp;Response : Invalid Flag!",'line','yellow');
-		} else if ( data === "error" ) {
+		} else if ( data === "{{ error_invalid_request }}" ) {
 				addTerminalHistory("&nbsp;&nbsp;Response : Some Error!",'line','error');
 
 		} else 	addTerminalHistory("&nbsp;&nbsp;Some Error Occured! Please Refresh Page",'line','red');
