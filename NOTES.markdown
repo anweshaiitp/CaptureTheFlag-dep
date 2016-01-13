@@ -196,6 +196,7 @@ TODO : create admin static
       : connect to anwesha db
       : correct privillages to apache
       : Move to subdomain so that links are resolved properly
+      : Are we are sending question answere in the home page?
 
 [1]: "http://code.google.com/p/modwsgi/downloads/list" "Source code"
 [2]: "https://code.google.com/p/modwsgi/wiki/QuickInstallationGuide" "Mod_Wsgi installation instructions"

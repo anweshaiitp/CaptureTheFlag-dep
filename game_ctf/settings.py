@@ -10,7 +10,7 @@ from django.contrib import messages
 	to modify the direcory structure, add the new directory to the 
 	global settings.TEMPLATE
 '''
-QUESTIONS_DIR='testQuestions/'
+QUESTIONS_DIR='questions/'
 
 # Some messages are hardcoded into the home.html javascript and used for comparison
 info_messages = {
