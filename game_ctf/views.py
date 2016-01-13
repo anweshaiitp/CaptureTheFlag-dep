@@ -17,6 +17,9 @@ from django.template import loader
 from models import Question, QuestionStatus, TeamDetail
 from .settings import QUESTIONS_DIR, info_messages, template_path
 
+def not_ready(request):
+	render(request,template_path['not_ready'])
+
 @login_required 
 def home(request):
 	questions = Question.objects.all().filter(valid=True)

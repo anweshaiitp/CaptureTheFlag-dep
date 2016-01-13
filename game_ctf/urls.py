@@ -3,6 +3,7 @@
 # urls.py
 # 
 from django.conf.urls import url
+from django.shortcuts import render
 from . import views
 
 app_name = 'game_ctf'
