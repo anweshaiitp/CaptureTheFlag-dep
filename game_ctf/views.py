@@ -56,7 +56,7 @@ def submit_answer(request,question_id):
 			
 		#Question Already Opened
 		if len(question_status_obj) !=0 :
-			qs = question_status_obj.get(team_id = request.user)#######3
+			qs = question_status_obj[0]
 		else:
 			qs = QuestionStatus(
 				team_id = request.user,
@@ -89,12 +89,20 @@ def question_page(request,question_id):
 			info_messages['question does not exist'][1])
 		return HttpResponseRedirect(reverse('user_session:login'))
 
-	question_status_obj = QuestionStatus.objects.filter(team_id = request.user).filter(question_id = question).filter(question_status = 'AW')	
-	if len(question_status_obj) == 1 :
+	question_status_obj = QuestionStatus.objects.filter(team_id = request.user).filter(question_id = question)
+	if len(question_status_obj.filter(question_status = 'AW')) == 1 :
 		messages.add_message(request,
 		info_messages['question already solved'][0],info_messages['question already solved'][1])
 		return HttpResponseRedirect(reverse('game_ctf:home'))
 
+	#Question Already Opened
+	if len(question_status_obj) ==0 :
+		qs = QuestionStatus(
+			team_id = request.user,
+			question_id = question,
+			question_status = 'OP')
+		qs.save()
+		
 	return render(request, QUESTIONS_DIR + question.source_file)
 
 
