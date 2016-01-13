@@ -6,6 +6,9 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User 
 from django import forms
+from django.utils import timezone
+from datetime import timedelta
+
 from CaptureTheFlag.settings import BASE_DIR
 
 class Question(models.Model):
@@ -49,7 +52,8 @@ class QuestionStatus(models.Model):
 	question_id = models.ForeignKey(Question,on_delete = models.PROTECT)
 	#submission will only when Answer is correct, Check views.py for ref
 	submission_time = models.DateTimeField(auto_now_add=True)
-
+	open_time = models.DateTimeField(auto_now_add=True)
+        
 	OPPEN = 'OP'
 	CLOSED = 'CL'
 	ANSWERED = 'AW'
@@ -58,5 +62,5 @@ class QuestionStatus(models.Model):
 		(ANSWERED,"Answered"))
 	question_status = models.CharField(max_length = 2, choices = QUESTION_STATUS_CHOICES, default = CLOSED)
 	def __str__(self):
-		return  "Time : "+str(self.submission_time)+"  "+str(self.team_id.pk) + " : " + self.team_id.username+" : "+self.question_id.source_file+" ("+str(self.question_id.points)+")"
+		return  "Time : "+str(self.open_time+ timedelta(hours=5,minutes=30))+" to "+str(self.submission_time+ timedelta(hours=5,minutes=30))+"  "+str(self.team_id.pk) + " : " + self.team_id.username+" : "+self.question_id.source_file+" ("+str(self.question_id.points)+")"
 
