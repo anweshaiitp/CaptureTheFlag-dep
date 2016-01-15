@@ -79,4 +79,26 @@ class Log(models.Model):
 		pre+="\t\tTime : "+str(self.submission_time+ timedelta(hours=5,minutes=30))
 		return pre
 
+'''
+The anweshd peoples database;
+This is used to link to the anwesha table.
+We only have read access to that DB.
+'''
+class People(models.Model):
+    name = models.CharField(max_length=50, blank=True, null=True)
+    pid = models.IntegerField(db_column='pId', primary_key=True)  # Field name made lowercase.
+    college = models.CharField(max_length=50, blank=True, null=True)
+    sex = models.CharField(max_length=1, blank=True, null=True)
+    mobile = models.CharField(unique=True, max_length=13, blank=True, null=True)
+    email = models.CharField(unique=True, max_length=60, blank=True, null=True)
+    dob = models.DateField(blank=True, null=True)
+    city = models.CharField(max_length=15, blank=True, null=True)
+    feepaid = models.IntegerField(db_column='feePaid', blank=True, null=True)  # Field name made lowercase.
+    confirm = models.IntegerField()
+    time = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'People'
+
 	
