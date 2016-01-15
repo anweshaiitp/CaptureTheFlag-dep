@@ -20,7 +20,7 @@ class Question(models.Model):
 	# Some questions will require additional context information
 	# such as specific rendering of modification requests, if this is
 	# the case we will have to handle such questions separately 
-	has_context = models.BooleanField(default = False)
+	has_context = models.BooleanField(default = True)
 	def __str__(self):
 		return str(self.pk) + " " + self.source_file
 

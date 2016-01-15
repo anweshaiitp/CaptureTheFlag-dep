@@ -109,6 +109,7 @@
 			"valid": true, 
 			"source_file": "hidden_overflow.html", 
 			"points": 30, 
+			"hidden": true,
 			"has_context": false,
 			"answer" : "QuestionTableOverflow"
 			}

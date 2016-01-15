@@ -18,6 +18,26 @@ from django.template import loader
 from models import Question, QuestionStatus, TeamDetail
 from .settings import QUESTIONS_DIR, info_messages, template_path
 
+import re
+
+question_urls = { '1' : '/q_1/?score=200',
+	'3' : '/q_3/' }
+
+##### QUESTION SPECIFICATIONS #######
+
+'''
+QUESTION 1 : Change get request value 
+			 define view in question_views
+			 change url to redirect 
+			 set has_context = 1
+QUESTION 3 : set has_context = 1
+
+QUESTION 9: (hidden)
+			Javasceipt redirect 
+			Make sure thequestion is not rendered inthe view
+			but is present in the database
+'''
+
 @login_required
 def q_1(request):
 	question_id = 1
@@ -34,43 +54,37 @@ def q_1(request):
 		messages.add_message(request,
 		info_messages['question already solved'][0],info_messages['question already solved'][1])
 		return HttpResponseRedirect(reverse('game_ctf:home'))
-		
-		if request.GET['score'] == '5':
-			message = 5
-			flag = 'Vendatta'
-		else :
-			flag = None
-			message = '$SCORE'
-		return render(request, QUESTIONS_DIR + question.source_file,{'message':message,'flag':flag})
+###################		
+	if request.GET['score'] == '5':
+		message = 5
+		flag = 'Vendatta'
+	else :
+		flag = None
+		message = '$SCORE'
+	return render(request, QUESTIONS_DIR + question.source_file,{'message':message,'flag':flag})
 	return HttpResponse("Ouch! Something went wrong. Please return to your home.")
 
-question_urls = { '1' : '/q_1/?score=200' }
+@login_required
+def q_3(request):
+	question_id = 3
+	try:
+		question = Question.objects.get(pk = question_id)
+	except ObjectDoesNotExist:
+		messages.add_message(request, info_messages['question does not exist'][0],
+			info_messages['question does not exist'][1])
+		return HttpResponseRedirect(reverse('user_session:login'))
 
-##############################################################
-	
 	content = {'mode' : True}
-	if question_id == '3' :
-		if request.method == 'GET' and 'generate' in request.GET:
-			content = {'generate':True}
-		elif request.method == 'GET' and 'name' in request.GET:
-			content = {'name':request.GET['name']}
-			#Hardcoded answer
-			p = re.compile(r'^(.*<\s*img.*src\s*=\s*[\'"].*/static/images/blog/5.jpg[\'"].*>.*)$', re.IGNORECASE)
-			if p.match(request.GET['name']):
-				content = {'name':request.GET['name'],'solved' : True}	
+	if request.method == 'GET' and 'generate' in request.GET:
+		content = {'generate':True}
+	elif request.method == 'GET' and 'name' in request.GET:
+		content = {'name':request.GET['name']}
+		#Hardcoded answer
+		p = re.compile(r'^(.*<img.*src\s*=\s*[\'"].*/static/images/blog/5.jpg[\'"].*>.*)$', re.IGNORECASE)
+		if p.match(request.GET['name']):
+			content = {'name':request.GET['name'],'solved' : True}	
 	
 	return render(request, QUESTIONS_DIR + question.source_file,content)
+	
+	
 
-##### QUESTION SPECIFICATIONS #######
-
-'''
-QUESTION 1 : Change get request value 
-			 define view in question_views
-			 change url to redirect 
-			 set has_context = 1
-
-QUESTION 9: (hidden)
-			Javasceipt redirect 
-			Make sure thequestion is not rendered inthe view
-			but is present in the database
-'''
