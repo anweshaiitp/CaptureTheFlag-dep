@@ -248,3 +248,9 @@ body {
 .flo-green {
   color: #66d93f;
 }
+.flag {
+  text-align: center;
+  padding: 10px;
+  color: #ADFF2F;
+  font-size: 1.2em;
+}
