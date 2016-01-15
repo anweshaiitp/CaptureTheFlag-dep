@@ -22,6 +22,7 @@ urlpatterns = [
 	# Custom URL for individual questions 
 	url(r'^q_1/',question_views.q_1,name='q_1'),
 	url(r'^q_3/',question_views.q_3,name='q_3'),
+	url(r'^q_4/',question_views.q_4,name='q_4'),
 ]
 
 

@@ -16,7 +16,7 @@ from django.template import loader
 from datetime import datetime
 
 from models import Question, QuestionStatus, TeamDetail
-from .settings import QUESTIONS_DIR, info_messages, template_path
+from .settings import QUESTIONS_DIR, info_messages, template_path, question_if_answered
 from .question_views import question_urls
 
 def not_ready(request):
@@ -94,11 +94,10 @@ def question_page(request,question_id):
 		return HttpResponseRedirect(reverse('user_session:login'))
 
 	question_status_obj = QuestionStatus.objects.filter(team_id = request.user).filter(question_id = question)
-	if len(question_status_obj.filter(question_status = 'AW')) == 1 :
-		messages.add_message(request,
-		info_messages['question already solved'][0],info_messages['question already solved'][1])
-		return HttpResponseRedirect(reverse('game_ctf:home'))
-
+	is_answered = question_if_answered(request,question_id,QuestionStatus,question)
+	if is_answered is not None:
+		return is_answered
+	
 	#Question not opened
 	if len(question_status_obj) ==0 :
 		qs = QuestionStatus(

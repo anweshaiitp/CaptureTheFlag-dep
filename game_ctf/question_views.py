@@ -16,12 +16,13 @@ from django.contrib import messages
 from django.template import loader
 
 from models import Question, QuestionStatus, TeamDetail
-from .settings import QUESTIONS_DIR, info_messages, template_path
+from .settings import QUESTIONS_DIR, info_messages, template_path, question_if_answered
 
 import re
 
 question_urls = { '1' : '/q_1/?score=200',
-	'3' : '/q_3/' }
+	'3' : '/q_3/',
+	'4' : '/q_4/' }
 
 ##### QUESTION SPECIFICATIONS #######
 
@@ -29,8 +30,6 @@ question_urls = { '1' : '/q_1/?score=200',
 QUESTION 1 : Change get request value 
 			 define view in question_views
 			 change url to redirect 
-			 set has_context = 1
-QUESTION 3 : set has_context = 1
 
 QUESTION 9: (hidden)
 			Javasceipt redirect 
@@ -50,11 +49,11 @@ def q_1(request):
 			return HttpResponseRedirect(reverse('user_session:login'))
 
 	question_status_obj = QuestionStatus.objects.filter(team_id = request.user).filter(question_id = question)
-	if len(question_status_obj.filter(question_status = 'AW')) == 1 :
-		messages.add_message(request,
-		info_messages['question already solved'][0],info_messages['question already solved'][1])
-		return HttpResponseRedirect(reverse('game_ctf:home'))
-###################		
+	is_answered = question_if_answered(request,question_id,QuestionStatus,question)
+	if is_answered is not None:
+		return is_answered
+	
+###################		NEED TO CHECK id score Exists
 	if request.GET['score'] == '5':
 		message = 5
 		flag = 'Vendatta'
@@ -74,6 +73,10 @@ def q_3(request):
 			info_messages['question does not exist'][1])
 		return HttpResponseRedirect(reverse('user_session:login'))
 
+	is_answered = question_if_answered(request,question_id,QuestionStatus,question)
+	if is_answered is not None:
+		return is_answered
+	
 	content = {'mode' : True}
 	if request.method == 'GET' and 'generate' in request.GET:
 		content = {'generate':True}
@@ -84,6 +87,33 @@ def q_3(request):
 		if p.match(request.GET['name']):
 			content = {'name':request.GET['name'],'solved' : True}	
 	
+	return render(request, QUESTIONS_DIR + question.source_file,content)
+
+@login_required
+def q_4(request):
+	question_id = 4
+	try:
+		question = Question.objects.get(pk = question_id)
+	except ObjectDoesNotExist:
+		messages.add_message(request, info_messages['question does not exist'][0],
+			info_messages['question does not exist'][1])
+		return HttpResponseRedirect(reverse('user_session:login'))
+
+	is_answered = question_if_answered(request,question_id,QuestionStatus,question)
+	if is_answered is not None:
+		return is_answered
+	
+	content = {'story' : True}
+	if request.method == 'GET' and 'feedback' in request.GET:
+		content = {'story':False}
+	elif request.method == 'POST' and 'name' in request.POST and 'comment' in request.POST:
+		size = len(request.POST['name'])+len(request.POST['comment'])
+		msg = "Space Used : "+str(size/1024.0)+" KB"
+		if size > 500*1024:
+			content = {'solved':True,'msg':msg}
+		else:
+			content = {'solved':False,'msg':msg}
+		
 	return render(request, QUESTIONS_DIR + question.source_file,content)
 	
 	
