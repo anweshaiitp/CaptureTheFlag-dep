@@ -104,7 +104,7 @@ def user_registration(request):
 			messages.add_message(request,
 			info_messages['registration successful'][0],info_messages['registration successful'][1])
 			save_team(registration_form)
-			return HttpResponseRedirect(reverse('user_session:login'))
+			return HttpResponseRedirect(reverse('user_session:register'))
 	else:
 			registration_form = UserRegistrationForm()
 
