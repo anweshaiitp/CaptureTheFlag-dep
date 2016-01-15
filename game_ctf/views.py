@@ -15,7 +15,7 @@ from django.contrib import messages
 from django.template import loader
 from datetime import datetime
 
-from models import Question, QuestionStatus, TeamDetail
+from models import Question, QuestionStatus, TeamDetail, Log
 from .settings import QUESTIONS_DIR, info_messages, template_path, question_if_answered
 from .question_views import question_urls
 
@@ -58,6 +58,15 @@ def submit_answer(request,question_id):
 		if len(question_status_obj.filter(question_status = 'AW')) !=0 :
 			return HttpResponse(info_messages['answered'][1])
 			
+		_log = Log.objects.filter(team_id = request.user).filter(question_id = question)
+		if len(_log) == 0 :
+			log = Log(team_id = request.user,
+				question_id = question,
+				)
+		else:
+			log = _log[0]
+		log.submission_time = datetime.now()
+			
 		#Question Already Opened
 		if len(question_status_obj) !=0 :
 			qs = question_status_obj[0]
@@ -69,17 +78,20 @@ def submit_answer(request,question_id):
 			
 		answer = request.POST['answer']
 		if question.answer == answer:
-			
+			log.solved = True
 			qs.question_status = 'AW'
 			qs.submission_time = datetime.now()
 			qs.save()
 			team = TeamDetail.objects.filter(team = qs.team_id)[0];
 			team.points+=qs.question_id.points;
 			team.save()
+			log.save()
 			return HttpResponse(info_messages['correct answer'][1])
 		else:
+			log.count_fail += 1
 			qs.submission_time = datetime.now()
 			qs.save()
+			log.save()
 			return HttpResponse(info_messages['incorrect answer'][1])
 	return HttpResponse(info_messages['invalid_request'][1])
 

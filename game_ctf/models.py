@@ -51,7 +51,6 @@ class TeamDetail(models.Model):
 class QuestionStatus(models.Model):
 	team_id = models.ForeignKey(User,on_delete = models.CASCADE)
 	question_id = models.ForeignKey(Question,on_delete = models.PROTECT)
-	#submission will only when Answer is correct, Check views.py for ref
 	submission_time = models.DateTimeField(auto_now_add=True)
 	open_time = models.DateTimeField(auto_now_add=True)
         
@@ -65,3 +64,19 @@ class QuestionStatus(models.Model):
 	def __str__(self):
 		return  "Time : "+str(self.open_time+ timedelta(hours=5,minutes=30))+" to "+str(self.submission_time+ timedelta(hours=5,minutes=30))+"  "+str(self.team_id.pk) + " : " + self.team_id.username+" : "+self.question_id.source_file+" ("+str(self.question_id.points)+")"
 
+class Log(models.Model):
+	team_id = models.ForeignKey(User,on_delete = models.CASCADE)
+	question_id = models.ForeignKey(Question,on_delete = models.PROTECT)
+	count_fail = models.IntegerField(default=0)
+	solved = models.BooleanField(default = False)
+	submission_time = models.DateTimeField(auto_now_add=True)
+	def __str__(self):
+		pre = str(self.team_id.pk) + " : " + self.team_id.username+" : "+self.question_id.source_file + " Fail : "+ str(self.count_fail)
+		if self.solved :
+			pre+=" (SOLVED) "
+		else:
+			pre+=" (unsolved) "
+		pre+="\t\tTime : "+str(self.submission_time+ timedelta(hours=5,minutes=30))
+		return pre
+
+	
