@@ -32,7 +32,7 @@ class UserRegistrationForm(forms.ModelForm):
         'password_mismatch': _("The two password fields didn't match."),
         'anw_same_id': _("Two Users Can't Have Same ANW ID"),
         'anw_exists': _("User Already Registered "),
-        'anw_not_found': _("Arey you registered with anwesha 16? AnweshaID not found:")
+        'anw_not_found': _("Arey your registered with anwesha 16? AnweshaID not found:")
     }
     
     teamname = forms.RegexField(
@@ -139,6 +139,7 @@ class UserRegistrationForm(forms.ModelForm):
                             code='anw_same_id',
                         )
 
+        '''
         for i in [0,1,2]:
             forUser1 = TeamDetail.objects.filter(user1 = u[i]);
             forUser2 = TeamDetail.objects.filter(user2 = u[i]);
@@ -149,6 +150,7 @@ class UserRegistrationForm(forms.ModelForm):
                             self.error_messages['anw_exists'] + u[i],
                             code='anw_exists',
                         )
+        
         for i in [0,1,2]:
             try:
                 a_user1 = People.objects.using('anwesha').get(pid=u[i][3:])
@@ -157,6 +159,8 @@ class UserRegistrationForm(forms.ModelForm):
                         self.error_messages['anw_not_found'] +u[i],
                         code='anw_not_found')
 
+        '''
+        
         return self.cleaned_data.get("user3")
         
 '''
