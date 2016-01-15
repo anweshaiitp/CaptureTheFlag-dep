@@ -86,15 +86,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': os.path.join(BASE_DIR, "CaptureTheFlag/mysql_ctf.cnf"),
+            'read_default_file': os.path.join(BASE_DIR, "CaptureTheFlag/mysql.cnf"),
         },
     },
-    'anwesha':{
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file': os.path.join(BASE_DIR, "CaptureTheFlag/mysql_anwesha.cnf"),
-        },
-    }
 }
 
 
