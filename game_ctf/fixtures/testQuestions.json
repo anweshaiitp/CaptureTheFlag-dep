@@ -31,10 +31,10 @@
 		"pk": 3, 
 		"fields": {
 			"valid": true, 
-			"source_file": "question3.html", 
-			"points": 0, 
-			"has_context": false,
-			"answer" : "ans3"
+			"source_file": "xss.html", 
+			"points": 30, 
+			"has_context": true,
+			"answer" : "NoPlaceForNoob"
 			}
 		}, 	
 
@@ -44,10 +44,10 @@
 		"pk": 4, 
 		"fields": {
 			"valid": true, 
-			"source_file": "question4.html", 
-			"points": 0, 
-			"has_context": false,
-			"answer" : "ans4"
+			"source_file": "overflow.html", 
+			"points": 30, 
+			"has_context": true,
+			"answer" : "CantHandelMore"
 			}
 		}, 	
 
@@ -57,10 +57,10 @@
 		"pk": 5, 
 		"fields": {
 			"valid": true, 
-			"source_file": "question5.html", 
-			"points": 0, 
-			"has_context": false,
-			"answer" : "ans5"
+			"source_file": "password.html", 
+			"points": 20, 
+			"has_context": true,
+			"answer" : "NothingIsHidden"
 			}
 		}, 	
 
