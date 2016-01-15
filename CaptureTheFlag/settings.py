@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
-import os
+import os,sys
 from user_session.settings import LOGIN_REDIRECT_URL,LOGIN_URL
 from secret_settings import SECRET_KEY 
 '''
@@ -26,9 +26,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = False
+#print >> sys.stderr, "hello cruel world"
+#print >> sys.stderr , request._get_raw_host() 
+ALLOWED_HOSTS = ['128.199.116.115','anwesha.info','ctf.anwesha.info']
 
 
 # Application definition
@@ -132,3 +133,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+# Allowed hosts
+#ALLOWED_HOSTS = ['128.199.116.115/ctf/','http://128.199.116.115/ctf',]
