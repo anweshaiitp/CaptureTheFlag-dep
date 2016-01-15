@@ -54,10 +54,10 @@ class QuestionStatus(models.Model):
 	submission_time = models.DateTimeField(auto_now_add=True)
 	open_time = models.DateTimeField(auto_now_add=True)
         
-	OPPEN = 'OP'
+	OPEN = 'OP'
 	CLOSED = 'CL'
 	ANSWERED = 'AW'
-	QUESTION_STATUS_CHOICES = ((OPPEN,"Open"),
+	QUESTION_STATUS_CHOICES = ((OPEN,"Open"),
 		(CLOSED,"Closed"),
 		(ANSWERED,"Answered"))
 	question_status = models.CharField(max_length = 2, choices = QUESTION_STATUS_CHOICES, default = CLOSED)

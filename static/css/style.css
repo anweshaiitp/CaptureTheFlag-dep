@@ -97,7 +97,7 @@ body {
   color:#FF0000;
 }
 .score{
-  color:#0000FF;
+  color:#FFFF00;
 }
 .question-box{
   font-size:1.7em;
@@ -247,4 +247,10 @@ body {
 
 .flo-green {
   color: #66d93f;
+}
+.flag {
+  text-align: center;
+  padding: 10px;
+  color: #ADFF2F;
+  font-size: 1.2em;
 }

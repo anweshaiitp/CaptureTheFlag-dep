@@ -59,6 +59,7 @@ This repository holds the capture the flag framework used by NJACK, IIT Patna.
 - [X] [Ignored] Return button on terminal because mobile forms dont have return key
 - [ ] To change or reset password, contact us
 - [ ] Define has context view
+- [ ] No users handle in leaderboard
 
 ### For future release
 - [ ] create a separate branch which allows
@@ -186,6 +187,16 @@ Once connected, obtaining model definitions for preexisting tables is as simple 
 
 After you have obtained the models, you can use them as you like. Migrate now to create the models defined my you and start your server to test.
 
+# Document allowed hosts
+# Dealing with pip installation
+# permission for apache
+
+TODO : create admin static
+      : Remove chutiya errors sys.errr
+      : connect to anwesha db
+      : correct privillages to apache
+      : Move to subdomain so that links are resolved properly
+      : Are we are sending question answere in the home page?
 
 [1]: "http://code.google.com/p/modwsgi/downloads/list" "Source code"
 [2]: "https://code.google.com/p/modwsgi/wiki/QuickInstallationGuide" "Mod_Wsgi installation instructions"

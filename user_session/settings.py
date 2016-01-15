@@ -18,6 +18,7 @@ template_path = {
 	'login':'user_session/login_logout.html',
 	'registration' : 'user_session/register.html',
 	'home' :'user_session/home.html',
+	'not_ready' : 'user_session/not_ready.html'
 }
 # Info messages used across module
 info_messages = {
