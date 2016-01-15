@@ -192,6 +192,7 @@ After you have obtained the models, you can use them as you like. Migrate now to
 # permission for apache
 
 TODO : create admin static
+      : vendetta flag is obvious
       : Remove chutiya errors sys.errr
       : connect to anwesha db
       : correct privillages to apache
