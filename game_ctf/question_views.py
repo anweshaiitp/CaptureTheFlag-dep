@@ -23,7 +23,7 @@ import re
 question_urls = { '1' : '/q_1/?score=200',
 	'3' : '/q_3/',
 	'4' : '/q_4/',
-	'5' : '/q_5/' }
+	'5' : '/q_5/?story' }
 
 
 ##### QUESTION SPECIFICATIONS #######
@@ -131,13 +131,59 @@ def q_5(request):
 	is_answered = question_if_answered(request,question_id,QuestionStatus,question)
 	if is_answered is not None:
 		return is_answered
+
+	if request.method == 'GET' and 'story' in request.GET:
+		return render(request, QUESTIONS_DIR + question.source_file,{'story':True})
+
+	
 	content = {}
-	if request.method == 'POST' and 'pass' in request.POST and 'pass2' in request.POST:
+
+	logged_in = False
+	name = 'unknown'
+	registered = False
+	
+	##check cookies
+	name = request.COOKIES.get('name')
+	if name is not None :
+		if name[0]<5 and _name[0]>15 :
+			name = None
+	login = request.COOKIES.get('login')
+	
+
+	if logged_in == False and request.method == 'POST' and 'name' in request.POST and 'pass' in request.POST and 'pass2' in request.POST:
 		content = {'solved':False,'msg':"Registration Failed : Password Didn't Match!",'b_class':'alert alert-warning'}
-		if len(request.POST['pass'])>0 and request.POST['pass']==request.POST['pass2']:
-			content = {'solved':True,'msg':"Registration Completed!",'b_class':'alert alert-success'}
-		
-	return render(request, QUESTIONS_DIR + question.source_file,content)
+		if len(request.POST['name'])<5 or len(request.POST['name'])>15:
+			content = {'solved':False,'msg':"Invalid Name",'b_class':'alert alert-warning'}
+		elif request.POST['name']=='admin':
+			content = {'solved':False,'msg':"User Already Registered!",'b_class':'alert alert-warning'}
+		elif len(request.POST['pass'])>0 and request.POST['pass']==request.POST['pass2']:
+			registered = True
+			content = {'solved':False,'registered':True,'msg':"Registration Completed!",'b_class':'alert alert-success'}
+	elif logged_in == False and request.method == 'GET' and 'login' in request.GET:
+		if name is not None:
+			logged_in = True
+
+	if logged_in : 
+		content = {'login':name}
+		if request.method == 'POST' and 'pass' in request.POST and 'pass2' in request.POST:
+			if request.POST['pass']!=request.POST['pass2']:
+					content = {'login':name,'msg':"Password didn't match",'b_class':'alert alert-warning'}
+			elif name == 'admin':
+				content = {'login':name,'msg':"Admin Password Changed",'b_class':'alert alert-success','solved':True}
+			else:
+				content = {'login':name,'msg':"CTF : You need to change admin Password",'b_class':'alert alert-warning'}
+
+
+	response = render(request, QUESTIONS_DIR + question.source_file,content)
+	if logged_in:
+		response.set_cookie('login','true')
+	else:
+		response.delete_cookie('login')
+	
+	if registered:
+		response.set_cookie('name',request.POST['name'])
+		response.set_cookie('login','false')
+	return response
 	
 	
 
