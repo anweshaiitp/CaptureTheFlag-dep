@@ -17,7 +17,10 @@ from game_ctf.models import TeamDetail
 
 from django.contrib.auth.models import User
 import settings 
-
+from django.core.mail import send_mail
+import sys
+import urllib2
+import json
 '''
 @metastableB : The page to redirect to if  `next` is not given or is empty.
 	If this is left to None we default to dango's settings.LOGIN_REDIRECT_URL
@@ -106,3 +109,14 @@ def user_registration(request):
 			registration_form = UserRegistrationForm()
 
 	return render(request, template_path['registration'], {'form' : registration_form})
+
+def email(response):
+	a = send_mail('This is a test', 'Here is the message.', 'ctf@anwesha.info',
+    ['asthanasumit23@gmail.com'], fail_silently=False)
+	return HttpResponse("lol")
+	
+def urlopen(request):
+	post_data = [('name','Gladys'),]     # a sequence of two element tuples
+	result = urllib2.urlopen('http://2016.anwesha.info/ctf_verify')
+	content = json.load(result)
+	return HttpResponse(content['ANW1231'])

@@ -7,12 +7,13 @@ For more information on this file, see
 https://docs.djangoproject.com/en/1.9/topics/settings/
 
 For the full list of settings and their values, see
+
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os,sys
 from user_session.settings import LOGIN_REDIRECT_URL,LOGIN_URL
-from secret_settings import SECRET_KEY 
+from secret_settings import SECRET_KEY ,EMAIL_HOST,EMAIL_HOST_USER,EMAIL_HOST_PASSWORD,EMAIL_PORT,EMAIL_USE_TLS
 '''
 @metastableB:
     User the following link to generate your own secret key
