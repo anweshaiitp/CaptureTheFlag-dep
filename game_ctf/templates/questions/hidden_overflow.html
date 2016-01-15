@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="NJACK Capture the Flag">
+    <meta name="author" content="scopeInfinity">
+    
+    {% load staticfiles %}
+    <link rel='shortcut icon' type='image/x-icon' href="{% static 'favicon.ico' %}" />
+    <link href="{% static 'bootstrap-3.3.6-dist/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <title>You are awesome</title>
+	<!-- Custom styles for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script type="text/javascript">
+    	window.location.assign("../../home");
+    </script>
+  </head>
+<body>
+	{% include 'includes/navbar_top.html' %}
+
+<div class="container">
+	<div class="row text-center lb-header">
+		<h2> Question 9 (Hidden)  <h2>
+	</div>
+	<div class="row text-centered">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<center class="flag">Flag : QuestionTableOverflow</center>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>
+	{% include 'includes/footer.html' %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>
+</body>

@@ -33,6 +33,9 @@ redirect_to_url = settings.LOGIN_REDIRECT_URL
 	If next isn't provided, it redirects to settings.LOGIN_REDIRECT_URL.
 '''
 
+def not_ready(request):
+	return render(request,template_path['not_ready'])
+
 @login_required
 def home(request):
 	return render(request, template_path['home'], {'user' : request.user})

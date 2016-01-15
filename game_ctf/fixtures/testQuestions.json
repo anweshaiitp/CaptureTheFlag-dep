@@ -1,0 +1,117 @@
+[
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 1, 
+		"fields": {
+			"valid": true, 
+			"source_file": "get_modification_simple.html", 
+			"points": 20, 
+			"has_context": true,
+			"answer" : "Vendetta"
+			}
+		}, 	
+
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 2, 
+		"fields": {
+			"valid": true, 
+			"source_file": "question2.html", 
+			"points": 0, 
+			"has_context": false,
+			"answer" : "ans2"
+			}
+		}, 	
+
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 3, 
+		"fields": {
+			"valid": true, 
+			"source_file": "xss.html", 
+			"points": 30, 
+			"has_context": true,
+			"answer" : "NoPlaceForNoob"
+			}
+		}, 	
+
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 4, 
+		"fields": {
+			"valid": true, 
+			"source_file": "overflow.html", 
+			"points": 30, 
+			"has_context": true,
+			"answer" : "CantHandelMore"
+			}
+		}, 	
+
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 5, 
+		"fields": {
+			"valid": true, 
+			"source_file": "password.html", 
+			"points": 20, 
+			"has_context": true,
+			"answer" : "NothingIsHidden"
+			}
+		}, 	
+
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 6, 
+		"fields": {
+			"valid": true, 
+			"source_file": "question6.html", 
+			"points": 0, 
+			"has_context": false,
+			"answer" : "ans6"
+			}
+		}, 	
+
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 7, 
+		"fields": {
+			"valid": true, 
+			"source_file": "question7.html", 
+			"points": 0, 
+			"has_context": false,
+			"answer" : "ans7"
+			}
+		}, 	
+
+
+	{
+		"model": "game_ctf.question", 
+		"pk": 8, 
+		"fields": {
+			"valid": true, 
+			"source_file": "question8.html", 
+			"points": 0, 
+			"has_context": false,
+			"answer" : "ans7"
+			}
+		},
+	{
+		"model": "game_ctf.question", 
+		"pk": 9, 
+		"fields": {
+			"valid": true, 
+			"source_file": "hidden_overflow.html", 
+			"points": 30, 
+			"hidden": true,
+			"has_context": false,
+			"answer" : "QuestionTableOverflow"
+			}
+		} 	 	
+]

@@ -2,6 +2,8 @@
 # @author:metastableB
 # settings.py
 # 
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.contrib import messages
 '''
 @metastableB : where the question files will be searched for.
@@ -10,7 +12,7 @@ from django.contrib import messages
 	to modify the direcory structure, add the new directory to the 
 	global settings.TEMPLATE
 '''
-QUESTIONS_DIR='testQuestions/'
+QUESTIONS_DIR='questions/'
 
 # Some messages are hardcoded into the home.html javascript and used for comparison
 info_messages = {
@@ -30,3 +32,11 @@ template_path = {
 	'leaderboard':'game_ctf/leaderboard.html',
 	'rules' : 'game_ctf/rules.html'
 }	
+
+def question_if_answered(request,question_id,QuestionStatus,question):
+	question_status_obj = QuestionStatus.objects.filter(team_id = request.user).filter(question_id = question)
+	if len(question_status_obj.filter(question_status = 'AW')) == 1 :
+		messages.add_message(request,
+		info_messages['question already solved'][0],info_messages['question already solved'][1])
+		return HttpResponseRedirect(reverse('game_ctf:home'))
+	return None

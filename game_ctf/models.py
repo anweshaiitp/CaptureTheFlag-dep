@@ -6,17 +6,21 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User 
 from django import forms
+from django.utils import timezone
+from datetime import timedelta
+
 from CaptureTheFlag.settings import BASE_DIR
 
 class Question(models.Model):
 	valid = models.BooleanField(default = True)
+	hidden = models.BooleanField(default = False)
 	source_file = models.CharField(max_length=50)
 	answer = models.CharField(max_length=50)
 	points = models.IntegerField(default = 0)
 	# Some questions will require additional context information
 	# such as specific rendering of modification requests, if this is
 	# the case we will have to handle such questions separately 
-	has_context = models.BooleanField(default = False)
+	has_context = models.BooleanField(default = True)
 	def __str__(self):
 		return str(self.pk) + " " + self.source_file
 
@@ -47,16 +51,32 @@ class TeamDetail(models.Model):
 class QuestionStatus(models.Model):
 	team_id = models.ForeignKey(User,on_delete = models.CASCADE)
 	question_id = models.ForeignKey(Question,on_delete = models.PROTECT)
-	#submission will only when Answer is correct, Check views.py for ref
 	submission_time = models.DateTimeField(auto_now_add=True)
-
-	OPPEN = 'OP'
+	open_time = models.DateTimeField(auto_now_add=True)
+        
+	OPEN = 'OP'
 	CLOSED = 'CL'
 	ANSWERED = 'AW'
-	QUESTION_STATUS_CHOICES = ((OPPEN,"Open"),
+	QUESTION_STATUS_CHOICES = ((OPEN,"Open"),
 		(CLOSED,"Closed"),
 		(ANSWERED,"Answered"))
 	question_status = models.CharField(max_length = 2, choices = QUESTION_STATUS_CHOICES, default = CLOSED)
 	def __str__(self):
-		return  "Time : "+str(self.submission_time)+"  "+str(self.team_id.pk) + " : " + self.team_id.username+" : "+self.question_id.source_file+" ("+str(self.question_id.points)+")"
+		return  "Time : "+str(self.open_time+ timedelta(hours=5,minutes=30))+" to "+str(self.submission_time+ timedelta(hours=5,minutes=30))+"  "+str(self.team_id.pk) + " : " + self.team_id.username+" : "+self.question_id.source_file+" ("+str(self.question_id.points)+")"
 
+class Log(models.Model):
+	team_id = models.ForeignKey(User,on_delete = models.CASCADE)
+	question_id = models.ForeignKey(Question,on_delete = models.PROTECT)
+	count_fail = models.IntegerField(default=0)
+	solved = models.BooleanField(default = False)
+	submission_time = models.DateTimeField(auto_now_add=True)
+	def __str__(self):
+		pre = str(self.team_id.pk) + " : " + self.team_id.username+" : "+self.question_id.source_file + " Fail : "+ str(self.count_fail)
+		if self.solved :
+			pre+=" (SOLVED) "
+		else:
+			pre+=" (unsolved) "
+		pre+="\t\tTime : "+str(self.submission_time+ timedelta(hours=5,minutes=30))
+		return pre
+
+	
