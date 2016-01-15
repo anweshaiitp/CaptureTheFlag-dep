@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="NJACK Capture the Flag">
+    <meta name="author" content="scopeInfinity">
+    
+    {% load staticfiles %}
+    <link rel='shortcut icon' type='image/x-icon' href="{% static 'favicon.ico' %}" />
+    <link href="{% static 'bootstrap-3.3.6-dist/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <title>Free Server</title>
+  <!-- Custom styles for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  </head>
+<body>
+  {% include 'includes/navbar_top.html' %}
+
+<div class="container">
+<div class="row text-center lb-header">
+    <h2>
+      {% if story %}
+      Free Server
+      {% else %}
+      SKZ University
+      {% endif %}
+      <h2>
+  </div>
+  <div class="row text-centered">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      {% if solved %}
+      <center class="flag">Flag : <code>CantHandelMore</code></center>
+      {% endif %}
+      {% if story %}
+        Your friend Amit has beed dispelled from SKZ University, He's you best buddy you wanted to take revenge from the unversity.<br>
+        However, Univerity is worst, with only Feedback back as online.<br>
+        But When there is a <strong>WILL</strong> there is a <strong>HACK</strong>.
+        Your friend has given you the link to feedback page <a href="./?feedback">here</a>. <br>
+        <br>
+        SKZ University server is alloted only 1MB for hosting it's web server..
+        <center><i>Aakhir Free ka maal hai</i></center>
+        <br>
+
+      {% else %}
+      <h3>Feedback Form</h3>
+      {% if msg %}
+      <div class="alert alert-info">
+      <strong>Submitted!</strong>   {{ msg }}
+      </div>
+      {% endif %}
+      <form method='POST' role='form' action='#'>
+        <div class="form-group">
+        {% csrf_token %} 
+        <label for='name'>Name :</label>
+        <input type='text' maxlength='10' name='name' placeholder='Name' class='form-control'>
+        <label for='comment'>Comment :</label>
+        <input type='text' maxlength='100' name='comment' placeholder='Enter your Feedback here' class='form-control' rows='4' id='comment'>
+        <p id="counter"></p>
+        <input type='submit' value='Comment' class="btn btn-default">
+      </div>
+      </form>
+      {% endif %}
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+  {% include 'includes/footer.html' %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>
+</body>

@@ -15,10 +15,8 @@ from django.contrib import messages
 from django.template import loader
 from datetime import datetime
 
-import re
-
-from models import Question, QuestionStatus, TeamDetail
-from .settings import QUESTIONS_DIR, info_messages, template_path
+from models import Question, QuestionStatus, TeamDetail, Log
+from .settings import QUESTIONS_DIR, info_messages, template_path, question_if_answered
 from .question_views import question_urls
 
 def not_ready(request):
@@ -60,6 +58,15 @@ def submit_answer(request,question_id):
 		if len(question_status_obj.filter(question_status = 'AW')) !=0 :
 			return HttpResponse(info_messages['answered'][1])
 			
+		_log = Log.objects.filter(team_id = request.user).filter(question_id = question)
+		if len(_log) == 0 :
+			log = Log(team_id = request.user,
+				question_id = question,
+				)
+		else:
+			log = _log[0]
+		log.submission_time = datetime.now()
+			
 		#Question Already Opened
 		if len(question_status_obj) !=0 :
 			qs = question_status_obj[0]
@@ -71,17 +78,20 @@ def submit_answer(request,question_id):
 			
 		answer = request.POST['answer']
 		if question.answer == answer:
-			
+			log.solved = True
 			qs.question_status = 'AW'
 			qs.submission_time = datetime.now()
 			qs.save()
 			team = TeamDetail.objects.filter(team = qs.team_id)[0];
 			team.points+=qs.question_id.points;
 			team.save()
+			log.save()
 			return HttpResponse(info_messages['correct answer'][1])
 		else:
+			log.count_fail += 1
 			qs.submission_time = datetime.now()
 			qs.save()
+			log.save()
 			return HttpResponse(info_messages['incorrect answer'][1])
 	return HttpResponse(info_messages['invalid_request'][1])
 
@@ -96,11 +106,10 @@ def question_page(request,question_id):
 		return HttpResponseRedirect(reverse('user_session:login'))
 
 	question_status_obj = QuestionStatus.objects.filter(team_id = request.user).filter(question_id = question)
-	if len(question_status_obj.filter(question_status = 'AW')) == 1 :
-		messages.add_message(request,
-		info_messages['question already solved'][0],info_messages['question already solved'][1])
-		return HttpResponseRedirect(reverse('game_ctf:home'))
-
+	is_answered = question_if_answered(request,question_id,QuestionStatus,question)
+	if is_answered is not None:
+		return is_answered
+	
 	#Question not opened
 	if len(question_status_obj) ==0 :
 		qs = QuestionStatus(
@@ -108,26 +117,11 @@ def question_page(request,question_id):
 			question_id = question,
 			question_status = 'OP')
 		qs.save()
-<<<<<<< HEAD
-	
-	content = {'mode' : True}
-	if question_id == '3' :
-		if request.method == 'GET' and 'generate' in request.GET:
-			content = {'generate':True}
-		elif request.method == 'GET' and 'name' in request.GET:
-			content = {'name':request.GET['name']}
-			#Hardcoded answer
-			p = re.compile(r'^(.*<\s*img.*src\s*=\s*[\'"].*/static/images/blog/5.jpg[\'"].*>.*)$', re.IGNORECASE)
-			if p.match(request.GET['name']):
-				content = {'name':request.GET['name'],'solved' : True}	
-	
-	return render(request, QUESTIONS_DIR + question.source_file,content)
-=======
+
 	if question.has_context:
 		return HttpResponseRedirect(question_urls[question_id])
 	
 	return render(request, QUESTIONS_DIR + question.source_file)
->>>>>>> master
 
 
 def leaderboard(request):

@@ -10,24 +10,23 @@
     {% load staticfiles %}
     <link rel='shortcut icon' type='image/x-icon' href="{% static 'favicon.ico' %}" />
     <link href="{% static 'bootstrap-3.3.6-dist/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
-    <title>You are awesome</title>
+    <title>Template</title>
   <!-- Custom styles for this template -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <script type="text/javascript">
-      window.location.assign("../../home");
-    </script>
-  </head>
+   </head>
 <body>
   {% include 'includes/navbar_top.html' %}
 
 <div class="container">
   <div class="row text-center lb-header">
-  ##############################
-  ##############################
-  ##############################
-  ############################
-
-  THIS IS TEMPLATE
+    <h2> Template  <h2>
+  </div>
+  <div class="row text-centered">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <center class="flag">Flag : SomeFlag</center>
+    </div>
+    <div class="col-md-2"></div>
   </div>
 </div>
   {% include 'includes/footer.html' %}
