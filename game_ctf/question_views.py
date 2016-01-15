@@ -148,6 +148,11 @@ def q_5(request):
 		if name[0]<5 and _name[0]>15 :
 			name = None
 	login = request.COOKIES.get('login')
+	if login :
+		logged_in = True
+		if request.method == 'GET' and 'logout' in request.GET:
+			logged_in = False
+		
 	
 
 	if logged_in == False and request.method == 'POST' and 'name' in request.POST and 'pass' in request.POST and 'pass2' in request.POST:
@@ -179,6 +184,8 @@ def q_5(request):
 		response.set_cookie('login','true')
 	else:
 		response.delete_cookie('login')
+		response.delete_cookie('name')
+
 	
 	if registered:
 		response.set_cookie('name',request.POST['name'])
