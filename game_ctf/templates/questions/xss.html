@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="NJACK Capture the Flag">
+    <meta name="author" content="scopeInfinity">
+    
+    {% load staticfiles %}
+    <link rel='shortcut icon' type='image/x-icon' href="{% static 'favicon.ico' %}" />
+    <link href="{% static 'bootstrap-3.3.6-dist/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <title>ID Generator</title>
+	<!-- Custom styles for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  </head>
+<body>
+	{% include 'includes/navbar_top.html' %}
+
+<div class="container">
+	<div class="row text-center lb-header">
+
+		<h2> 
+       {% if mode %}
+            I want Pic
+       {%else %}
+           {% if not name %}
+           Fake ID Generator
+           {% endif %}
+       {% endif %}
+
+       <h2>
+	</div>
+
+	<div class="row text-centered">
+        {% if solved %}
+            Flag : <code>NoPlaceForNoob</code>
+        {% endif %}
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8" >
+        <center>
+        {% if mode %}
+            You have recently came to know about a Fake ID Generator <a target="_blank" href="./?generate">here</a> from one of your friend Dary.<br>
+            But he didn't like name in generated final ID, he wants his image.<br><br>
+            He knows you are good at tech stuff, So Dary asked you to generate his ID with his photo on it.<br>
+            <br>
+            You just rememered that Recently, There are a incomplete <a target="_blank" href="{% static 'html/blog.html' %}">blog</a> which contains your friend circle images.
+            <br>
+            <br>
+        {% endif %}
+        {% if name %}
+            {% autoescape off %}
+            <h2>{{ name }}</h2>
+            {% endautoescape %}
+            <div>
+            <br>
+            BirthPlace : Portugal<br>
+            <br>
+            <br>
+            I'm born in Santo António, a neighbourhood of Funchal, Madeira, the youngest child of Maria Dolores dos Santos Aveiro, a cook, and José Dinis Aveiro, a municipal gardener.I has one older brother, Hugo, and two older sisters, Elma and Liliana Cátia.Mine great-grandmother Isabel da Piedade was from Cape Verde.
+            <br>
+            Mine family was staunchly Catholic. Ronaldo later claimed that he lived in poverty, sharing a room with his brother and sisters. I was expelled after he threw a chair at his teacher because he disrespected me. At age 14, I agreed with his mother to focus entirely on football. He states, "When I got to 14 I felt I had the potential. I thought I was maybe good enough at that time to play semi-professionally". I had started playing for amateur team Andorinha at age 8, where his father was the kit man. In 1995, aged 10, signed with local club Nacional, and, after a title-winning campaign, I went on a three-day trial with Sporting CP, who subsequently signed him for an undisclosed sum.
+            <br>
+            
+            </div>
+            
+        {% endif %}
+        {% if generate %}
+            <form action = "#" method="GET" style="color:black">
+                <input type='text' name="name" placeholder="Name">
+                <input type='submit' value='CheckOut'>
+            </form>
+        {% endif %}
+        </center>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+	{% include 'includes/footer.html' %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>
+</body>

@@ -15,6 +15,8 @@ from django.contrib import messages
 from django.template import loader
 from datetime import datetime
 
+import re
+
 from models import Question, QuestionStatus, TeamDetail
 from .settings import QUESTIONS_DIR, info_messages, template_path
 
@@ -105,8 +107,19 @@ def question_page(request,question_id):
 			question_id = question,
 			question_status = 'OP')
 		qs.save()
-		
-	return render(request, QUESTIONS_DIR + question.source_file)
+	
+	content = {'mode' : True}
+	if question_id == '3' :
+		if request.method == 'GET' and 'generate' in request.GET:
+			content = {'generate':True}
+		elif request.method == 'GET' and 'name' in request.GET:
+			content = {'name':request.GET['name']}
+			#Hardcoded answer
+			p = re.compile(r'^(.*<\s*img.*src\s*=\s*[\'"].*/static/images/blog/5.jpg[\'"].*>.*)$', re.IGNORECASE)
+			if p.match(request.GET['name']):
+				content = {'name':request.GET['name'],'solved' : True}	
+	
+	return render(request, QUESTIONS_DIR + question.source_file,content)
 
 
 def leaderboard(request):

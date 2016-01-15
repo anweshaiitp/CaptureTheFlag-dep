@@ -13,6 +13,7 @@ from CaptureTheFlag.settings import BASE_DIR
 
 class Question(models.Model):
 	valid = models.BooleanField(default = True)
+	hidden = models.BooleanField(default = False)
 	source_file = models.CharField(max_length=50)
 	answer = models.CharField(max_length=50)
 	points = models.IntegerField(default = 0)
