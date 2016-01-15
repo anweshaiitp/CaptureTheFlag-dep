@@ -148,7 +148,7 @@ def q_5(request):
 		if name[0]<5 and _name[0]>15 :
 			name = None
 	login = request.COOKIES.get('login')
-	if login :
+	if login and name is not None:
 		logged_in = True
 		if request.method == 'GET' and 'logout' in request.GET:
 			logged_in = False
@@ -170,8 +170,8 @@ def q_5(request):
 
 	if logged_in : 
 		content = {'login':name}
-		if request.method == 'POST' and 'pass' in request.POST and 'pass2' in request.POST:
-			if request.POST['pass']!=request.POST['pass2']:
+		if request.method == 'POST' and 'pass' in request.POST and 'pass_confirm' in request.POST:
+			if request.POST['pass']!=request.POST['pass_confirm']:
 					content = {'login':name,'msg':"Password didn't match",'b_class':'alert alert-warning'}
 			elif name == 'admin':
 				content = {'login':name,'msg':"Admin Password Changed",'b_class':'alert alert-success','solved':True}
@@ -184,9 +184,7 @@ def q_5(request):
 		response.set_cookie('login','true')
 	else:
 		response.delete_cookie('login')
-		response.delete_cookie('name')
-
-	
+		
 	if registered:
 		response.set_cookie('name',request.POST['name'])
 		response.set_cookie('login','false')
