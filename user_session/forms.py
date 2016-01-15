@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django import forms
 
-from game_ctf.models import TeamDetail
+from game_ctf.models import TeamDetail, People
 
 '''
 @metastableB : The inbuild userregistration form was too difficult to modify
@@ -32,6 +32,7 @@ class UserRegistrationForm(forms.ModelForm):
         'password_mismatch': _("The two password fields didn't match."),
         'anw_same_id': _("Two Users Can't Have Same ANW ID"),
         'anw_exists': _("User Already Registered "),
+        'anw_not_found': _("Arey you registered with anwesha 16? AnweshaID not found:")
     }
     
     teamname = forms.RegexField(
@@ -148,6 +149,14 @@ class UserRegistrationForm(forms.ModelForm):
                             self.error_messages['anw_exists'] + u[i],
                             code='anw_exists',
                         )
+        for i in [0,1,2]:
+            try:
+                a_user1 = People.objects.using('anwesha').get(pid=u[i][3:])
+            except People.DoesNotExist:
+                raise forms.ValidationError(
+                        self.error_messages['anw_not_found'] +u[i],
+                        code='anw_not_found')
+
         return self.cleaned_data.get("user3")
         
 '''
