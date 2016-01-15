@@ -23,6 +23,7 @@ urlpatterns = [
 	url(r'^q_1/',question_views.q_1,name='q_1'),
 	url(r'^q_3/',question_views.q_3,name='q_3'),
 	url(r'^q_4/',question_views.q_4,name='q_4'),
+	url(r'^q_5/',question_views.q_5,name='q_5'),
 ]
 
 

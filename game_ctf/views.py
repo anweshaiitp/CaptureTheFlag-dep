@@ -24,7 +24,7 @@ def not_ready(request):
 
 @login_required 
 def home(request):
-	questions = Question.objects.all().filter(valid=True).exclude(pk = 9)
+	questions = Question.objects.all().filter(valid=True).exclude(hidden = True)
 	try:
 		score = TeamDetail.objects.get(team = request.user).points
 	except ObjectDoesNotExist:
