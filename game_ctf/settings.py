@@ -30,7 +30,9 @@ info_messages = {
 template_path = {
 	'home':'game_ctf/home.html',
 	'leaderboard':'game_ctf/leaderboard.html',
-	'rules' : 'game_ctf/rules.html'
+	'rules' : 'game_ctf/rules.html',
+	'contact' : 'game_ctf/contact.html'
+
 }	
 
 def question_if_answered(request,question_id,QuestionStatus,question):

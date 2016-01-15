@@ -139,3 +139,6 @@ def leaderboard(request):
 
 def rules(request):
 	return render(request, template_path['rules'])
+
+def contact(request):
+	return render(request, template_path['contact'])

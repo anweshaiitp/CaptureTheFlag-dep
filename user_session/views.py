@@ -110,8 +110,8 @@ def user_registration(request):
 
 	return render(request, template_path['registration'], {'form' : registration_form})
 
-def email(response):
-	a = send_mail('This is a test', 'Here is the message.', 'ctf@anwesha.info',
+'''def email(response):
+	a = send_mail('Subject', 'Here is the message.', 'ctf@anwesha.info',
     ['asthanasumit23@gmail.com'], fail_silently=False)
 	return HttpResponse("lol")
 	
@@ -120,3 +120,4 @@ def urlopen(request):
 	result = urllib2.urlopen('http://2016.anwesha.info/ctf_verify')
 	content = json.load(result)
 	return HttpResponse(content['ANW1231'])
+'''
