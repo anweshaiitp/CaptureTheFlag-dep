@@ -17,13 +17,14 @@ from datetime import datetime
 
 from models import Question, QuestionStatus, TeamDetail
 from .settings import QUESTIONS_DIR, info_messages, template_path
+from .question_views import question_urls
 
 def not_ready(request):
 	render(request,template_path['not_ready'])
 
 @login_required 
 def home(request):
-	questions = Question.objects.all().filter(valid=True)
+	questions = Question.objects.all().filter(valid=True).exclude(pk = 9)
 	try:
 		score = TeamDetail.objects.get(team = request.user).points
 	except ObjectDoesNotExist:
@@ -98,14 +99,16 @@ def question_page(request,question_id):
 		info_messages['question already solved'][0],info_messages['question already solved'][1])
 		return HttpResponseRedirect(reverse('game_ctf:home'))
 
-	#Question Already Opened
+	#Question not opened
 	if len(question_status_obj) ==0 :
 		qs = QuestionStatus(
 			team_id = request.user,
 			question_id = question,
 			question_status = 'OP')
 		qs.save()
-		
+	if question.has_context:
+		return HttpResponseRedirect(question_urls[question_id])
+	
 	return render(request, QUESTIONS_DIR + question.source_file)
 
 
