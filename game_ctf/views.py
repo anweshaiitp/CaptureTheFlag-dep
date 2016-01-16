@@ -14,6 +14,7 @@ from django.contrib import messages
 
 from django.template import loader
 from datetime import datetime
+from django.utils import timezone
 
 from models import Question, QuestionStatus, TeamDetail, Log
 from .settings import QUESTIONS_DIR, info_messages, template_path, question_if_answered
@@ -65,7 +66,7 @@ def submit_answer(request,question_id):
 				)
 		else:
 			log = _log[0]
-		log.submission_time = datetime.now()
+		log.submission_time = timezone.now()
 			
 		#Question Already Opened
 		if len(question_status_obj) !=0 :
@@ -80,7 +81,7 @@ def submit_answer(request,question_id):
 		if question.answer == answer:
 			log.solved = True
 			qs.question_status = 'AW'
-			qs.submission_time = datetime.now()
+			qs.submission_time = timezone.now()
 			qs.save()
 			team = TeamDetail.objects.filter(team = qs.team_id)[0];
 			team.points+=qs.question_id.points;
@@ -89,7 +90,7 @@ def submit_answer(request,question_id):
 			return HttpResponse(info_messages['correct answer'][1])
 		else:
 			log.count_fail += 1
-			qs.submission_time = datetime.now()
+			qs.submission_time = timezone.now()
 			qs.save()
 			log.save()
 			return HttpResponse(info_messages['incorrect answer'][1])
