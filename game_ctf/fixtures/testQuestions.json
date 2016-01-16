@@ -116,7 +116,7 @@
 		"fields": {
 			"valid": true, 
 			"source_file": "disassemble_2.html", 
-			"points": 30, 
+			"points": 50, 
 			"hidden": true,
 			"has_context": false,
 			"answer" : "ShiretoMordor"
