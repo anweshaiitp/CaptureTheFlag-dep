@@ -33,19 +33,24 @@
 	</div>
 
 	<div class="row text-centered">
-        {% if solved %}
-            Flag : <code>NoPlaceForNoob</code>
+        {% if flag %}
+            Flag : <code>{{flag}}</code>
         {% endif %}
         <div class="col-md-2">
         </div>
         <div class="col-md-8" >
         <center>
         {% if mode %}
-            You have recently came to know about a Fake ID Generator <a target="_blank" href="./?generate">here</a> from one of your friend Dary.<br>
-            But he didn't like name in generated final ID, he wants his image.<br><br>
-            He knows you are good at tech stuff, So Dary asked you to generate his ID with his photo on it.<br>
-            <br>
-            You just rememered that Recently, There are a incomplete <a target="_blank" href="{% static 'html/blog.html' %}">blog</a> which contains your friend circle images.
+            <p>Your friend <code>xena_p07</code> recently hacked into some places that should not be named, and most definitely not hacked. The government is after him and closing in quick. Though he took at most precaution in his endeavors, you suspect, rightly so, that the exit nodes he was using were compromised! </p>
+            
+            <p> You need to get him out of here, FAST! </p>
+            
+            <p> He has entrusted you with hacking into the government passport system to change his image and name to something a little less suspicious. He is going underground and will be awaiting at the rendezvous point.</p>
+            
+            <p>TIME is of the essence, ACT! </p>
+
+            A <a target="_blank" href="./?generate">backdoor</a> into the passport department database.<br>
+            More  <a target="_blank" href="{% static 'html/blog.html' %}">help</a> for you to fake an Image.
             <br>
             <br>
         {% endif %}

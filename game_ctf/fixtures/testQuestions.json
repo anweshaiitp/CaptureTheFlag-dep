@@ -8,7 +8,7 @@
 			"source_file": "get_modification_simple.html", 
 			"points": 20, 
 			"has_context": true,
-			"answer" : "eliminateblurb"
+			"answer" : "EliminateBlurb"
 			}
 		}, 	
 
@@ -73,7 +73,7 @@
 			"source_file": "sqli_frost.html", 
 			"points": 50, 
 			"has_context": false,
-			"answer" : "authenticdistortion"
+			"answer" : "AuthenticDistortion"
 			}
 		}, 	
 
@@ -86,7 +86,7 @@
 			"source_file": "disassemble_1.html", 
 			"points": 60, 
 			"has_context": false,
-			"answer" : "cursedfanatic"
+			"answer" : "CursedFanatic"
 			}
 		}, 	
 
@@ -123,7 +123,7 @@
 			"points": 30, 
 			"hidden": true,
 			"has_context": false,
-			"answer" : "shiretomordor"
+			"answer" : "ShiretoMordor"
 			}
 		} 
 			 	

@@ -87,7 +87,8 @@ def q_3(request):
         #Hardcoded answer
         p = re.compile(r'^(.*<img.*src\s*=\s*[\'"].*/static/images/blog/5.jpg[\'"].*>.*)$', re.IGNORECASE)
         if p.match(request.GET['name']):
-            content = {'name':request.GET['name'],'solved' : True}  
+            flag = question.answer
+            content = {'name':request.GET['name'],'solved' : True,'flag':flag}  
     
     return render(request, QUESTIONS_DIR + question.source_file,content)
 
@@ -112,7 +113,7 @@ def q_4(request):
         size = len(request.POST['name'])+len(request.POST['comment'])
         msg = "Space Used : "+str(size/1024.0)+" KB"
         if size > 200*1024:
-            content = {'solved':True,'msg':msg}
+            content = {'solved':True,'msg':msg,'flag':question.answer}
         else:
             content = {'solved':False,'msg':msg}
         
