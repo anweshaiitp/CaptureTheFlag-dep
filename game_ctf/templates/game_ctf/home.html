@@ -86,8 +86,10 @@
 	<div class="terminalhistory" id="terminalhistory" style="position:absolute;bottom:32px;margin-top:32px">
 	</div>
 	<div class="bottom" style="position:absolute;bottom:0px;">
-		<div class="label" class="flo-green" >{{ shortteamname }}@ctf:~$ </div>
-		<div id="input"></div>
+		<div class="label" class="flo-green" style='float:left'>{{ shortteamname }}@ctf:~$ </div>
+		<div id="terminal_input"  style='float:left'</div>
+	</div>
+
 	</div>
 
 	</div>
@@ -150,13 +152,17 @@ width: 100%
 position:absolute;
 bottom:32px;
 overflow:hidden;
+
+font-family: courier;
+font-size: 14px;
+background: black;
+color: #21f838;
+padding: 5px;
+cursor:text;
+
 }
 
-.cssConsoleDisplay {
-position:absolute;
-bottom:0px;
-padding-left: 80px;
-}
+
 .answered {
    pointer-events: none;
    cursor: default;
@@ -165,6 +171,14 @@ padding-left: 80px;
 <script type="text/javascript">
 addTerminalHistory("Welcome To Capture The Flag",'line','green');
 addTerminalHistory("&nbsp;[ CTF terminal v1.0 ]<br>",'line','white');
+
+var focus;
+
+focus = window.setInterval(function() {
+	if(!$('#terminal_input').find('input').is(":focus")){
+		$('#terminal_input').find('input').focus();
+	}
+}, 100);
 
 var currcmd = -1;
 var lineLimit = 28;
@@ -186,7 +200,7 @@ var cmd_history = [];
 
 $(document).ready(function(){
 	var post_url = "../submit/";
-	$('.terminal').cssConsole({
+	$('#terminal_input').cssConsole({
 
 
 		onEnter: function(){
