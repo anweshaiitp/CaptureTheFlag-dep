@@ -101,4 +101,17 @@ class People(models.Model):
         managed = False
         db_table = 'People'
 
+'''
+Dabaase model for SQLI
+Make sure the databse is separate from the default and that
+the user does not have any privillages except select
+'''
+class Flags(models.Model):
+    flag = models.CharField(max_length=20, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'flags'
+
+
 	

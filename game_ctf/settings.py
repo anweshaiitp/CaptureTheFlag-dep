@@ -25,14 +25,19 @@ info_messages = {
 	'answered':(messages.INFO,"AlreadySubmmited"),
 	'correct answer':(messages.INFO,"CrackedIt"),
 	'incorrect answer':(messages.INFO,"InvalidFlag"),
+	'unknown error':(messages.INFO,"unknown error"),
 }
 
 template_path = {
 	'home':'game_ctf/home.html',
 	'leaderboard':'game_ctf/leaderboard.html',
 	'rules' : 'game_ctf/rules.html',
-	'contact' : 'game_ctf/contact.html'
-
+	'contact' : 'game_ctf/contact.html',
+	
+	# Question templates:
+	'q_6_404' : 'questions/sqli_frost_404.html',
+	'q_6_ans' : 'questions/sqli_frost_ans.html',
+	'q_6_': 'questions/sqli_frost_sqli.html',
 }	
 
 def question_if_answered(request,question_id,QuestionStatus,question):

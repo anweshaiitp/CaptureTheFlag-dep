@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="NJACK Capture the Flag">
+    <meta name="author" content="scopeInfinity">
+    
+    {% load staticfiles %}
+    <link rel='shortcut icon' type='image/x-icon' href="{% static 'favicon.ico' %}" />
+    <link href="{% static 'bootstrap-3.3.6-dist/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <title>Frost</title>
+  <!-- Custom styles for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  </head>
+<body>
+  {% include 'includes/navbar_top.html' %}
+
+<div class="container">
+  <div class="row text-center lb-header" style="padding:75px;font-size:3em;">
+    decrypted messag which can be anwered by the key given there
+  </div>
+  <div class="row text-center lb-header">
+    <div class="col-md-3"></div>
+      <form method='POST' role='form' action='#' class="col-md-6">
+        <div class="form-group">
+        {% csrf_token %} 
+        {% if message %}
+          <div class="row text-center" style="color:#EE0000;"> {{ message }}</div>
+        {% endif %}
+        <label for='pass'>Answer</label>
+        <input type='text' required pattern=".{0,15}" maxlength='15' name='answer' placeholder='Maybe' class='form-control'>
+        <input type='submit' style='margin-top:10px;' value='Submit' class="btn btn-default">
+        </center>
+      </div>
+      </form>
+    <div class="col-md-3"></div>
+  </div>
+</div>
+  {% include 'includes/footer.html' %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>
+</body>

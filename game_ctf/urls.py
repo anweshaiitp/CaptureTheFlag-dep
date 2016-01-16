@@ -25,6 +25,11 @@ urlpatterns = [
 	url(r'^q_3/',question_views.q_3,name='q_3'),
 	url(r'^q_4/',question_views.q_4,name='q_4'),
 	url(r'^q_5/',question_views.q_5,name='q_5'),
+
+	## Url for question 6
+	url(r'^404_frost/',question_views.q_6_404,name='q_6_404'),
+	url(r'^ans_frost/',question_views.q_6_ans,name='q_6_ans'),
+	url(r'^_frost/',question_views.q_6_,name='q_6_'),
 ]
 
 
