@@ -85,6 +85,7 @@ The anweshd peoples database;
 This is used to link to the anwesha table.
 We only have read access to that DB.
 '''
+'''
 class People(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
     pid = models.IntegerField(db_column='pId', primary_key=True)  # Field name made lowercase.
@@ -101,7 +102,7 @@ class People(models.Model):
     class Meta:
         managed = False
         db_table = 'People'
-
+'''
 '''
 Dabaase model for SQLI
 Make sure the databse is separate from the default and that

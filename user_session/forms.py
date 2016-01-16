@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django import forms
 
-from game_ctf.models import TeamDetail, People
+from game_ctf.models import TeamDetail
 
 '''
 @metastableB : The inbuild userregistration form was too difficult to modify
