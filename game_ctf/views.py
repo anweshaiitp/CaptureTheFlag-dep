@@ -50,7 +50,7 @@ def home(request):
 def submit_answer(request,question_id):
 	if request.method == 'POST' and 'answer' in request.POST:
 		try:
-			question = Question.objects.get(pk = question_id)
+			question = Question.objects.filter(valid=True).get(pk = question_id)
 		except ObjectDoesNotExist:
 				return HttpResponse(info_messages['invalid_question'][1])
 		question_status_obj = QuestionStatus.objects.filter(team_id = request.user).filter(question_id = question)
@@ -99,7 +99,7 @@ def submit_answer(request,question_id):
 @login_required
 def question_page(request,question_id):
 	try:
-		question = Question.objects.get(pk = question_id)
+		question = Question.objects.filter(valid=True).get(pk = question_id)
 	except ObjectDoesNotExist:
 		messages.add_message(request, info_messages['question does not exist'][0],
 			info_messages['question does not exist'][1])

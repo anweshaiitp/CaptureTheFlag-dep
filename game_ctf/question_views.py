@@ -45,7 +45,7 @@ def q_1(request):
     question_id = 1
     if request.method == 'GET' and 'score' in request.GET:
         try:
-            question = Question.objects.get(pk = question_id)
+            question = Question.objects.filter(valid=True).get(pk = question_id)
         except ObjectDoesNotExist:
             messages.add_message(request, info_messages['question does not exist'][0],
                 info_messages['question does not exist'][1])
@@ -69,7 +69,7 @@ def q_1(request):
 def q_3(request):
     question_id = 3
     try:
-        question = Question.objects.get(pk = question_id)
+        question = Question.objects.filter(valid=True).get(pk = question_id)
     except ObjectDoesNotExist:
         messages.add_message(request, info_messages['question does not exist'][0],
             info_messages['question does not exist'][1])
@@ -96,7 +96,7 @@ def q_3(request):
 def q_4(request):
     question_id = 4
     try:
-        question = Question.objects.get(pk = question_id)
+        question = Question.objects.filter(valid=True).get(pk = question_id)
     except ObjectDoesNotExist:
         messages.add_message(request, info_messages['question does not exist'][0],
             info_messages['question does not exist'][1])
@@ -123,7 +123,7 @@ def q_4(request):
 def q_5(request):
     question_id = 5
     try:
-        question = Question.objects.get(pk = question_id)
+        question = Question.objects.filter(valid=True).get(pk = question_id)
     except ObjectDoesNotExist:
         messages.add_message(request, info_messages['question does not exist'][0],
             info_messages['question does not exist'][1])
@@ -198,7 +198,7 @@ def q_6_404(request):
     question_id = 6
     if request.method == 'GET':
         try:
-            question = Question.objects.get(pk = question_id)
+            question = Question.objects.filter(valid=True).get(pk = question_id)
         except ObjectDoesNotExist:
             messages.add_message(request, info_messages['question does not exist'][0],
                 info_messages['question does not exist'][1])
@@ -216,7 +216,7 @@ def q_6_ans(request):
     question_id = 6
 
     try:
-        question = Question.objects.get(pk = question_id)
+        question = Question.objects.filter(valid=True).get(pk = question_id)
     except ObjectDoesNotExist:
         messages.add_message(request, info_messages['question does not exist'][0],
             info_messages['question does not exist'][1])
@@ -244,7 +244,7 @@ def q_6_(request):
     question_id = 6
 
     try:
-        question = Question.objects.get(pk = question_id)
+        question = Question.objects.filter(valid=True).get(pk = question_id)
     except ObjectDoesNotExist:
         messages.add_message(request, info_messages['question does not exist'][0],
             info_messages['question does not exist'][1])
