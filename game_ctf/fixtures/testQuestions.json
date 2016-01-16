@@ -8,7 +8,7 @@
 			"source_file": "get_modification_simple.html", 
 			"points": 20, 
 			"has_context": true,
-			"answer" : "Vendetta"
+			"answer" : "eliminateblurb"
 			}
 		}, 	
 
@@ -18,10 +18,10 @@
 		"pk": 2, 
 		"fields": {
 			"valid": true, 
-			"source_file": "question2.html", 
-			"points": 0, 
+			"source_file": "pig_pen.html", 
+			"points": 20, 
 			"has_context": false,
-			"answer" : "ans2"
+			"answer" : "3"
 			}
 		}, 	
 
@@ -71,9 +71,9 @@
 		"fields": {
 			"valid": true, 
 			"source_file": "sqli_frost.html", 
-			"points": 0, 
+			"points": 50, 
 			"has_context": false,
-			"answer" : "ans6"
+			"answer" : "authenticdistortion"
 			}
 		}, 	
 

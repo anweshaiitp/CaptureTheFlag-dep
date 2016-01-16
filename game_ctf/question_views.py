@@ -58,7 +58,7 @@ def q_1(request):
 
     if request.GET['score'] == '5':
         message = 5
-        flag = 'Vendatta'
+        flag = question.answer
     else :
         flag = None
         message = '$SCORE'
@@ -227,11 +227,12 @@ def q_6_ans(request):
         return is_answered
     if request.method == 'GET':
         return render(request,template_path['q_6_ans'])
+    #electronic xxxxxxxx variable automatic computer
     if 'answer' in request.POST:
-        if request.POST['answer'] != 'something':
+        if request.POST['answer'] != 'discrete':
             return render(request,template_path['q_6_ans'],{'message':'TRY AGAIN!'})
         else:
-            return HttpResponseRedirect(reverse('game_ctf:q_6_'))
+            return HttpResponseRedirect(reverse('game_ctf:q_6_')+'?answer=%s'%request.POST['answer']   )
     else:
         messages.add_message(request, info_messages['unknown error'][0],
                 info_messages['unknown error'][1])
@@ -252,14 +253,14 @@ def q_6_(request):
     is_answered = question_if_answered(request,question_id,QuestionStatus,question)
     if is_answered is not None:
         return is_answered
-    if request.method == 'GET':
+    if request.method == 'GET' and 'answer' in request.GET and request.GET['answer'] == 'discrete':
         return render(request,template_path['q_6_'])
     if request.method == 'POST':
         row = "DATABASE EXCEPTION : Please Contact administrator."
         try:
             cursor = connections['ctf_sqli'].cursor()
             cursor.execute(request.POST['answer'])
-            row = cursor.fetchall()
+            row = cursor.fetchall()[0][0]
         except Exception as ex:
             pass
         return render(request,template_path['q_6_'],{'message':row})
