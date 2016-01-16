@@ -191,13 +191,9 @@ After you have obtained the models, you can use them as you like. Migrate now to
 # Dealing with pip installation
 # permission for apache
 
-TODO : create admin static
-      : vendetta flag is obvious
-      : Remove chutiya errors sys.errr
-      : connect to anwesha db
+TODO : create admin stati
       : correct privillages to apache
-      : Move to subdomain so that links are resolved properly
-      : Are we are sending question answere in the home page?
+      : Allow multiple logins
 
 [1]: "http://code.google.com/p/modwsgi/downloads/list" "Source code"
 [2]: "https://code.google.com/p/modwsgi/wiki/QuickInstallationGuide" "Mod_Wsgi installation instructions"
