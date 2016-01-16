@@ -80,13 +80,13 @@
 	</div>
 </div>
 <div>
-<div class="title-bar">Hack Here!</div>
-	<div class="terminal">
+<div class="title-bar" style='margin-bottom:0px'>Hack Here!</div>
+	<div class="terminal" style='margin-top:0px'>
 
 	<div class="terminalhistory" id="terminalhistory" style="position:absolute;bottom:32px;margin-top:32px">
 	</div>
 	<div class="bottom" style="position:absolute;bottom:0px;">
-		<div class="label" class="flo-green" style='float:left'>{{ shortteamname }}@ctf:~$ </div>
+		<div class="label" class="flo-green" style='float:left'>{{ shortteamname }}@ctf:/$ </div>
 		<div id="terminal_input"  style='float:left'</div>
 	</div>
 
@@ -148,9 +148,7 @@ $.ajaxSetup({
 </script>
 <style type="text/css">
 .terminal{
-width: 100%
-position:absolute;
-bottom:32px;
+margin-bottom:32px;
 overflow:hidden;
 
 font-family: courier;
@@ -192,9 +190,9 @@ function addTerminalHistory(input, style, color) {
 }
 function afterCommandEntered()
 {
-	$('.terminal').cssConsole('reset');
+	$('#terminal_input').cssConsole('reset');	
 }
-var precmdtag = "{{ shortteamname }}@ctf:~$ ";
+var precmdtag = "{{ shortteamname }}@ctf:/$ ";
 $('.label').innerHTML = precmdtag;
 var cmd_history = [];
 
@@ -208,15 +206,30 @@ $(document).ready(function(){
 			var output = "";
 			var color = 'white';
 			var usage = "&nbsp;&nbsp;Usage : ans -q &lt;QuestionNo&gt; -f &lt;Flag&gt;<br>&nbsp;&nbsp;&nbsp;Example : ans -q 1 -f got_my_flag";
-			var commands = spans[0].innerHTML.replace(new RegExp("<([^>]+)>","gm"),"").replace(/<\/span>/g,"");
-			var cmds = commands.replace(/  +/g, ' ').split(" ");
+			var commands = $('#terminal_input').find('input').val();
+			var _commands_single_space = commands.replace(/  +/g, ' ');
+			var cmds = _commands_single_space.split(" ");
 			if(cmds.length == 0 || cmds[0]=="")
 			{
 				output = "&nbsp;&nbsp;No Commands Entered!\nEnter `help` for manual";
 				color = 'yellow';
 			}
+			else if(cmds.length == 1 && cmds[0]=="ls")
+			{
+				output = "&nbsp;&nbsp;/bin /boot /dev /home /etc /media /lib /mnt /opt /root /sys /usr /var\n";
+			}
+			else if(cmds.length == 2 && cmds[0]=="ls")
+			{
+				output = "&nbsp;&nbsp;No command-line parameters supported\n";
+				color = 'red';
+			}
+			else if(cmds[0]=="sudo" || cmds[0]=="cd" || cmds[0]=="mkdir" || cmds[0]=="cp")
+			{
+				output = "&nbsp;&nbsp;Access Denied!\n";
+				color = 'red';
+			}
 			else if(cmds[0] == "help")
-				output = "&nbsp;&nbsp;[ CTF terminal v1.0 ]<br><br>&nbsp;&nbsp;&nbsp;Shell Commands List - <br>&nbsp;&nbsp;&nbsp;&nbsp;clear   - To Clear Screen<br>&nbsp;&nbsp;&nbsp;&nbsp;help    - To Show Shell Manual<br>&nbsp;&nbsp;&nbsp;&nbsp;ans     - To submit Flag<br>";
+				output = "&nbsp;&nbsp;[ CTF terminal v1.0 ]<br><br>&nbsp;&nbsp;&nbsp;Shell Commands List - <br>&nbsp;&nbsp;&nbsp;&nbsp;clear   - To Clear Screen<br>&nbsp;&nbsp;&nbsp;&nbsp;help    - To Show Shell Manual<br>&nbsp;&nbsp;&nbsp;&nbsp;ls    - List Directory<br>&nbsp;&nbsp;&nbsp;&nbsp;cd    - Change Directory<br>&nbsp;&nbsp;&nbsp;&nbsp;mkdir    - Create Directory<br>&nbsp;&nbsp;&nbsp;&nbsp;cp    - Copy  <br>&nbsp;&nbsp;&nbsp;&nbsp;sudo    - With root permission<br>&nbsp;&nbsp;&nbsp;&nbsp;ans     - To submit Flag<br>";
 			else if(cmds[0] == "clear")
 			{
 				$('.terminalhistory div').empty();
@@ -265,17 +278,22 @@ $(document).ready(function(){
 
 
 			}
-			addTerminalHistory(precmdtag+commands,'line','flo-green');
-			if(cmd_history[currcmd] != commands && commands!="")
+			if((currcmd<0 || cmd_history[currcmd] != commands) && commands!="")
 			{
-				cmd_history.push(commands);
+				cmd_history.push(_commands_single_space);
 				currcmd = cmd_history.length;
+			} else if ((currcmd>=0 && cmd_history[currcmd] == _commands_single_space))
+				currcmd++;
+			
+			if(output=="clear");
+			else
+			{
+				addTerminalHistory(precmdtag+_commands_single_space,'line','flo-green');
+				if(output!="")
+					addTerminalHistory(output,'line',color);
 			}
-			
-			if(output=="clear"); 
-			else if(output!="")
-				addTerminalHistory(output,'line',color);
-			
+
+
 			afterCommandEntered();
 		}
 	});
@@ -304,11 +322,7 @@ $(document).ready(function(){
 });
 document.onkeydown = checkKey;
 function setCommand (argument) {
-	var spans = $(".cssConsoleDisplay");
-	str = "";
-	for (var i = 0, len = argument.length; i < len; i++) 
-		str+="<span>"+argument[i]+"</span>"; 
-	spans[0].innerHTML = str;
+	 $('#terminal_input').find('input').val(argument);
 }
 function checkKey(e) {
 
@@ -316,13 +330,14 @@ function checkKey(e) {
 
     if (e.keyCode == '38') {
         // up arrow
-        if(currcmd>0) currcmd--;
+        currcmd--;
+        if(currcmd<0) currcmd=0;
         if(currcmd>=0) setCommand(cmd_history[currcmd]);
     }
     else if (e.keyCode == '40') {
         // down arrow
     		currcmd++;
-    	if(currcmd>=cmd_history.length-1)
+    	if(currcmd>=cmd_history.length)
     		currcmd=cmd_history.length-1;
     	if(currcmd>=0) setCommand(cmd_history[currcmd]);
     }

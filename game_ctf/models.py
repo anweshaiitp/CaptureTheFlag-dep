@@ -62,7 +62,7 @@ class QuestionStatus(models.Model):
 		(ANSWERED,"Answered"))
 	question_status = models.CharField(max_length = 2, choices = QUESTION_STATUS_CHOICES, default = CLOSED)
 	def __str__(self):
-		return  "Time : "+str(self.open_time+ timedelta(hours=5,minutes=30))+" to "+str(self.submission_time+ timedelta(hours=5,minutes=30))+"  "+str(self.team_id.pk) + " : " + self.team_id.username+" : "+self.question_id.source_file+" ("+str(self.question_id.points)+")"
+		return  "Time : "+str((self.open_time+ timedelta(hours=5,minutes=30)).strftime('%l:%M%p on %b %d'))+" to "+str((self.submission_time+ timedelta(hours=5,minutes=30)).strftime('%l:%M%p on %b %d'))+"  |  TeamID "+str(self.team_id.pk) + ". " + self.team_id.username+"  |  "+str(self.question_id.pk)+". "+self.question_id.source_file+" ("+str(self.question_id.points)+")"
 
 class Log(models.Model):
 	team_id = models.ForeignKey(User,on_delete = models.CASCADE)
@@ -71,12 +71,12 @@ class Log(models.Model):
 	solved = models.BooleanField(default = False)
 	submission_time = models.DateTimeField(auto_now_add=True)
 	def __str__(self):
-		pre = str(self.team_id.pk) + " : " + self.team_id.username+" : "+self.question_id.source_file + " Fail : "+ str(self.count_fail)
+		pre ="Time : "+str((self.submission_time+ timedelta(hours=5,minutes=30)).strftime('%l:%M%p on %b %d'))
+		pre += "  |  "+str(self.team_id.pk) + ". " + self.team_id.username+" | "+str(self.question_id.pk)+". "+self.question_id.source_file + " FailAttempt : "+ str(self.count_fail)
 		if self.solved :
 			pre+=" (SOLVED) "
 		else:
 			pre+=" (unsolved) "
-		pre+="\t\tTime : "+str(self.submission_time+ timedelta(hours=5,minutes=30))
 		return pre
 
 '''

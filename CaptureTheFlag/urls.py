@@ -21,5 +21,5 @@ from django.contrib import admin
 urlpatterns = [
 	url(r'^',include('user_session.urls')),
 	url(r'^',include('game_ctf.urls')),
-    url(r'^admin/', admin.site.urls),
+    url(r'^i_am_superuser/', admin.site.urls),
 ]
