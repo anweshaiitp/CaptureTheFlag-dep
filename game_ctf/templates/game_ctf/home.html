@@ -234,8 +234,20 @@ $(document).ready(function(){
 				output = "&nbsp;&nbsp;Access Denied!\n";
 				color = 'red';
 			}
-			else if(cmds[0] == "help")
-				output = "&nbsp;&nbsp;[ CTF terminal v1.0 ]<br><br>&nbsp;&nbsp;&nbsp;Shell Commands List - <br>&nbsp;&nbsp;&nbsp;&nbsp;clear   - To Clear Screen<br>&nbsp;&nbsp;&nbsp;&nbsp;help    - To Show Shell Manual<br>&nbsp;&nbsp;&nbsp;&nbsp;ls    - List Directory<br>&nbsp;&nbsp;&nbsp;&nbsp;cd    - Change Directory<br>&nbsp;&nbsp;&nbsp;&nbsp;mkdir    - Create Directory<br>&nbsp;&nbsp;&nbsp;&nbsp;cp    - Copy  <br>&nbsp;&nbsp;&nbsp;&nbsp;sudo    - With root permission<br>&nbsp;&nbsp;&nbsp;&nbsp;ans     - To submit Flag<br>";
+			else if(cmds[0] == "help"){
+				tab = "&nbsp;&nbsp;&nbsp;&nbsp;";
+				half = "&nbsp;&nbsp;";
+				sp = "&nbsp;"
+				
+				s1 = "[ CTF terminal v1.0 ]<br>";
+				s2 = "Shell Commands List:<br>"
+				s3 = tab+"clear:"+half         +"To clear screen<br>" ;
+				s4 = tab+"help"+sp+":"+half    +"This menu<br>";
+				s5 = tab+"cd"+sp+sp+sp+":"+half+"Directory listing<br>";
+				s6 = tab+"ans"+sp+sp+":"+half  +"Answer Question<br>";
+				s7 = tab +"Use --help flag for more details."
+				output = s1+s2+s3+s4+s5+s6+s7;
+			}
 			else if(cmds[0] == "clear")
 			{
 				$('.terminalhistory div').empty();
