@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="NJACK Capture the Flag">
+    <meta name="author" content="scopeInfinity">
+    
+    {% load staticfiles %}
+    <link rel='shortcut icon' type='image/x-icon' href="{% static 'favicon.ico' %}" />
+    <link href="{% static 'bootstrap-3.3.6-dist/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <title>i386</title>
+  <!-- Custom styles for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+   </head>
+<body>
+  {% include 'includes/navbar_top.html' %}
+
+<div class="container">
+	{% include 'includes/navbar_top.html' %}
+    <!--theflagis #746865 #666c61 #676973
+    shiretomordor #736869 #726574 #6f6d6f #72646f #72-->
+
+	<div class="container">
+		<div class="row text-center lb-header">
+			<h2> i386 (Hidden)  <h2>
+		</div>
+		<div class="row text-center">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				Ok man, just one step further.
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	    <div class="row text-center" style="height:50px;padding-top:30px;">
+	        <div class="col-xs-3"></div>
+	        <div class="col-xs-2" style="height:20px;background-color:#746865"></div>
+	        <div class="col-xs-2" style="height:20px;background-color:#666c61"></div>
+	        <div class="col-xs-2" style="height:20px;background-color:#676973"></div>
+	        <div class="col-md-3"></div>
+	    </div>
+
+	    <div class="row text-center" style="height:50px;padding-top:30px;">
+	        <div class="col-xs-1"></div>
+	        <div class="col-xs-2" style="height:20px;background-color:#736869"></div>
+	        <div class="col-xs-2" style="height:20px;background-color:#726574"></div>
+	        <div class="col-xs-2" style="height:20px;background-color:#6f6d6f"></div>
+	        <div class="col-xs-2" style="height:20px;background-color:#72646f"></div>
+	        <div class="col-xs-2" style="height:20px;background-color:#720000"></div>
+	        <div class="col-xs-1"></div>
+	    </div>
+	</div>
+</div>
+  {% include 'includes/footer.html' %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>
+</body>

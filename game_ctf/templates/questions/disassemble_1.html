@@ -10,16 +10,34 @@
     {% load staticfiles %}
     <link rel='shortcut icon' type='image/x-icon' href="{% static 'favicon.ico' %}" />
     <link href="{% static 'bootstrap-3.3.6-dist/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
-    <title>NSA Much?</title>
+    <title>Reverse Man!</title>
   <!-- Custom styles for this template -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
    </head>
 <body>
   {% include 'includes/navbar_top.html' %}
-<div class="container">
-  <div class="row text-center " style="padding-top:40px;">
-    <img src={% static 'pigpen.png' %} class"img-responsive">
+
+<div class="container" style="padding-top:40px;">
+  <div class="row text-center lb-header">
+    <div class="row ">
+      Oh please, oh please great warrior!<br>
+    Threatened our lives have been, since this alien object presented.<br>
+    Oh please, oh please great warrior!<br>
+    Therein lies what you seek, and more <br>
+    Oh Please, oh please great warrior.<br>  
+    </div>
+    <div class="row" style="padding-top:40px;">
+      <div class="col-md-3"></div>
+      <div class="col-md-3 text-center">
+        <a href = "{% static 'dis/BOMB_amd64.o' %}">BOMB1</a>
+      </div>
+      <div class="col-md-3 text-center">
+        <a href = "{% static 'dis/BOMB_amd64.exe' %}">BOMB2</a>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
   </div>
+</div>
   {% include 'includes/footer.html' %}
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>
