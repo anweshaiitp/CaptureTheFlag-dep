@@ -27,6 +27,7 @@ class Question(models.Model):
 class TeamDetail(models.Model):
 	# TODO : enforce validators
 	team = models.ForeignKey(User,on_delete = models.CASCADE)
+	non_competing = models.BooleanField(default=False)
 	valid = models.BooleanField(default = True)
 	user1 = models.CharField(max_length = 30)
 	user2 = models.CharField(max_length = 30)

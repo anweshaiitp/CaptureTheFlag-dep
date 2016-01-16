@@ -126,7 +126,7 @@ def question_page(request,question_id):
 
 def leaderboard(request):
 	template = loader.get_template('game_ctf/leaderboard.html')
-	rlist_ = TeamDetail.objects.all().order_by('-points')[:20];
+	rlist_ = TeamDetail.objects.all().filter(non_competing = False).order_by('-points')[:20];
 	rlist = []
 	rank = 1
 	for row in rlist_:
