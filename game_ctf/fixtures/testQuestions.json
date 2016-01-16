@@ -70,7 +70,7 @@
 		"pk": 6, 
 		"fields": {
 			"valid": true, 
-			"source_file": "question6.html", 
+			"source_file": "sqli_frost.html", 
 			"points": 0, 
 			"has_context": false,
 			"answer" : "ans6"

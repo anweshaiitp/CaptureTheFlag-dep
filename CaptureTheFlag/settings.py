@@ -90,6 +90,12 @@ DATABASES = {
             'read_default_file': os.path.join(BASE_DIR, "CaptureTheFlag/mysql.cnf"),
         },
     },
+    'ctf_sqli': {
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': os.path.join(BASE_DIR, "CaptureTheFlag/mysql_sqli.cnf"),
+        },
+    },
 }
 
 
