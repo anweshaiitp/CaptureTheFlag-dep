@@ -38,7 +38,7 @@ ALLOWED_HOSTS = ['128.199.116.115','anwesha.info','ctf.anwesha.info']
 INSTALLED_APPS = [
     'game_ctf',
     'user_session',
-    'preventconcurrentlogins',
+    #'preventconcurrentlogins',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
