@@ -83,7 +83,7 @@
 <div class="title-bar" style='margin-bottom:0px'>Hack Here!</div>
 	<div class="terminal" style='margin-top:0px;'>
 
-	<div class="terminalhistory" id="terminalhistory" style="position:absolute;bottom:32px;margin-top:32px">
+	<div class="terminalhistory" id="terminalhistory" style="position:absolute;bottom:32px;margin-top:0px">
 	</div>
 	<div class="bottom" style="position:absolute;bottom:0px;">
 		<div class="label" class="flo-green" style='float:left'>{{ shortteamname }}@ctf:/$ </div>
@@ -187,6 +187,11 @@ function addTerminalHistory(input, style, color) {
 		style = typeof style !== 'undefined' ? style : 'line';
 		color = typeof color !== 'undefined' ? color : 'white';
 		$('.terminalhistory').append('<div class="'+style+'" style="color:'+color+'">'+input+'</div>');
+		$( '.line' ).each( function() {
+			if ( $( this ).offset().top < $( '.terminal' ).offset().top ) {
+				$( this ).css( 'display', 'none' );
+			}
+		} );
 }
 function afterCommandEntered()
 {
@@ -204,9 +209,10 @@ $(document).ready(function(){
 		onEnter: function(){
 			var spans = $(".cssConsoleDisplay");
 			var output = "";
+			
 			var color = 'white';
 			var usage = "&nbsp;&nbsp;Usage : ans -q &lt;QuestionNo&gt; -f &lt;Flag&gt;<br>&nbsp;&nbsp;&nbsp;Example : ans -q 1 -f got_my_flag";
-			var commands = $('#terminal_input').find('input').val();
+			var commands = $('#terminal_input').find('input').val().trim();
 			var _commands_single_space = commands.replace(/  +/g, ' ');
 			var cmds = _commands_single_space.split(" ");
 			if(cmds.length == 0 || cmds[0]=="")
