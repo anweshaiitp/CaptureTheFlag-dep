@@ -63,22 +63,33 @@
 			"answer" : "NothingIsHidden"
 			}
 		}, 	
-
-
 	{
 		"model": "game_ctf.question", 
 		"pk": 6, 
 		"fields": {
 			"valid": true, 
-			"source_file": "sqli_frost.html", 
+			"source_file": "disassemble_1.html", 
 			"points": 50, 
+			"has_context": false,
+			"answer" : "CursedFanatic"
+			}
+		}, 
+ 	{
+		"model": "game_ctf.question", 
+		"pk": 7, 
+		"fields": {
+			"valid": true, 
+			"source_file": "sqli_frost.html", 
+			"points": 100, 
 			"has_context": false,
 			"answer" : "AuthenticDistortion"
 			}
-		}, 	
-	{
+		},
+
+
+			{
 		"model": "game_ctf.question", 
-		"pk": 7, 
+		"pk": 8, 
 		"fields": {
 			"valid": true, 
 			"source_file": "question7.html", 
@@ -86,19 +97,7 @@
 			"has_context": false,
 			"answer" : "ans7"
 			}
-		},
-
-	{
-		"model": "game_ctf.question", 
-		"pk": 8, 
-		"fields": {
-			"valid": true, 
-			"source_file": "disassemble_1.html", 
-			"points": 100, 
-			"has_context": false,
-			"answer" : "CursedFanatic"
-			}
-		}, 	
+		},	
 	{
 		"model": "game_ctf.question", 
 		"pk": 9, 
