@@ -80,8 +80,8 @@
 	</div>
 </div>
 <div>
-<div class="title-bar">Hack Here!</div>
-	<div class="terminal">
+<div class="title-bar" style='margin-bottom:0px'>Hack Here!</div>
+	<div class="terminal" style='margin-top:0px'>
 
 	<div class="terminalhistory" id="terminalhistory" style="position:absolute;bottom:32px;margin-top:32px">
 	</div>
@@ -148,9 +148,7 @@ $.ajaxSetup({
 </script>
 <style type="text/css">
 .terminal{
-width: 100%
-position:absolute;
-bottom:32px;
+margin-bottom:32px;
 overflow:hidden;
 
 font-family: courier;
@@ -270,15 +268,18 @@ $(document).ready(function(){
 			{
 				cmd_history.push(_commands_single_space);
 				currcmd = cmd_history.length;
-			} else if ((currcmd>=0 && cmd_history[currcmd] == commands))
+			} else if ((currcmd>=0 && cmd_history[currcmd] == _commands_single_space))
 				currcmd++;
 			
-			if(output==="clear");
-			else if(output!="")
-				{
-					addTerminalHistory(precmdtag+commands,'line','flo-green');
+			if(output=="clear");
+			else
+			{
+				addTerminalHistory(precmdtag+_commands_single_space,'line','flo-green');
+				if(output!="")
 					addTerminalHistory(output,'line',color);
-				}
+			}
+
+
 			afterCommandEntered();
 		}
 	});
