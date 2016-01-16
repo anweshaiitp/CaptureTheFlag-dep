@@ -86,7 +86,7 @@
 	<div class="terminalhistory" id="terminalhistory" style="position:absolute;bottom:32px;margin-top:32px">
 	</div>
 	<div class="bottom" style="position:absolute;bottom:0px;">
-		<div class="label" class="flo-green" style='float:left'>{{ shortteamname }}@ctf:~$ </div>
+		<div class="label" class="flo-green" style='float:left'>{{ shortteamname }}@ctf:/$ </div>
 		<div id="terminal_input"  style='float:left'</div>
 	</div>
 
@@ -192,7 +192,7 @@ function afterCommandEntered()
 {
 	$('#terminal_input').cssConsole('reset');	
 }
-var precmdtag = "{{ shortteamname }}@ctf:~$ ";
+var precmdtag = "{{ shortteamname }}@ctf:/$ ";
 $('.label').innerHTML = precmdtag;
 var cmd_history = [];
 
@@ -214,8 +214,22 @@ $(document).ready(function(){
 				output = "&nbsp;&nbsp;No Commands Entered!\nEnter `help` for manual";
 				color = 'yellow';
 			}
+			else if(cmds.length == 1 && cmds[0]=="ls")
+			{
+				output = "&nbsp;&nbsp;/bin /boot /dev /home /etc /media /lib /mnt /opt /root /sys /usr /var\n";
+			}
+			else if(cmds.length == 2 && cmds[0]=="ls")
+			{
+				output = "&nbsp;&nbsp;No command-line parameters supported\n";
+				color = 'red';
+			}
+			else if(cmds[0]=="sudo" || cmds[0]=="cd" || cmds[0]=="mkdir" || cmds[0]=="cp")
+			{
+				output = "&nbsp;&nbsp;Access Denied!\n";
+				color = 'red';
+			}
 			else if(cmds[0] == "help")
-				output = "&nbsp;&nbsp;[ CTF terminal v1.0 ]<br><br>&nbsp;&nbsp;&nbsp;Shell Commands List - <br>&nbsp;&nbsp;&nbsp;&nbsp;clear   - To Clear Screen<br>&nbsp;&nbsp;&nbsp;&nbsp;help    - To Show Shell Manual<br>&nbsp;&nbsp;&nbsp;&nbsp;ans     - To submit Flag<br>";
+				output = "&nbsp;&nbsp;[ CTF terminal v1.0 ]<br><br>&nbsp;&nbsp;&nbsp;Shell Commands List - <br>&nbsp;&nbsp;&nbsp;&nbsp;clear   - To Clear Screen<br>&nbsp;&nbsp;&nbsp;&nbsp;help    - To Show Shell Manual<br>&nbsp;&nbsp;&nbsp;&nbsp;ls    - List Directory<br>&nbsp;&nbsp;&nbsp;&nbsp;cd    - Change Directory<br>&nbsp;&nbsp;&nbsp;&nbsp;mkdir    - Create Directory<br>&nbsp;&nbsp;&nbsp;&nbsp;cp    - Copy  <br>&nbsp;&nbsp;&nbsp;&nbsp;sudo    - With root permission<br>&nbsp;&nbsp;&nbsp;&nbsp;ans     - To submit Flag<br>";
 			else if(cmds[0] == "clear")
 			{
 				$('.terminalhistory div').empty();
