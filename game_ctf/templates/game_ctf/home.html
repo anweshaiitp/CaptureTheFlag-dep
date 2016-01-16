@@ -192,7 +192,7 @@ function addTerminalHistory(input, style, color) {
 }
 function afterCommandEntered()
 {
-	$('.terminal').cssConsole('reset');
+	$('#terminal_input').cssConsole('reset');	
 }
 var precmdtag = "{{ shortteamname }}@ctf:~$ ";
 $('.label').innerHTML = precmdtag;
@@ -208,8 +208,9 @@ $(document).ready(function(){
 			var output = "";
 			var color = 'white';
 			var usage = "&nbsp;&nbsp;Usage : ans -q &lt;QuestionNo&gt; -f &lt;Flag&gt;<br>&nbsp;&nbsp;&nbsp;Example : ans -q 1 -f got_my_flag";
-			var commands = spans[0].innerHTML.replace(new RegExp("<([^>]+)>","gm"),"").replace(/<\/span>/g,"");
-			var cmds = commands.replace(/  +/g, ' ').split(" ");
+			var commands = $('#terminal_input').find('input').val();
+			var _commands_single_space = commands.replace(/  +/g, ' ');
+			var cmds = _commands_single_space.split(" ");
 			if(cmds.length == 0 || cmds[0]=="")
 			{
 				output = "&nbsp;&nbsp;No Commands Entered!\nEnter `help` for manual";
@@ -265,17 +266,19 @@ $(document).ready(function(){
 
 
 			}
-			addTerminalHistory(precmdtag+commands,'line','flo-green');
-			if(cmd_history[currcmd] != commands && commands!="")
+			if((currcmd<0 || cmd_history[currcmd] != commands) && commands!="")
 			{
-				cmd_history.push(commands);
+				cmd_history.push(_commands_single_space);
 				currcmd = cmd_history.length;
-			}
+			} else if ((currcmd>=0 && cmd_history[currcmd] == commands))
+				currcmd++;
 			
-			if(output=="clear"); 
+			if(output==="clear");
 			else if(output!="")
-				addTerminalHistory(output,'line',color);
-			
+				{
+					addTerminalHistory(precmdtag+commands,'line','flo-green');
+					addTerminalHistory(output,'line',color);
+				}
 			afterCommandEntered();
 		}
 	});
@@ -304,11 +307,7 @@ $(document).ready(function(){
 });
 document.onkeydown = checkKey;
 function setCommand (argument) {
-	var spans = $(".cssConsoleDisplay");
-	str = "";
-	for (var i = 0, len = argument.length; i < len; i++) 
-		str+="<span>"+argument[i]+"</span>"; 
-	spans[0].innerHTML = str;
+	 $('#terminal_input').find('input').val(argument);
 }
 function checkKey(e) {
 
@@ -316,13 +315,14 @@ function checkKey(e) {
 
     if (e.keyCode == '38') {
         // up arrow
-        if(currcmd>0) currcmd--;
+        currcmd--;
+        if(currcmd<0) currcmd=0;
         if(currcmd>=0) setCommand(cmd_history[currcmd]);
     }
     else if (e.keyCode == '40') {
         // down arrow
     		currcmd++;
-    	if(currcmd>=cmd_history.length-1)
+    	if(currcmd>=cmd_history.length)
     		currcmd=cmd_history.length-1;
     	if(currcmd>=0) setCommand(cmd_history[currcmd]);
     }
