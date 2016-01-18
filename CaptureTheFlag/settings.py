@@ -38,7 +38,7 @@ ALLOWED_HOSTS = ['128.199.116.115','anwesha.info','ctf.anwesha.info']
 INSTALLED_APPS = [
     'game_ctf',
     'user_session',
-    #'preventconcurrentlogins',
+    #   'preventconcurrentlogins',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,9 +56,9 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-#    'preventconcurrentlogins.middleware.PreventConcurrentLoginsMiddleware',
-]
 
+    #'preventconcurrentlogins.middleware.PreventConcurrentLoginsMiddleware',
+]
 ROOT_URLCONF = 'CaptureTheFlag.urls'
 
 TEMPLATES = [
