@@ -31,6 +31,7 @@ class UserRegistrationForm(forms.ModelForm):
         'duplicate_teamname': _("A team with that teamname already exists."),
         'password_mismatch': _("The two password fields didn't match."),
         'anw_same_id': _("Two Users Can't Have Same ANW ID"),
+        'anw_no_input': _("User 1 is required"),
         'anw_exists': _("User Already Registered "),
         'anw_not_found': _("Arey your registered with anwesha 16? AnweshaID not found:")
     }
@@ -63,7 +64,7 @@ class UserRegistrationForm(forms.ModelForm):
     	widget=forms.TextInput(attrs={ 'class':'form-control form-control-reg', 'placeholder':'User1: AnweshaID'}))
     
     user2 = forms.RegexField(
-    	required = True,
+    	required = False,
     	min_length = 1, 
     	label='user2: AnweshaID',
     	max_length=10,
@@ -72,7 +73,7 @@ class UserRegistrationForm(forms.ModelForm):
     	widget=forms.TextInput(attrs={ 'class':'form-control form-control-reg', 'placeholder':'User2: AnweshaID'}))
     
     user3 = forms.RegexField(
-    	required = True,
+    	required = False,
     	min_length = 1, 
     	label='user3: AnweshaID',
     	max_length=10,
@@ -129,9 +130,19 @@ class UserRegistrationForm(forms.ModelForm):
         return password2
 
     def clean_user3(self):
-        u = [self.cleaned_data['user1'].upper(),self.cleaned_data['user2'].upper(),self.cleaned_data['user3'].upper() ]
-        for i in [0,1,2]:
-            for j in [0,1,2]:
+        if 'user1' not in self.cleaned_data:
+             raise forms.ValidationError(
+                            self.error_messages['anw_no_input'],
+                            code='anw_no_input',
+                        )
+        u = [self.cleaned_data['user1'].upper()]
+        if 'user2' in self.cleaned_data:
+            u.append( self.cleaned_data['user2'].upper() )
+        if 'user3' in self.cleaned_data:
+            u.append( self.cleaned_data['user3'].upper() )
+        
+        for i in range(len(u)):
+            for j in range(len(u)):
                 if i!=j:
                     if u[i] == u[j]:
                         raise forms.ValidationError(
