@@ -136,10 +136,10 @@ class UserRegistrationForm(forms.ModelForm):
                             code='anw_no_input',
                         )
         u = [self.cleaned_data['user1'].upper()]
-        if 'user2' in self.cleaned_data:
-            u.append( self.cleaned_data['user2'].upper() )
-        if 'user3' in self.cleaned_data:
-            u.append( self.cleaned_data['user3'].upper() )
+        if len(self.cleaned_data['user2'].strip())>0:
+            u.append( self.cleaned_data['user2'].upper())
+        if len(self.cleaned_data['user3'].strip())>0:
+            u.append( self.cleaned_data['user3'].upper())
         
         for i in range(len(u)):
             for j in range(len(u)):
