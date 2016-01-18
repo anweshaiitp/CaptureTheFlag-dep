@@ -74,9 +74,20 @@
 			"answer" : "CursedFanatic"
 			}
 		}, 
- 	{
+			{
 		"model": "game_ctf.question", 
 		"pk": 7, 
+		"fields": {
+			"valid": true, 
+			"source_file": "js_interfere.html", 
+			"points": 50, 
+			"has_context": false,
+			"answer" : "moo2moo"
+			}
+		},	
+ 	{
+		"model": "game_ctf.question", 
+		"pk": 8, 
 		"fields": {
 			"valid": true, 
 			"source_file": "sqli_frost.html", 
@@ -87,17 +98,6 @@
 		},
 
 
-			{
-		"model": "game_ctf.question", 
-		"pk": 8, 
-		"fields": {
-			"valid": true, 
-			"source_file": "question7.html", 
-			"points": 0, 
-			"has_context": false,
-			"answer" : "ans7"
-			}
-		},	
 	{
 		"model": "game_ctf.question", 
 		"pk": 9, 
