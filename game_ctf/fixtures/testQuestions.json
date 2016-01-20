@@ -97,10 +97,21 @@
 			}
 		},
 
-
-	{
+		{
 		"model": "game_ctf.question", 
 		"pk": 9, 
+		"fields": {
+			"valid": true, 
+			"source_file": "network_protocol.html", 
+			"points": 100, 
+			"hidden": false,
+			"has_context": false,
+			"answer" : "0xefe6"
+			}
+		},
+	{
+		"model": "game_ctf.question", 
+		"pk": 10, 
 		"fields": {
 			"valid": true, 
 			"source_file": "hidden_overflow.html", 
