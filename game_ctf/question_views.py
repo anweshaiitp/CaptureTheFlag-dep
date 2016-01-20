@@ -195,7 +195,7 @@ def q_5(request):
 
 @login_required
 def q_6_404(request):
-    question_id = 6
+    question_id = 8
     if request.method == 'GET':
         try:
             question = Question.objects.filter(valid=True).get(pk = question_id)
@@ -213,7 +213,7 @@ def q_6_404(request):
 
 @login_required
 def q_6_ans(request):
-    question_id = 6
+    question_id = 8
 
     try:
         question = Question.objects.filter(valid=True).get(pk = question_id)
@@ -241,7 +241,7 @@ def q_6_ans(request):
 
 @login_required
 def q_6_(request):
-    question_id = 6
+    question_id = 8
 
     try:
         question = Question.objects.filter(valid=True).get(pk = question_id)
