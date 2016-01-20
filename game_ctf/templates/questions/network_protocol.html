@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="NJACK Capture the Flag">
+    <meta name="author" content="scopeInfinity">
+    
+    {% load staticfiles %}
+    <link rel='shortcut icon' type='image/x-icon' href="{% static 'favicon.ico' %}" />
+    <link href="{% static 'bootstrap-3.3.6-dist/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <title>Template</title>
+  <!-- Custom styles for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+   </head>
+<body>
+  {% include 'includes/navbar_top.html' %}
+
+<div class="container">
+  <div class="row text-center lb-header" style="padding-top:40px;">
+    <h2> The Three Mistakes of My Life <h2>
+  </div>
+  <div class="row text-centered">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+
+      <ul>
+        <p><li> I forgot to consider the START </li></p>
+        <p><li><code>
+               08 00 45 10 00 3C 
+               16 DB 00 00 3F 06 
+               CD 8B D5 E9 AB 0A
+               5E B6 B8 8C 05 55 
+               90 1F 90 30 93 71 
+               75 F5 DB BA A0 12 
+               15 28 EF E6 00 00 
+               02 01 05 96 04 02 
+               08 0A 59 70 9A 08 
+               2D DE 7D 72 01 02 
+               03 06
+        </code></li></p>
+        <p><li>My third mistake will give you the flag.</li></p>
+    </ul>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+  {% include 'includes/footer.html' %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>
+</body>
