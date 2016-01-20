@@ -257,7 +257,7 @@ def q_6_(request):
     if request.method == 'GET' and 'answer' in request.GET and request.GET['answer'] == 'discrete':
         return render(request,template_path['q_6_'])
     if request.method == 'POST':
-        row = "DATABASE EXCEPTION : Please Contact administrator."
+        row = "DATABASE EXCEPTION"
         try:
             cursor = connections['ctf_sqli'].cursor()
             cursor.execute(request.POST['answer'])
